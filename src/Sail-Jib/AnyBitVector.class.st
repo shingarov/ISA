@@ -1,5 +1,5 @@
 Class {
-	#name : #UnknownLengthBitVector,
+	#name : #AnyBitVector,
 	#superclass : #Object,
 	#instVars : [
 		'v'
@@ -7,19 +7,19 @@ Class {
 	#category : #'Sail-Jib'
 }
 
-{ #category : #'as yet unclassified' }
-UnknownLengthBitVector class >> with: anInteger [ 
+{ #category : #'instance creation' }
+AnyBitVector class >> with: anInteger [ 
 	^self basicNew
 		v: anInteger;
 		yourself
 ]
 
 { #category : #accessing }
-UnknownLengthBitVector >> v [
+AnyBitVector >> v [
 	^ v
 ]
 
 { #category : #accessing }
-UnknownLengthBitVector >> v: anObject [
+AnyBitVector >> v: anObject [
 	v := anObject
 ]
