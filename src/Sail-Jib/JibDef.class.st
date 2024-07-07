@@ -9,5 +9,5 @@ Class {
 
 { #category : #initialization }
 JibDef >> addTo: aJibProgram [
-	"self subclassResponsibility"
+	self subclassResponsibility
 ]

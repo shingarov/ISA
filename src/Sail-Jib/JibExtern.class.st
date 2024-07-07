@@ -26,3 +26,13 @@ JibExtern class >> inducedParser [
 	    'abstract' asParser
 	)
 ]
+
+{ #category : #initialization }
+JibExtern >> addTo: aJibProgram [
+	aJibProgram types
+		at: id zdecode
+		put: tys->ty"BOGUS, must convert to function type".
+	aJibProgram values
+		at: id zdecode
+		put: self
+]

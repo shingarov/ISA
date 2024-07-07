@@ -19,3 +19,10 @@ JibVal class >> inducedParser [
 	, Ty inducedParser trim
 	construct: #(- id - tys - ty)
 ]
+
+{ #category : #initialization }
+JibVal >> addTo: aJibProgram [ 
+	aJibProgram types
+		at: id zdecode
+		put: self
+]
