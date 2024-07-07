@@ -8,13 +8,5 @@ Class {
 JibMangled class >> inducedParser [
 	^ 'mangled' asParser
 	, (#blank asParser plus, JibParser id) plus
-	
-	
-
-"
-JibPragma parser parse:
-String lf,
-'#mangled zSome zSomezIbzK',
-String lf
-"
+	==> [ :x | self new "BOGUS" ]
 ]

@@ -3,3 +3,8 @@ Class {
 	#superclass : #Object,
 	#category : #'Sail-Jib'
 }
+
+{ #category : #initialization }
+JibDef >> addTo: aJibProgram [
+	"self subclassResponsibility"
+]
