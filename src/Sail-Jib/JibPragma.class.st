@@ -12,3 +12,8 @@ JibPragma class >> inducedParser [
 	==> #second
 	) trim
 ]
+
+{ #category : #initialization }
+JibPragma >> addTo: aJibProgram [ 
+	"self shouldBeImplemented." "BOGUS, I don't know what this is, do nothing for now"
+]

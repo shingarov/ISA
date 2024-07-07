@@ -16,6 +16,13 @@ JibUnion class >> inducedParser [
 	construct: #(- name members)
 ]
 
+{ #category : #initialization }
+JibUnion >> addTo: aJibProgram [
+	aJibProgram unions
+		at: name zdecode
+		put: self
+]
+
 { #category : #printing }
 JibUnion >> printOn: aStream [
 	aStream
