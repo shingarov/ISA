@@ -19,5 +19,6 @@ JibParser >> def [
 
 { #category : #accessing }
 JibParser >> start [
-	^def plus end
+	^ def plus end
+	==> (JibProgram fromDefs: □)
 ]

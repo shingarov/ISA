@@ -10,7 +10,6 @@ JibRegister class >> inducedParser [
 	, JibParser id trim
 	, $: asParser trim
 	, Ty inducedParser trim
-	, '{BOGUS}' asParser optional
-	
-	
+	, '{BOGUS}' asParser optional "never happens in riscv_duopod"
+	==> [ :x | self shouldBeImplemented  ]
 ]

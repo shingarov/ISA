@@ -24,8 +24,5 @@ JibTest >> testDuopod [
 	s := f contents.
 	f close.
 
-	j := JibParser new end parse: s.
-self halt.
-'a' zencode
-
+	j := JibParser new parse: s
 ]
