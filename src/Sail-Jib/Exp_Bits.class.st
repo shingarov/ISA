@@ -13,7 +13,7 @@ Exp_Bits class >> inducedParser [
 		('bitzero' asParser ==> [ :_ | 0 toBitVector: 1 ]) /
 		('bitone'  asParser ==> [ :_ | 1 toBitVector: 1 ]) /
 		('emptybitvec' asParser ==> [ :_ | BitVector empty ]) /
-		(PPParser cHexNumber ==> [ :x | UnknownLengthBitVector with: x ]) /
+		(PPParser cHexNumber ==> [ :x | AnyBitVector with: x ]) /
 		BitVector parser0b
 	) construct: #(x)
 ]
