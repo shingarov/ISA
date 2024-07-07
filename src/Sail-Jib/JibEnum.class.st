@@ -16,6 +16,13 @@ JibEnum class >> inducedParser [
 	construct: #(- name members)
 ]
 
+{ #category : #initialization }
+JibEnum >> addTo: aJibProgram [ 
+	aJibProgram enums
+		at: name
+		zdecode put: self
+]
+
 { #category : #printing }
 JibEnum >> printOn: aStream [
 	aStream

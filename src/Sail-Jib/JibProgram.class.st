@@ -23,7 +23,8 @@ JibProgram class >> fromDefs: defs [
 
 { #category : #accessing }
 JibProgram >> enums [
-	^ enums
+	enums isNil ifTrue: [ enums := Dictionary new ].
+	^enums
 ]
 
 { #category : #accessing }
@@ -54,7 +55,8 @@ JibProgram >> sourceFiles: anObject [
 
 { #category : #accessing }
 JibProgram >> structs [
-	^ structs
+	structs isNil ifTrue: [ structs := Dictionary new ].
+	^structs
 ]
 
 { #category : #accessing }
@@ -64,6 +66,7 @@ JibProgram >> structs: anObject [
 
 { #category : #accessing }
 JibProgram >> types [
+	types isNil ifTrue: [ types := Dictionary new ].
 	^ types
 ]
 
@@ -74,7 +77,8 @@ JibProgram >> types: anObject [
 
 { #category : #accessing }
 JibProgram >> unions [
-	^ unions
+	unions isNil ifTrue: [ unions := Dictionary new ].
+	^unions
 ]
 
 { #category : #accessing }
@@ -84,7 +88,8 @@ JibProgram >> unions: anObject [
 
 { #category : #accessing }
 JibProgram >> values [
-	^ values
+	values isNil ifTrue: [ values := Dictionary new ].
+	^values
 ]
 
 { #category : #accessing }

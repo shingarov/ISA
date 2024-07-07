@@ -16,6 +16,13 @@ JibStruct class >> inducedParser [
 	construct: #(- name members)
 ]
 
+{ #category : #initialization }
+JibStruct >> addTo: aJibProgram [
+	aJibProgram structs
+		at: name
+		put: self
+]
+
 { #category : #printing }
 JibStruct >> printOn: aStream [
 	aStream
