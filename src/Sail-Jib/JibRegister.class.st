@@ -1,6 +1,10 @@
 Class {
 	#name : #JibRegister,
 	#superclass : #JibDef,
+	#instVars : [
+		'name',
+		'ty'
+	],
 	#category : #'Sail-Jib'
 }
 
@@ -11,5 +15,12 @@ JibRegister class >> inducedParser [
 	, $: asParser trim
 	, Ty inducedParser trim
 	, '{BOGUS}' asParser optional "never happens in riscv_duopod"
-	==> [ :x | self shouldBeImplemented  ]
+	construct: #(- name - ty -)
+]
+
+{ #category : #initialization }
+JibRegister >> addTo: aJibProgram [
+	aJibProgram registers
+		at: name zdecode
+		put: self
 ]

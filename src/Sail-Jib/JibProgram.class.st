@@ -34,6 +34,7 @@ JibProgram >> enums: anObject [
 
 { #category : #accessing }
 JibProgram >> registers [
+	registers isNil ifTrue: [ registers := Dictionary new ].
 	^ registers
 ]
 

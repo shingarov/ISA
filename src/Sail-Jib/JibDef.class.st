@@ -1,6 +1,9 @@
 Class {
 	#name : #JibDef,
 	#superclass : #Object,
+	#instVars : [
+		'loc'
+	],
 	#category : #'Sail-Jib'
 }
 
