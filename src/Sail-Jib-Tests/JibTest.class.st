@@ -5,24 +5,23 @@ Class {
 }
 
 { #category : #tests }
-JibTest >> test1 [
+JibTest >> parseFileNamed: fileName [
 	| f s j |
-	f := '/home/boris/work/REMS/isla-snapshots/smalltalk.ir' asFileReference readStream.
+	f := fileName asFileReference readStream.
 	s := f contents.
 	f close.
-
-	j := JibParser new end parse: s.
-self halt.
-'a' zencode
-
+	self parseString: s
 ]
 
 { #category : #tests }
-JibTest >> testDuopod [
-	| f s j |
-	f := '/home/boris/work/REMS/duopod.ir' asFileReference readStream.
-	s := f contents.
-	f close.
+JibTest >> parseString: s [
+	| jp |
+	jp := JibParser new parse: s.
+	self assert: (jp isKindOf: JibProgram).
+	^jp
+]
 
-	j := JibParser new parse: s
+{ #category : #tests }
+JibTest >> testParseDuopod [
+	self parseFileNamed: '/home/boris/work/REMS/duopod.ir'
 ]
