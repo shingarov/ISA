@@ -1,5 +1,5 @@
 Class {
-	#name : #JibRegister,
+	#name : #'Def_Register',
 	#superclass : #JibDef,
 	#instVars : [
 		'name',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #syntax }
-JibRegister class >> inducedParser [
+Def_Register class >> inducedParser [
 	^ 'register' asParser trim
 	, JibParser id trim
 	, $: asParser trim
@@ -19,7 +19,7 @@ JibRegister class >> inducedParser [
 ]
 
 { #category : #initialization }
-JibRegister >> addTo: aJibProgram [
+Def_Register >> addTo: aJibProgram [
 	aJibProgram registers
 		at: name zdecode
 		put: self

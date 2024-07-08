@@ -1,5 +1,5 @@
 Class {
-	#name : #JibFiles,
+	#name : #'Def_Files',
 	#superclass : #JibDef,
 	#instVars : [
 		'dict'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #syntax }
-JibFiles class >> inducedParser [
+Def_Files class >> inducedParser [
 	^ 'files ' asParser
 	, PPParser doubleQuoted trim plus
 	==> [ :x |
@@ -20,17 +20,17 @@ JibFiles class >> inducedParser [
 ]
 
 { #category : #adding }
-JibFiles >> addTo: aJibProgram [
+Def_Files >> addTo: aJibProgram [
 	aJibProgram sourceFiles: dict
 ]
 
 { #category : #accessing }
-JibFiles >> dict [
+Def_Files >> dict [
 	dict isNil ifTrue: [ dict := Dictionary new ].
 	^ dict
 ]
 
 { #category : #accessing }
-JibFiles >> dict: anObject [
+Def_Files >> dict: anObject [
 	dict := anObject
 ]

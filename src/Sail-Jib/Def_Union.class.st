@@ -1,5 +1,5 @@
 Class {
-	#name : #JibStruct,
+	#name : #'Def_Union',
 	#superclass : #JibDef,
 	#instVars : [
 		'name',
@@ -9,24 +9,24 @@ Class {
 }
 
 { #category : #syntax }
-JibStruct class >> inducedParser [
-	^ 'struct' asParser trim
+Def_Union class >> inducedParser [
+	^ 'union' asParser trim
 	, JibParser id trim
 	, (JibParser id, $: asParser trim, Ty inducedParser) commaSeparated braces
 	construct: #(- name members)
 ]
 
 { #category : #initialization }
-JibStruct >> addTo: aJibProgram [
-	aJibProgram structs
-		at: name
+Def_Union >> addTo: aJibProgram [
+	aJibProgram unions
+		at: name zdecode
 		put: self
 ]
 
 { #category : #printing }
-JibStruct >> printOn: aStream [
+Def_Union >> printOn: aStream [
 	aStream
-		nextPutAll: 'struct ';
+		nextPutAll: 'union ';
 		nextPutAll: name;
 		nextPutAll: ' {…}'
 ]

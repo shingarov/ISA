@@ -1,5 +1,5 @@
 Class {
-	#name : #JibVal,
+	#name : #'Def_Val',
 	#superclass : #JibDef,
 	#instVars : [
 		'id',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #syntax }
-JibVal class >> inducedParser [
+Def_Val class >> inducedParser [
 	^ 'val' asParser trim
 	, JibParser id trim
 	, $: asParser trim
@@ -21,7 +21,7 @@ JibVal class >> inducedParser [
 ]
 
 { #category : #initialization }
-JibVal >> addTo: aJibProgram [ 
+Def_Val >> addTo: aJibProgram [ 
 	aJibProgram types
 		at: id zdecode
 		put: self
