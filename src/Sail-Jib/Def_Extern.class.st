@@ -1,5 +1,5 @@
 Class {
-	#name : #JibExtern,
+	#name : #'Def_Extern',
 	#superclass : #JibDef,
 	#instVars : [
 		'id',
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #syntax }
-JibExtern class >> inducedParser [
+Def_Extern class >> inducedParser [
 	^   (
 	    'val' asParser trim,
 	    JibParser id trim,
@@ -28,7 +28,7 @@ JibExtern class >> inducedParser [
 ]
 
 { #category : #initialization }
-JibExtern >> addTo: aJibProgram [
+Def_Extern >> addTo: aJibProgram [
 	aJibProgram types
 		at: id zdecode
 		put: tys->ty"BOGUS, must convert to function type".
@@ -38,7 +38,7 @@ JibExtern >> addTo: aJibProgram [
 ]
 
 { #category : #printing }
-JibExtern >> printOn: aStream [
+Def_Extern >> printOn: aStream [
 	aStream nextPut: (Character codePoint: 16r2197).
 	aStream nextPutAll: ext.
 	aStream nextPutAll: ' ∷ ('.
