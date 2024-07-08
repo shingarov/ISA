@@ -36,3 +36,13 @@ JibExtern >> addTo: aJibProgram [
 		at: id zdecode
 		put: self
 ]
+
+{ #category : #printing }
+JibExtern >> printOn: aStream [
+	aStream nextPut: (Character codePoint: 16r2197).
+	aStream nextPutAll: ext.
+	aStream nextPutAll: ' ∷ ('.
+	tys do: (□ printOn: aStream) separatedBy: [ aStream nextPutAll: ', ' ].
+	aStream nextPutAll: ') -> '.
+	ty printOn: aStream
+]
