@@ -1,6 +1,11 @@
 Class {
 	#name : #'Instr_Call',
 	#superclass : #JibInstr,
+	#instVars : [
+		'lvalue',
+		'f',
+		'args'
+	],
 	#category : #'Sail-Jib'
 }
 
@@ -8,12 +13,8 @@ Class {
 Instr_Call class >> inducedParser [
 	^ JibLoc inducedParser trim
 	, $= asParser trim
-	, ($$ asParser optional, JibParser id) trim
+	, ($$ asParser optional, JibParser id) flatten trim
 	, JibExp inducedParser commaList trim
 	, JibSourceLoc inducedParser
-
-
-"
-Instr_Call inducedParser parse: 'y = f(x) `6 157:32-157:41'
-"
+	construct: #(lvalue - f args sourceLoc)
 ]
