@@ -13,3 +13,9 @@ Ty_Bits class >> inducedParser [
 	, (#digit asParser plus flatten ==> #asInteger)
 	construct: #(- length)
 ]
+
+{ #category : #printing }
+Ty_Bits >> printOn: aStream [
+	aStream nextPutAll: '%bv'.
+	length printOn: aStream
+]
