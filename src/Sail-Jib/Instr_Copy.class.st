@@ -3,8 +3,7 @@ Class {
 	#superclass : #JibInstr,
 	#instVars : [
 		'l',
-		'e',
-		's'
+		'e'
 	],
 	#category : #'Sail-Jib'
 }
@@ -15,5 +14,5 @@ Instr_Copy class >> inducedParser [
 	, $= asParser trim
 	, JibExp inducedParser
 	, JibSourceLoc inducedParser optional"??? not according to ir_parser.lalrpop!"
-	construct: #(l - e s)
+	construct: #(l - e sourceLoc)
 ]
