@@ -6,11 +6,7 @@ Class {
 
 { #category : #tests }
 JibTest >> parseFileNamed: fileName [
-	| f s j |
-	f := fileName asFileReference readStream.
-	s := f contents.
-	f close.
-	self parseString: s
+	^self parseString: fileName asFileReference contents
 ]
 
 { #category : #tests }
