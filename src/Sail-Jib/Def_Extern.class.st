@@ -1,11 +1,8 @@
 Class {
 	#name : #'Def_Extern',
-	#superclass : #JibDef,
+	#superclass : #'Def_Val',
 	#instVars : [
-		'id',
-		'ext',
-		'tys',
-		'ty'
+		'ext'
 	],
 	#category : #'Sail-Jib'
 }
@@ -29,9 +26,7 @@ Def_Extern class >> inducedParser [
 
 { #category : #initialization }
 Def_Extern >> addTo: aJibProgram [
-	aJibProgram types
-		at: id zdecode
-		put: tys->ty"BOGUS, must convert to function type".
+	super addTo: aJibProgram.
 	aJibProgram values
 		at: id zdecode
 		put: self
