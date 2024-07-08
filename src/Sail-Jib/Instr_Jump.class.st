@@ -3,8 +3,7 @@ Class {
 	#superclass : #JibInstr,
 	#instVars : [
 		'exp',
-		'target',
-		'loc'
+		'target'
 	],
 	#category : #'Sail-Jib'
 }
@@ -16,5 +15,5 @@ Instr_Jump class >> inducedParser [
 	, 'goto' asParser trim
 	, PPParser decimalInteger trim
 	, JibSourceLoc inducedParser trim
-	construct: #(- exp - target loc)
+	construct: #(- exp - target sourceLoc)
 ]
