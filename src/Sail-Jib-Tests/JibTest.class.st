@@ -19,5 +19,5 @@ JibTest >> parseString: s [
 
 { #category : #tests }
 JibTest >> testParseDuopod [
-	self parseFileNamed: '/home/boris/work/REMS/duopod.ir'
+	(self parseFileNamed: '/home/boris/work/REMS/duopod.ir') inspect
 ]
