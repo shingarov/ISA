@@ -11,18 +11,19 @@ Class {
 
 { #category : #syntax }
 Def_Val class >> inducedParser [
-	^ 'val' asParser trim
+	^ Def_Extern inducedParser
+	/('val' asParser trim
 	, JibParser id trim
 	, $: asParser trim
 	, Ty inducedParser trim commaSeparated parens
 	, '->' asParser trim
 	, Ty inducedParser trim
-	construct: #(- id - tys - ty)
+	construct: #(- id - tys - ty))
 ]
 
 { #category : #initialization }
 Def_Val >> addTo: aJibProgram [ 
 	aJibProgram types
 		at: id zdecode
-		put: self
+		put: (JibFunctionType dom: tys cod: ty)
 ]
