@@ -1,5 +1,5 @@
 Class {
-	#name : #JibFn,
+	#name : #'Def_Fn',
 	#superclass : #JibDef,
 	#instVars : [
 		'name',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #syntax }
-JibFn class >> inducedParser [
+Def_Fn class >> inducedParser [
 	^ 'fn' asParser trim
 	, JibParser id trim
 	, JibParser id trim commaList
@@ -19,7 +19,7 @@ JibFn class >> inducedParser [
 ]
 
 { #category : #initialization }
-JibFn >> addTo: aJibProgram [
+Def_Fn >> addTo: aJibProgram [
 	aJibProgram values
 		at: name zdecode
 		put: self.
@@ -27,6 +27,6 @@ JibFn >> addTo: aJibProgram [
 ]
 
 { #category : #'as yet unclassified' }
-JibFn >> elaborateIn: aJibProgram [
+Def_Fn >> elaborateIn: aJibProgram [
 	"self shouldBeImplemented."  "the most interesting thing!"
 ]

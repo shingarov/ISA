@@ -1,12 +1,12 @@
 Class {
-	#name : #JibTupleStruct,
-	#superclass : #JibPragma,
+	#name : #'Def_Mangled',
+	#superclass : #'Def_Pragma',
 	#category : #'Sail-Jib'
 }
 
 { #category : #syntax }
-JibTupleStruct class >> inducedParser [
-	^ 'tuplestruct' asParser
+Def_Mangled class >> inducedParser [
+	^ 'mangled' asParser
 	, (#blank asParser plus, JibParser id) plus
 	==> [ :x | self new "BOGUS" ]
 ]

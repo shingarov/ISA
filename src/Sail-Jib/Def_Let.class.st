@@ -1,10 +1,10 @@
 Class {
-	#name : #JibLet,
+	#name : #'Def_Let',
 	#superclass : #JibDef,
 	#category : #'Sail-Jib'
 }
 
 { #category : #syntax }
-JibLet class >> inducedParser [
+Def_Let class >> inducedParser [
 ^'let' asParser
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #JibEnum,
+	#name : #'Def_Enum',
 	#superclass : #JibDef,
 	#instVars : [
 		'name',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #syntax }
-JibEnum class >> inducedParser [
+Def_Enum class >> inducedParser [
 	^ 'enum' asParser trim
 	, JibParser id trim
 	, JibParser id trim commaSeparated braces
@@ -17,14 +17,14 @@ JibEnum class >> inducedParser [
 ]
 
 { #category : #initialization }
-JibEnum >> addTo: aJibProgram [ 
+Def_Enum >> addTo: aJibProgram [ 
 	aJibProgram enums
 		at: name
 		zdecode put: self
 ]
 
 { #category : #printing }
-JibEnum >> printOn: aStream [
+Def_Enum >> printOn: aStream [
 	aStream
 		nextPutAll: 'enum ';
 		nextPutAll: name;
