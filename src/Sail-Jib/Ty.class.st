@@ -17,7 +17,6 @@ Ty class >> adtSummands [
 		Ty_Real.
 		Ty_Enum.
 		Ty_Vector.
-		Ty_FixedVector.
 		Ty_Float.
 		Ty_List.
 		Ty_RoundingMode.
