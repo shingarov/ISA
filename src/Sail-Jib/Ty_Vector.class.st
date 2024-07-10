@@ -33,14 +33,27 @@ Ty_Vector class >> vecParser [
 	construct: #(- ty)
 ]
 
+{ #category : #private }
+Ty_Vector >> addAlias: someone [
+	someone == self ifTrue: [ ^self ].
+	self aliases add: someone
+]
+
 { #category : #accessing }
 Ty_Vector >> aliases [
+	aliases isNil ifTrue: [ aliases := Set new ].
 	^ aliases
 ]
 
 { #category : #accessing }
 Ty_Vector >> aliases: anObject [
 	aliases := anObject
+]
+
+{ #category : #private }
+Ty_Vector >> ensureSameLength: rhs [
+	length = rhs length ifFalse: [ Incompatible signal ].
+	^self
 ]
 
 { #category : #accessing }
@@ -96,13 +109,13 @@ Ty_Vector >> unify: rhs [
 		ifFalse: [ self unifyKnownLength: rhs ]
 ]
 
-{ #category : #'Hindley-Milner' }
+{ #category : #private }
 Ty_Vector >> unifyKnownLength: rhs [
 	rhs length isNil ifFalse: [ ^self ensureSameLength: rhs ]	.
 	^rhs unifyUnknownLength: self
 ]
 
-{ #category : #'Hindley-Milner' }
+{ #category : #private }
 Ty_Vector >> unifyUnknownLength: rhs [
 	rhs length isNil
 		ifFalse: [
