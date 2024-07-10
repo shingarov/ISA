@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #tests }
+JibTest >> jibExamples [
+	^self class definingGitDirectory / 'examples' / 'Jib'
+]
+
+{ #category : #tests }
 JibTest >> parseFileNamed: fileName [
 	^self parseString: fileName asFileReference contents
 ]
@@ -15,6 +20,13 @@ JibTest >> parseString: s [
 	jp := JibParser new parse: s.
 	self assert: (jp isKindOf: JibProgram).
 	^jp
+]
+
+{ #category : #tests }
+JibTest >> testExecuteReturn42 [
+	| ir |
+	ir := self parseFileNamed: self jibExamples / 'return42.ir'.
+	self halt
 ]
 
 { #category : #tests }
