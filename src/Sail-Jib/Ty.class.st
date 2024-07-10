@@ -26,3 +26,8 @@ Ty class >> adtSummands [
 		Ty_Struct
 	}
 ]
+
+{ #category : #'Hindley-Milner' }
+Ty >> unify: rhs [ 
+	self subclassResponsibility
+]
