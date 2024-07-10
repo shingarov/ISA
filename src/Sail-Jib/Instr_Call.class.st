@@ -18,3 +18,16 @@ Instr_Call class >> inducedParser [
 	, JibSourceLoc inducedParser
 	construct: #(lvalue - f args sourceLoc)
 ]
+
+{ #category : #'Hindley-Milner' }
+Instr_Call >> unifyHmTypesIn: Γ [
+	| functionType actualArgTypes actualReturnType |
+	actualArgTypes := args collect: (□ typeIn: Γ).
+	functionType := Γ at: f.
+	(actualArgTypes zip: functionType dom) doAssociations: #unify:.
+	actualReturnType := lvalue typeIn: Γ.
+	actualReturnType unify: functionType cod.
+	"TODO: instantiation of concrete app" self halt.
+	^Γ
+
+]

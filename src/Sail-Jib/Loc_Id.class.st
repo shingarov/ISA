@@ -16,3 +16,8 @@ Loc_Id class >> inducedParser [
 JibLoc inducedParser parse: 'xyz'
 "
 ]
+
+{ #category : #'Hindley-Milner' }
+Loc_Id >> typeIn: Γ [
+	^Γ at: id
+]

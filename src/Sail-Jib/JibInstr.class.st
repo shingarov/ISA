@@ -22,3 +22,8 @@ JibInstr class >> adtSummands [
 		Instr_Init.
 	}
 ]
+
+{ #category : #'Hindley-Milner' }
+JibInstr >> unifyHmTypesIn: typeDictionary [
+	self subclassResponsibility
+]

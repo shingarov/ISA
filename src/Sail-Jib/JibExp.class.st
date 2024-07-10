@@ -21,3 +21,8 @@ JibExp class >> adtSummands [
 		Exp_Id
 	}
 ]
+
+{ #category : #'Hindley-Milner' }
+JibExp >> typeIn: typeEnv [
+	self subclassResponsibility
+]

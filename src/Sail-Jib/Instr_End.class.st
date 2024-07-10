@@ -17,3 +17,7 @@ Instr_End class >> inducedParser [
 Instr_End class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self basicNew ]
 ]
+
+{ #category : #'Hindley-Milner' }
+Instr_End >> unifyHmTypesIn: _ [
+]

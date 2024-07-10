@@ -17,3 +17,8 @@ Exp_Bits class >> inducedParser [
 		BitVector parser0b
 	) construct: #(x)
 ]
+
+{ #category : #'Hindley-Milner' }
+Exp_Bits >> typeIn: _ [
+	^Ty_Bits new: x length
+]

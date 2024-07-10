@@ -16,3 +16,12 @@ Instr_Copy class >> inducedParser [
 	, JibSourceLoc inducedParser optional"??? not according to ir_parser.lalrpop!"
 	construct: #(l - e sourceLoc)
 ]
+
+{ #category : #'Hindley-Milner' }
+Instr_Copy >> unifyHmTypesIn: Γ [ 
+	| lvalueType exprType |
+	lvalueType := Γ at: l.
+	exprType := e typeIn: Γ.
+	lvalueType unify: exprType.
+	^Γ
+]

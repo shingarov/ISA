@@ -16,3 +16,8 @@ Exp_Id class >> inducedParser [
 JibExp inducedParser parse: 'xyz'
 "
 ]
+
+{ #category : #'Hindley-Milner' }
+Exp_Id >> typeIn: Γ [
+	^Γ at: id
+]

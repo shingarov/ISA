@@ -25,7 +25,7 @@ JibProgram class >> fromDefs: defs [
 JibProgram >> elaborate [
 	"TODO: elab unions etc."
 	
-	
+	values do: (□ unifyHmTypesIn: self types).
 	self shouldBeImplemented.
 ]
 
