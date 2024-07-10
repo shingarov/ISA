@@ -1,0 +1,11 @@
+val zf : (%i) ->  %bv32
+
+fn zf(zx) {
+  zz39 : %bv32 `1;
+  zz39 = 0b00000000000000000000000000101010 `2;
+  return = zz39 `3;
+  end;
+}
+
+register zPC : %bv64
+
