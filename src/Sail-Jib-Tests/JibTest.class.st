@@ -29,6 +29,13 @@ JibTest >> testExecuteReturn42 [
 	self halt
 ]
 
+{ #category : #'as yet unclassified' }
+JibTest >> testExecuteUnify1 [
+	| ir |
+	ir := self parseFileNamed: self jibExamples / 'unify1_p.ir'.
+	self halt
+]
+
 { #category : #tests }
 JibTest >> testParseDuopod [
 	(self parseFileNamed: '/home/boris/work/REMS/duopod.ir') inspect
