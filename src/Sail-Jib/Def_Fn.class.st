@@ -30,3 +30,10 @@ Def_Fn >> addTo: aJibProgram [
 Def_Fn >> elaborateIn: aJibProgram [
 	"self shouldBeImplemented."  "the most interesting thing!"
 ]
+
+{ #category : #printing }
+Def_Fn >> printOn: aStream [
+	aStream
+		nextPutAll: 'fn ';
+		nextPutAll: name zdecode
+]
