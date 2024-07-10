@@ -10,6 +10,7 @@ Class {
 { #category : #syntax }
 Ty_Unit class >> inducedParser [
 	^'%unit' asParser
+	==> [ :_ | self uniqueInstance ]
 ]
 
 { #category : #'instance creation' }
