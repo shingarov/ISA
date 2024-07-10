@@ -14,3 +14,8 @@ Exp_I128 class >> inducedParser [
 	, 'i128' asParser trim
 	construct: #(v - -)
 ]
+
+{ #category : #'Hindley-Milner' }
+Exp_I128 >> typeIn: _ [ 
+	^Ty_I128 uniqueInstance
+]

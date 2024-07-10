@@ -13,3 +13,8 @@ Exp_I64 class >> inducedParser [
 	, ($: asParser trim, 'i64' asParser trim) optional
 	construct: #(v -)
 ]
+
+{ #category : #'Hindley-Milner' }
+Exp_I64 >> typeIn: _ [ 
+	^Ty_I64 uniqueInstance
+]
