@@ -75,7 +75,7 @@ Ty_Bits >> unify: rhs [
 	(rhs isKindOf: Ty_Bits) ifFalse: [ ^Incompatible signal ]. "can't unify BV with anything else"
 	^length isNil
 		ifTrue: [ self unifyUnknownLength: rhs ]
-		ifFalse: [ self unifyKnownLength: rhs ]	
+		ifFalse: [ self unifyKnownLength: rhs ]
 	
 ]
 
@@ -86,7 +86,7 @@ Ty_Bits >> unifyKnownLength: rhs [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 Ty_Bits >> unifyUnknownLength: rhs [
 	rhs length isNil
 		ifFalse: [
