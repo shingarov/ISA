@@ -18,7 +18,7 @@ JibProgram class >> fromDefs: defs [
 	| instance |
 	instance := self basicNew.
 	defs do: [ :def | def addTo: instance ].
-	^instance
+	^instance elaborate
 ]
 
 { #category : #elaboration }
