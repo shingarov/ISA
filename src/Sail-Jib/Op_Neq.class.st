@@ -6,5 +6,6 @@ Class {
 
 { #category : #syntax }
 Op_Neq class >> inducedParser [
-	^ '@neq' asParser "==> self uniqueInstance"
+	^ '@neq' asParser
+	==> self uniqueInstance
 ]
