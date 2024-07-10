@@ -21,3 +21,8 @@ Exp_Unit class >> new [
 Exp_Unit class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self basicNew ]
 ]
+
+{ #category : #'Hindley-Milner' }
+Exp_Unit >> typeIn: _ [ 
+	^Ty_Unit uniqueInstance
+]
