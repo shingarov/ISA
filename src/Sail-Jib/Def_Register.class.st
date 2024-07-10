@@ -24,3 +24,11 @@ Def_Register >> addTo: aJibProgram [
 		at: name zdecode
 		put: self
 ]
+
+{ #category : #printing }
+Def_Register >> printOn: aStream [
+	aStream nextPut: (Character codePoint: 16rAE).
+	aStream nextPutAll: name zdecode.
+	aStream nextPutAll: ' ∷ '.
+	ty printOn: aStream
+]

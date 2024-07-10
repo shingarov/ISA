@@ -43,6 +43,16 @@ JibProgram >> gtFunsIn: composite [
 ]
 
 { #category : #GT }
+JibProgram >> gtRegistersIn: composite [
+	<gtInspectorPresentationOrder: 2>
+	^ composite fastTable
+		title: 'Registers';
+		display: [ self registers associations ];
+			column: 'Key' evaluated: [ :each | each key zdecode ];
+		column: 'Value' evaluated: [ :each | GTObjectPrinter asTruncatedTextFrom: each value ]
+]
+
+{ #category : #GT }
 JibProgram >> gtTypesIn: composite [
 	<gtInspectorPresentationOrder: 0>
 	^ composite fastTable
