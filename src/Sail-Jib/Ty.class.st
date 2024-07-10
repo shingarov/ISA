@@ -28,6 +28,7 @@ Ty class >> adtSummands [
 ]
 
 { #category : #'Hindley-Milner' }
-Ty >> unify: rhs [ 
-	self subclassResponsibility
+Ty >> unify: rhs [
+	self == rhs ifFalse: [ Incompatible signal ].
+	^self
 ]

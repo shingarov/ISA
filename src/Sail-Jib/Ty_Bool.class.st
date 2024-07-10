@@ -18,6 +18,11 @@ Ty_Bool class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self basicNew ]
 ]
 
+{ #category : #copying }
+Ty_Bool >> copy [
+	^self
+]
+
 { #category : #printing }
 Ty_Bool >> printOn: aStream [
 	aStream nextPutAll: '%bool'

@@ -18,6 +18,11 @@ Ty_I128 class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self basicNew ]
 ]
 
+{ #category : #copying }
+Ty_I128 >> copy [
+	^self
+]
+
 { #category : #printing }
 Ty_I128 >> printOn: aStream [
 	aStream nextPutAll: '%i128'

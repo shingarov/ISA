@@ -18,3 +18,8 @@ Ty_Bit class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self basicNew ]
 
 ]
+
+{ #category : #copying }
+Ty_Bit >> copy [
+	^self
+]
