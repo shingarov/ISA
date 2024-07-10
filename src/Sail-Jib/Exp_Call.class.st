@@ -2,7 +2,8 @@ Class {
 	#name : #'Exp_Call',
 	#superclass : #JibExp,
 	#instVars : [
-		'b'
+		'op',
+		'args'
 	],
 	#category : #'Sail-Jib'
 }
@@ -11,4 +12,5 @@ Class {
 Exp_Call class >> inducedParser [
 	^ JibOp inducedParser
 	, (Context readState: #parentInducedParser) commaList
+	construct: #(op args)
 ]
