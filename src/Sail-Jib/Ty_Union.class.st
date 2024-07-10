@@ -13,3 +13,9 @@ Ty_Union class >> inducedParser [
 	, JibParser id
 	construct: #(- id)
 ]
+
+{ #category : #printing }
+Ty_Union >> printOn: aStream [
+	aStream nextPutAll: '%union '.
+	aStream nextPutAll: id
+]
