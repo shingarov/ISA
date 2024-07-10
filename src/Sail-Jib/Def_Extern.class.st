@@ -28,7 +28,7 @@ Def_Extern class >> inducedParser [
 Def_Extern >> addTo: aJibProgram [
 	super addTo: aJibProgram.
 	aJibProgram values
-		at: id zdecode
+		at: id
 		put: self
 ]
 

@@ -21,7 +21,7 @@ Def_Fn class >> inducedParser [
 { #category : #initialization }
 Def_Fn >> addTo: aJibProgram [
 	aJibProgram values
-		at: name zdecode
+		at: name
 		put: self.
 	self elaborateIn: aJibProgram
 ]

@@ -24,7 +24,7 @@ Def_Val class >> inducedParser [
 { #category : #initialization }
 Def_Val >> addTo: aJibProgram [ 
 	aJibProgram types
-		at: id zdecode
-		ifPresent: [ self error: 'cant have mor than one type declaration' ]
+		at: id
+		ifPresent: [ self error: 'cant have more than one type declaration' ]
 		ifAbsentPut: (JibFunctionType dom: tys cod: ty)
 ]

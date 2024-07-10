@@ -21,7 +21,7 @@ Def_Register class >> inducedParser [
 { #category : #initialization }
 Def_Register >> addTo: aJibProgram [
 	aJibProgram registers
-		at: name zdecode
+		at: name
 		put: self
 ]
 

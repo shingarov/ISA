@@ -20,7 +20,7 @@ Def_Enum class >> inducedParser [
 Def_Enum >> addTo: aJibProgram [ 
 	aJibProgram enums
 		at: name
-		zdecode put: self
+		put: self
 ]
 
 { #category : #printing }
