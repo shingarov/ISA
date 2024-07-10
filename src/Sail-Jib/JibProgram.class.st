@@ -32,6 +32,16 @@ JibProgram >> enums: anObject [
 	enums := anObject
 ]
 
+{ #category : #GT }
+JibProgram >> gtTypesIn: composite [
+	<gtInspectorPresentationOrder: 0>
+	^ composite fastTable
+		title: 'Types';
+		display: [ self types associations ];
+			column: 'Key' evaluated: [ :each | each key zdecode ];
+		column: 'Value' evaluated: [ :each | GTObjectPrinter asTruncatedTextFrom: each value ]
+]
+
 { #category : #accessing }
 JibProgram >> registers [
 	registers isNil ifTrue: [ registers := Dictionary new ].
