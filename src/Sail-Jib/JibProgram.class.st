@@ -33,6 +33,16 @@ JibProgram >> enums: anObject [
 ]
 
 { #category : #GT }
+JibProgram >> gtFunsIn: composite [
+	<gtInspectorPresentationOrder: 1>
+	^ composite fastTable
+		title: 'Funs';
+		display: [ self values associations ];
+			column: 'Key' evaluated: [ :each | each key zdecode ];
+		column: 'Value' evaluated: [ :each | GTObjectPrinter asTruncatedTextFrom: each value ]
+]
+
+{ #category : #GT }
 JibProgram >> gtTypesIn: composite [
 	<gtInspectorPresentationOrder: 0>
 	^ composite fastTable
