@@ -21,12 +21,14 @@ Instr_Call class >> inducedParser [
 
 { #category : #'Hindley-Milner' }
 Instr_Call >> unifyHmTypesIn: Γ [
-	| functionType actualArgTypes actualReturnType |
+	| functionType dom cod actualArgTypes actualReturnType |
 	actualArgTypes := args collect: (□ typeIn: Γ).
 	functionType := Γ at: f.
-	(actualArgTypes zip: functionType dom) doAssociations: #unify:.
+	dom := functionType dom collect: #copy.
+	cod := functionType cod copy.
+	(actualArgTypes zip: dom) doAssociations: #unify:.
 	actualReturnType := lvalue typeIn: Γ.
-	actualReturnType unify: functionType cod.
+	actualReturnType unify: cod.
 	"TODO: instantiation of concrete app" self halt.
 	^Γ
 
