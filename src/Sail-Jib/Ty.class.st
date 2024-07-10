@@ -10,7 +10,6 @@ Ty class >> adtSummands [
 		Ty_I64.
 		Ty_I128.
 		Ty_Bits.
-		Ty_AnyBits.
 		Ty_Unit.
 		Ty_Bool.
 		Ty_Bit.
