@@ -9,9 +9,7 @@ Class {
 
 { #category : #syntax }
 Ty_Union class >> inducedParser [
-	^(PPSequenceParser with:
-		( '%union' asParser trim
-		, JibParser id
-		)
-	) construct: #(id)
+	^ '%union' asParser trim
+	, JibParser id
+	construct: #(- id)
 ]
