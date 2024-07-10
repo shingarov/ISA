@@ -22,7 +22,11 @@ Def_Register class >> inducedParser [
 Def_Register >> addTo: aJibProgram [
 	aJibProgram registers
 		at: name
-		put: self
+		put: self.
+	aJibProgram types
+		at: name
+		ifPresent: [ self error: 'cant have more than one type declaration' ]
+		ifAbsentPut: ty
 ]
 
 { #category : #printing }
