@@ -1,0 +1,23 @@
+enum ziop {
+  zA, 
+  zB 
+}
+
+val zf : (%bv32, %bv32) ->  %bv32
+
+fn zf(zx, zy) {
+  return = zy `100;
+  end;
+}
+
+val zmain : (%i) -> %bv32
+
+fn zmain(zarg) {
+  zz39 : %bv32 `1;
+  zz39 = 0b00000000000000000000000000101010 `2;
+  return = zf(zz39, zB) `13;
+  end;
+}
+
+register zPC : %bv64
+
