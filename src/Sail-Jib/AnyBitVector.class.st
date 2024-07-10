@@ -14,6 +14,11 @@ AnyBitVector class >> with: anInteger [
 		yourself
 ]
 
+{ #category : #'Hindley-Milner' }
+AnyBitVector >> length [
+	^nil
+]
+
 { #category : #accessing }
 AnyBitVector >> v [
 	^ v
