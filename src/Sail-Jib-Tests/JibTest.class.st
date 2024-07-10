@@ -33,6 +33,7 @@ JibTest >> testExecuteReturn42 [
 JibTest >> testExecuteUnify1 [
 	| ir |
 	ir := self parseFileNamed: self jibExamples / 'unify1_p.ir'.
+	ir elaborate .
 	self halt
 ]
 

@@ -21,6 +21,14 @@ JibProgram class >> fromDefs: defs [
 	^instance
 ]
 
+{ #category : #elaboration }
+JibProgram >> elaborate [
+	"TODO: elab unions etc."
+	
+	
+	self shouldBeImplemented.
+]
+
 { #category : #accessing }
 JibProgram >> enums [
 	enums isNil ifTrue: [ enums := Dictionary new ].
