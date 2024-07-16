@@ -27,11 +27,6 @@ JibProgram >> enums [
 	^enums
 ]
 
-{ #category : #accessing }
-JibProgram >> enums: anObject [
-	enums := anObject
-]
-
 { #category : #GT }
 JibProgram >> gtFunsIn: composite [
 	<gtInspectorPresentationOrder: 1>
@@ -69,11 +64,6 @@ JibProgram >> registers [
 ]
 
 { #category : #accessing }
-JibProgram >> registers: anObject [
-	registers := anObject
-]
-
-{ #category : #accessing }
 JibProgram >> sourceFiles [
 	^ sourceFiles
 ]
@@ -90,19 +80,9 @@ JibProgram >> structs [
 ]
 
 { #category : #accessing }
-JibProgram >> structs: anObject [
-	structs := anObject
-]
-
-{ #category : #accessing }
 JibProgram >> types [
 	types isNil ifTrue: [ types := Dictionary new ].
 	^ types
-]
-
-{ #category : #accessing }
-JibProgram >> types: anObject [
-	types := anObject
 ]
 
 { #category : #accessing }
@@ -112,17 +92,7 @@ JibProgram >> unions [
 ]
 
 { #category : #accessing }
-JibProgram >> unions: anObject [
-	unions := anObject
-]
-
-{ #category : #accessing }
 JibProgram >> values [
 	values isNil ifTrue: [ values := Dictionary new ].
 	^values
-]
-
-{ #category : #accessing }
-JibProgram >> values: anObject [
-	values := anObject
 ]
