@@ -20,7 +20,7 @@ Def_Union class >> inducedParser [
 { #category : #initialization }
 Def_Union >> addTo: aJibProgram [
 	aJibProgram unions
-		at: name zdecode
+		at: name
 		put: self
 ]
 
