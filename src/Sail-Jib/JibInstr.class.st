@@ -1,0 +1,21 @@
+Class {
+	#name : #JibInstr,
+	#superclass : #Object,
+	#category : #'Sail-Jib'
+}
+
+{ #category : #syntax }
+JibInstr class >> adtSummands [
+	^{
+		Instr_Arbitrary.
+		Instr_End.
+		Instr_Goto.
+		Instr_Jump.
+		Instr_Monomorphize.
+		Instr_Call.
+		Instr_Copy.
+		Instr_Decl.
+		Instr_Exit.
+		Instr_Init.
+	}
+]
