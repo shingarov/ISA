@@ -22,13 +22,7 @@ Def_Fn class >> inducedParser [
 Def_Fn >> addTo: aJibProgram [
 	aJibProgram values
 		at: name
-		put: self.
-	self elaborateIn: aJibProgram
-]
-
-{ #category : #'as yet unclassified' }
-Def_Fn >> elaborateIn: aJibProgram [
-	"self shouldBeImplemented."  "the most interesting thing!"
+		put: self
 ]
 
 { #category : #printing }
