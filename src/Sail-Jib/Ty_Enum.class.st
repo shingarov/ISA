@@ -13,3 +13,8 @@ Ty_Enum class >> inducedParser [
 	, JibParser id
 	construct: #(- id)
 ]
+
+{ #category : #parsing }
+Ty_Enum >> typeDef [
+	(Context readState: #jibProgramUnderConstruction) halt
+]

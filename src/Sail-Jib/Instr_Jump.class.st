@@ -17,3 +17,8 @@ Instr_Jump class >> inducedParser [
 	, JibSourceLoc inducedParser trim
 	construct: #(- exp - target sourceLoc)
 ]
+
+{ #category : #'Hindley-Milner' }
+Instr_Jump >> unifyHmTypesIn: Γ [
+	^exp unifyHmTypesIn: Γ
+]

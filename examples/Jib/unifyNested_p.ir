@@ -1,0 +1,38 @@
+val zf : (%bv) ->  %bv
+
+fn zf(zx) {
+  return = zx `100;
+  end;
+}
+
+val zg : (%bv) ->  %bv
+
+fn zg(zy) {
+  return = zy `100;
+  end;
+}
+
+val zmain32 : (%bv32) -> %bv32
+
+fn zmain32(zarg2) {
+  zz9 : %bv `1;
+  zz9 = zf(zarg2) `2;
+  zz0 : %bv `7;
+  zz0 = zg(zz9) `115;
+  return = zz0 `13;
+  end;
+}
+
+val zmain64 : (%bv64) -> %bv64
+
+fn zmain(zarg) {
+  zz39 : %bv `1;
+  zz39 = zf(zarg)  `2;
+  zz40 : %bv `7;
+  zz40 = zg(zz39) `115;
+  return = zz40 `13;
+  end;
+}
+
+register zPC : %bv64
+

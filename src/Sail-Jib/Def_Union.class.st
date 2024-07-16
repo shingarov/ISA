@@ -24,6 +24,11 @@ Def_Union >> addTo: aJibProgram [
 		put: self
 ]
 
+{ #category : #'member lookup' }
+Def_Union >> memberAt: memberName ifAbsent: absentBlock [
+	^members at: memberName ifAbsent: absentBlock
+]
+
 { #category : #printing }
 Def_Union >> printOn: aStream [
 	aStream

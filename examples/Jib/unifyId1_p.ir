@@ -1,0 +1,31 @@
+val zId : (%bv) ->  %bv
+
+fn zId(zx) {
+  return = zx `100;
+  end;
+}
+
+val zmain32 : (%i) -> %bv32
+
+fn zmain32(zarg2) {
+  zz9 : %bv32 `1;
+  zz9 = 0b00000000000000000000000000101010 `2;
+  zz0 : %bv32 `7;
+  zz0 = zId(zz9) `115;
+  return = zz0 `13;
+  end;
+}
+
+val zmain : (%i) -> %bv64
+
+fn zmain(zarg) {
+  zz39 : %bv64 `1;
+  zz39 = 0b0000000000000000000000000010101000000000000000000000000000101010  `2;
+  zz40 : %bv64 `7;
+  zz40 = zId(zz39) `115;
+  return = zz40 `13;
+  end;
+}
+
+register zPC : %bv64
+

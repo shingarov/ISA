@@ -19,3 +19,8 @@ Ty_Union >> printOn: aStream [
 	aStream nextPutAll: '%union '.
 	aStream nextPutAll: id
 ]
+
+{ #category : #parsing }
+Ty_Union >> typeDef [
+	^(Context readState: #jibProgramUnderConstruction) unions at: id
+]

@@ -41,3 +41,10 @@ Def_Extern >> printOn: aStream [
 	aStream nextPutAll: ') -> '.
 	ty printOn: aStream
 ]
+
+{ #category : #'Hindley-Milner' }
+Def_Extern >> unifyHmTypesIn: Γ [
+	"Def_Extern is a weird two-faced lycanthrope:
+	 it is a function-typed value, but it also specifies its type."
+	"TODO"  "self shouldBeImplemented."
+]

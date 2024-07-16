@@ -17,8 +17,9 @@ Class {
 JibProgram class >> fromDefs: defs [
 	| instance |
 	instance := self basicNew.
-	defs do: [ :def | def addTo: instance ].
-	^instance elaborate
+	[ defs do: [ :def | def addTo: instance ].
+	  instance elaborate
+	] runReader: #jibProgramUnderConstruction initialState: instance
 ]
 
 { #category : #elaboration }

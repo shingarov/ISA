@@ -32,7 +32,7 @@ JibTest >> testExecuteReturn42 [
 { #category : #'as yet unclassified' }
 JibTest >> testExecuteUnify1 [
 	| ir |
-	ir := self parseFileNamed: self jibExamples / 'unify1_p.ir'.
+	ir := self parseFileNamed: self jibExamples / 'unifyId1_p.ir'.
 	self halt
 ]
 
