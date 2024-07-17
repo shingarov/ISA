@@ -59,3 +59,29 @@ fn zf(zarg) {
 
 '
 ]
+
+{ #category : #'tests - 42' }
+JibVerificationTest >> testExecuteReturn42b_n [
+	self refuteReturns42: '
+val zf : (%bv32) -> %bv32
+
+fn zf(zarg) {
+  return = 0b10000000000000000000000000101010 `3;
+  end;
+}
+
+'
+]
+
+{ #category : #'tests - 42' }
+JibVerificationTest >> testExecuteReturn42b_p [
+	self proveReturns42: '
+val zf : (%bv32) -> %bv32
+
+fn zf(zarg) {
+  return = 0b00000000000000000000000000101010 `3;
+  end;
+}
+
+'
+]
