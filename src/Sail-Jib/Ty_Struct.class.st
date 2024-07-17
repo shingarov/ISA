@@ -15,3 +15,13 @@ Ty_Struct class >> inducedParser [
 		) ==> #second
 	) construct: #(id)
 ]
+
+{ #category : #'formal semantics' }
+Ty_Struct >> spriteType [
+	^Data
+		name: #ident
+		vars: #idents
+		rvars: #rvars
+		ctors: #bindToRType_Assocs
+		inv: #inv
+]

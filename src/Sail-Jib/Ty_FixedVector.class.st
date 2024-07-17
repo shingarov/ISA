@@ -29,3 +29,8 @@ Ty_FixedVector >> printOn: aStream [
 	aStream nextPut: $)
 	
 ]
+
+{ #category : #'formal semantics' }
+Ty_FixedVector >> spriteType [
+	self shouldBeImplemented.
+]

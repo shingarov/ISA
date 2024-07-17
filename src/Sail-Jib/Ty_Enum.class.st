@@ -13,3 +13,13 @@ Ty_Enum class >> inducedParser [
 	, JibParser id
 	construct: #(- id)
 ]
+
+{ #category : #'formal semantics' }
+Ty_Enum >> spriteType [
+	^Data
+		name: #ident
+		vars: #idents
+		rvars: #rvars
+		ctors: #bindToRType_Assocs
+		inv: #inv
+]
