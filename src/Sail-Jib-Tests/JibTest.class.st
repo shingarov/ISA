@@ -10,6 +10,11 @@ JibTest >> jibExamples [
 ]
 
 { #category : #tests }
+JibTest >> parseExampleFileNamed: relativeFileName [
+	^self parseFileNamed: self jibExamples / relativeFileName
+]
+
+{ #category : #tests }
 JibTest >> parseFileNamed: fileName [
 	^self parseString: fileName asFileReference contents
 ]
@@ -20,16 +25,4 @@ JibTest >> parseString: s [
 	jp := JibParser new parse: s.
 	self assert: (jp isKindOf: JibProgram).
 	^jp
-]
-
-{ #category : #tests }
-JibTest >> testExecuteReturn42 [
-	| ir |
-	ir := self parseFileNamed: self jibExamples / 'return42.ir'.
-	self halt
-]
-
-{ #category : #tests }
-JibTest >> testParseDuopod [
-	(self parseFileNamed: '/home/boris/work/REMS/duopod.ir') inspect
 ]
