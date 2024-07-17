@@ -14,7 +14,7 @@ Def_Fn class >> inducedParser [
 	^ 'fn' asParser trim
 	, JibParser id trim
 	, JibParser id trim commaList
-	, (JibInstr inducedParser, $; asParser trim ==> #first) star braces trim
+	, JibFnBody inducedParser trim
 	construct: #(- name args body)
 ]
 
