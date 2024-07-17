@@ -80,6 +80,42 @@ JibProgram >> structs [
 	^structs
 ]
 
+{ #category : #'formal semantics' }
+JibProgram >> toSpriteProgExprWithMain: anExpr [
+	^self values associations
+			foldr: [ :thisAss :soFar |
+				ELet
+					decl: (thisAss value toSpriteDecl)
+					expr: soFar ]
+			fromSeed: anExpr
+]
+
+{ #category : #'formal semantics' }
+JibProgram >> toSpriteProgWithMain: anExpr [
+	| e |
+	e := self toSpriteProgExprWithMain: anExpr.
+	^Prog
+		quals: #()
+		meas: #()
+		expr: e
+		data: #()
+		options: Set new
+]
+
+{ #category : #'formal semantics' }
+JibProgram >> toSpriteProgWithMainSource: sourceString [
+	| mainProg |
+	mainProg := ΛκParser parse: sourceString.
+	mainProg isPetitFailure ifTrue: [ self error ].
+	^self toSpriteProgWithMain: mainProg expr
+]
+
+{ #category : #'as yet unclassified' }
+JibProgram >> typeEnvironment [
+	typeEnvironment isNil ifTrue: [ typeEnvironment := JibProgramEnvironment of: self ].
+	^typeEnvironment
+]
+
 { #category : #accessing }
 JibProgram >> types [
 	types isNil ifTrue: [ types := Dictionary new ].

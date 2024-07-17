@@ -17,3 +17,11 @@ Exp_Bits class >> inducedParser [
 		BitVector parser0b
 	) construct: #(x)
 ]
+
+{ #category : #'formal semantics' }
+Exp_Bits >> toSpriteExprIn: _ [
+	^EImm imm: (ECon prim: (PBitVector
+		length: x length
+		value: x unsignedValue))
+
+]

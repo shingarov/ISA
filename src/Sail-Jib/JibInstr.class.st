@@ -22,3 +22,8 @@ JibInstr class >> adtSummands [
 		Instr_Init.
 	}
 ]
+
+{ #category : #'formal semantics' }
+JibInstr >> toSpriteExprIn: aJibProgram [ 
+	self subclassResponsibility 
+]
