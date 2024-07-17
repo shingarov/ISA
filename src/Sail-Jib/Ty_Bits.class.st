@@ -19,3 +19,8 @@ Ty_Bits >> printOn: aStream [
 	aStream nextPutAll: '%bv'.
 	length printOn: aStream
 ]
+
+{ #category : #'as yet unclassified' }
+Ty_Bits >> spriteType [
+	^(TBitVector instance: length) bTrue
+]

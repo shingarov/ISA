@@ -27,3 +27,13 @@ Ty class >> adtSummands [
 		Ty_Struct
 	}
 ]
+
+{ #category : #syntax }
+Ty class >> constructNewFrom: anArray accordingTo: fields [
+	^(super constructNewFrom: anArray accordingTo: fields) spriteType
+]
+
+{ #category : #'as yet unclassified' }
+Ty >> spriteType [
+	^self subclassResponsibility
+]
