@@ -8,7 +8,8 @@ Class {
 		'structs',
 		'unions',
 		'registers',
-		'sourceFiles'
+		'sourceFiles',
+		'typeEnvironment'
 	],
 	#category : #'Sail-Jib'
 }
@@ -93,6 +94,6 @@ JibProgram >> unions [
 
 { #category : #accessing }
 JibProgram >> values [
-	values isNil ifTrue: [ values := Dictionary new ].
+	values isNil ifTrue: [ values := OrderedDictionary new ].
 	^values
 ]
