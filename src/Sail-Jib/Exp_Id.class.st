@@ -16,3 +16,8 @@ Exp_Id class >> inducedParser [
 JibExp inducedParser parse: 'xyz'
 "
 ]
+
+{ #category : #'as yet unclassified' }
+Exp_Id >> toSpriteExprIn: aJibFnEnvironment [ 
+	^EImm imm: (EVar of: id)
+]

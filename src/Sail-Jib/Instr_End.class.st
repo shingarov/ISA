@@ -17,3 +17,8 @@ Instr_End class >> inducedParser [
 Instr_End class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self basicNew ]
 ]
+
+{ #category : #'as yet unclassified' }
+Instr_End >> toSpriteExprIn: aJibProgram [ 
+	^EImm imm: (EVar of: 'return') "BOGUS, must unravel the coalgebra"
+]

@@ -16,3 +16,19 @@ Instr_Copy class >> inducedParser [
 	, JibSourceLoc inducedParser optional"??? not according to ir_parser.lalrpop!"
 	construct: #(l - e sourceLoc)
 ]
+
+{ #category : #'as yet unclassified' }
+Instr_Copy >> toSpriteELetAround: expr in: aJibFnEnvironment [
+	^ELet
+		decl: (SpriteDecl
+			bind: (SpriteBind id: l)
+			expr: (EAnn
+				expr: (e toSpriteExprIn: aJibFnEnvironment)
+				ann: (Val
+					symbol: l
+					rtype: (aJibFnEnvironment at: l) b bUnknown
+					metric: nil )
+			)
+		)
+		expr: expr
+]
