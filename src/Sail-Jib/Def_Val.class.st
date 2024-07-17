@@ -25,6 +25,6 @@ Def_Val class >> inducedParser [
 Def_Val >> addTo: aJibProgram [ 
 	aJibProgram types
 		at: id
-		ifPresent: [ self error: 'cant have mor than one type declaration' ]
-		ifAbsentPut: (JibFunctionType dom: tys cod: ty)
+		ifPresent: [ self error: 'cant have more than one type declaration' ]
+		ifAbsentPut: (tys foldr: [ :thisTime :soFar | thisTime ==> soFar ] fromSeed: ty)
 ]
