@@ -9,7 +9,7 @@ PPParser >> construct: fields [
 			inst := cls basicNew.
 			(fields zip: x) do: [ :ivarNameAndVal |
 				ivarNameAndVal key = #- ifFalse: [ inst instVarNamed: ivarNameAndVal key put: ivarNameAndVal value ] ].
-			inst ]
+			inst initialize; yourself ]
 ]
 
 { #category : #'*Sail-Jib-Parsing' }
