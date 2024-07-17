@@ -4,12 +4,7 @@ Extension { #name : #PPParser }
 PPParser >> construct: fields [
 	| cls |
 	cls := Object class findContextReceivingMe receiver.
-	^self ==> [ :x |
-			| inst |
-			inst := cls basicNew.
-			(fields zip: x) do: [ :ivarNameAndVal |
-				ivarNameAndVal key = #- ifFalse: [ inst instVarNamed: ivarNameAndVal key put: ivarNameAndVal value ] ].
-			inst initialize; yourself ]
+	^self ==> (cls constructNewFrom: □ accordingTo: fields)
 ]
 
 { #category : #'*Sail-Jib-Parsing' }

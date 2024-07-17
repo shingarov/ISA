@@ -6,6 +6,16 @@ Class >> adtSummands [
 ]
 
 { #category : #'*Sail-Jib-Parsing' }
+Class >> constructNewFrom: anArray accordingTo: fields [
+	| inst |
+	inst := self basicNew.
+	(fields zip: anArray) do: [ :ivarNameAndVal |
+				ivarNameAndVal key = #- ifFalse: [ inst instVarNamed: ivarNameAndVal key put: ivarNameAndVal value ] ].
+	inst initialize.
+	^inst
+]
+
+{ #category : #'*Sail-Jib-Parsing' }
 Class >> inducedParser [
 	| dp |
 	dp := PPDelegateParser new.
