@@ -17,6 +17,11 @@ Instr_Copy class >> inducedParser [
 	construct: #(l - e sourceLoc)
 ]
 
+{ #category : #'deterministic interpretation' }
+Instr_Copy >> interpretIn: aContext [
+	^(aContext at: l put: (e valueIn: aContext)) incrPC
+]
+
 { #category : #'formal semantics' }
 Instr_Copy >> toSpriteELetAround: expr in: aJibFnEnvironment [
 	^ELet

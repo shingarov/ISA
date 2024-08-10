@@ -27,6 +27,11 @@ Def_Fn >> addTo: aJibProgram [
 	self program: aJibProgram
 ]
 
+{ #category : #accessing }
+Def_Fn >> instrAt: j [ 
+	^body instrs at: j
+]
+
 { #category : #printing }
 Def_Fn >> printOn: aStream [
 	aStream
@@ -34,7 +39,7 @@ Def_Fn >> printOn: aStream [
 		nextPutAll: name zdecode
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 Def_Fn >> program: aJibProgram [
 	"Now that we know enough, we can construct the type environment."
 	| cod_dom cod dom |
@@ -51,12 +56,23 @@ Def_Fn >> program: aJibProgram [
 	body addTempsTo: Γ
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'formal semantics' }
+Def_Fn >> returnSort [
+	"BOGUS what about currying?"
+	^self rtype t sort
+]
+
+{ #category : #'formal semantics' }
+Def_Fn >> rtype [
+	^Γ at: name
+]
+
+{ #category : #'formal semantics' }
 Def_Fn >> toSpriteAnn [
 	| ann bodyExpr efun |
 	ann := Refl
 		symbol: name
-		rtype: (Γ at: name)
+		rtype: self rtype
 		metric: nil.
 		
 	bodyExpr := body toSpriteExprIn: 	Γ.
@@ -72,7 +88,7 @@ Def_Fn >> toSpriteAnn [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'formal semantics' }
 Def_Fn >> toSpriteDecl [
 	^SpriteDecl
 		bind: (SpriteBind id: name)

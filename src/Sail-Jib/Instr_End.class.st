@@ -18,6 +18,11 @@ Instr_End class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self basicNew ]
 ]
 
+{ #category : #'deterministic interpretation' }
+Instr_End >> interpretIn: aContext [ 
+	self shouldBeImplemented.
+]
+
 { #category : #'formal semantics' }
 Instr_End >> toSpriteExprIn: aJibProgram [ 
 	^EImm imm: (EVar of: 'return') "BOGUS, must unravel the coalgebra"

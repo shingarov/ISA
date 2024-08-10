@@ -21,3 +21,8 @@ JibExp inducedParser parse: 'xyz'
 Exp_Id >> toSpriteExprIn: aJibFnEnvironment [ 
 	^EImm imm: (EVar of: id)
 ]
+
+{ #category : #'deterministic interpretation' }
+Exp_Id >> valueIn: aContext [ 
+	^aContext at: id
+]

@@ -25,3 +25,8 @@ Instr_Decl inducedParser parse: 'zz40 : %bool `6 131:25-134:1'
 Instr_Decl >> addTempDeclTo: aJibFnEnvironment [ 
 	aJibFnEnvironment temp: id hasType: ty
 ]
+
+{ #category : #'deterministic interpretation' }
+Instr_Decl >> interpretIn: aContext [ 
+	^(aContext declareTemp: id ofSort: ty sort) incrPC
+]

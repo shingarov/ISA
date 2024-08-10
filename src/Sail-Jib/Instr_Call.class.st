@@ -18,3 +18,16 @@ Instr_Call class >> inducedParser [
 	, JibSourceLoc inducedParser
 	construct: #(lvalue - f args sourceLoc)
 ]
+
+{ #category : #'deterministic interpretation' }
+Instr_Call >> interpretIn: aContext [
+	| fn callee |
+	fn := aContext at: f.
+	callee := JibDeterministicContext new.
+	callee
+		fn: fn;
+		temps: (Dictionary newFromAssociations: {'return'->fn returnSort undefinedElement});
+		sender: aContext;
+		pc: 1.
+	^callee
+]

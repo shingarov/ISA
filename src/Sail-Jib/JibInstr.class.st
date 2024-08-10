@@ -23,6 +23,11 @@ JibInstr class >> adtSummands [
 	}
 ]
 
+{ #category : #'deterministic interpretation' }
+JibInstr >> interpretIn: aContext [ 
+	^self subclassResponsibility
+]
+
 { #category : #'formal semantics' }
 JibInstr >> toSpriteExprIn: aJibProgram [ 
 	self subclassResponsibility 

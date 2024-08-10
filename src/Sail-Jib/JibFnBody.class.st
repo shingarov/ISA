@@ -20,6 +20,11 @@ JibFnBody >> addTempsTo: aJibFnEnvironment [
 	decls do: (□ addTempDeclTo: aJibFnEnvironment)
 ]
 
+{ #category : #accessing }
+JibFnBody >> instrs [
+	^ instrs
+]
+
 { #category : #'as yet unclassified' }
 JibFnBody >> toSpriteExprIn: aJibFnEnvironment [
 	| them end |

@@ -25,3 +25,9 @@ Exp_Bits >> toSpriteExprIn: _ [
 		value: x unsignedValue))
 
 ]
+
+{ #category : #'deterministic interpretation' }
+Exp_Bits >> valueIn: _ [
+	^x
+
+]
