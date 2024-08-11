@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'def'
 	],
-	#category : #'Sail-Jib'
+	#category : #'Sail-Jib-Parsing'
 }
 
 { #category : #accessing }
