@@ -17,3 +17,13 @@ Instr_Jump class >> inducedParser [
 	, JibSourceLoc inducedParser trim
 	construct: #(- exp - target sourceLoc)
 ]
+
+{ #category : #testing }
+Instr_Jump >> isJump [
+	^true
+]
+
+{ #category : #accessing }
+Instr_Jump >> target [
+	^ target
+]

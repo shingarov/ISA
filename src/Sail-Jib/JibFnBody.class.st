@@ -2,7 +2,8 @@ Class {
 	#name : #JibFnBody,
 	#superclass : #Object,
 	#instVars : [
-		'instrs'
+		'instrs',
+		'blocks'
 	],
 	#category : #'Sail-Jib'
 }
@@ -18,6 +19,26 @@ JibFnBody >> addTempsTo: aJibFnEnvironment [
 	| decls |
 	decls := instrs select: (□ isKindOf: Instr_Decl).
 	decls do: (□ addTempDeclTo: aJibFnEnvironment)
+]
+
+{ #category : #accessing }
+JibFnBody >> blocks [
+	blocks isNil ifTrue:[
+		blocks := JibFnBodyBlock analyze: self.
+	].
+	^blocks
+]
+
+{ #category : #inspecting }
+JibFnBody >> gtInstructionsIn: composite [
+	<gtInspectorPresentationOrder: 1>
+	^ composite fastTable
+		title: 'Instructions';
+		display: [ instrs ];
+		column: 'Index'      evaluated: [ :insn | (instrs indexOf: insn) - 1 ];
+		column: 'Instruction' evaluated: [ :insn | insn ]
+
+	
 ]
 
 { #category : #accessing }

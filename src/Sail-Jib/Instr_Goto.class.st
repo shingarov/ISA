@@ -18,8 +18,18 @@ Instr_Goto parser parse: 'goto 10'
 "
 ]
 
+{ #category : #testing }
+Instr_Goto >> isGoto [
+	^true
+]
+
 { #category : #printing }
 Instr_Goto >> printOn: aStream [
 	aStream nextPutAll: 'goto '.
 	n printOn: aStream
+]
+
+{ #category : #accessing }
+Instr_Goto >> target [
+	^n
 ]

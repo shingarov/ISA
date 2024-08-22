@@ -90,6 +90,9 @@ Def_Fn >> toSpriteAnn [
 
 { #category : #'formal semantics' }
 Def_Fn >> toSpriteDecl [
+	body blocks.
+	self halt.
+	
 	^SpriteDecl
 		bind: (SpriteBind id: name)
 		expr: self toSpriteAnn

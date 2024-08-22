@@ -20,3 +20,8 @@ Instr_Exit inducedParser parse: 'exit match `6 131:25-134:1'
 "
 	
 ]
+
+{ #category : #testing }
+Instr_Exit >> isExit [
+	^true
+]
