@@ -10,7 +10,7 @@ Class {
 
 { #category : #syntax }
 Instr_Copy class >> inducedParser [
-	^ JibParser id trim
+	^ JibLoc inducedParser trim
 	, $= asParser trim
 	, JibExp inducedParser
 	, JibSourceLoc inducedParser optional"??? not according to ir_parser.lalrpop!"
