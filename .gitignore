@@ -1,0 +1,12 @@
+# Local customizations
+GNUmakefile.local
+
+# Build by-products 
+pdl
+MachineArithmetic
+
+# Smalltalk/X
+stx/stx
+stx/package-cache
+stx/*Test.xml
+
