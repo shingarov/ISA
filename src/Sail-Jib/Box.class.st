@@ -19,6 +19,11 @@ Box class >> with: l [
 		yourself
 ]
 
+{ #category : #enumerating }
+Box >> defdIdsDo: aBlock [
+	l defdIdsDo: aBlock
+]
+
 { #category : #accessing }
 Box >> l [
 	^ l
@@ -27,4 +32,9 @@ Box >> l [
 { #category : #accessing }
 Box >> l: anObject [
 	l := anObject
+]
+
+{ #category : #printing }
+Box >> printOn: aStream [
+	l printOn: aStream
 ]

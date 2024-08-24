@@ -6,7 +6,8 @@ Class {
 		'range',
 		'precedessors',
 		'successor1',
-		'successor2'
+		'successor2',
+		'liveness'
 	],
 	#category : #'Sail-Jib'
 }
@@ -112,8 +113,24 @@ JibFnBodyBlock >> displayStringOn: aStream [
 ]
 
 { #category : #inspecting }
-JibFnBodyBlock >> gtInstructionsIn: composite [
+JibFnBodyBlock >> gtInstructionsAndLivenessIn: composite [
 	<gtInspectorPresentationOrder: 1>
+	^ composite tabulator	
+			title: 'Instructions';
+			with: [ :pane |
+				pane row: #instructions; row: #liveness.
+				pane transmit
+					to: #instructions;
+					andShow: [ :a | self gtInstructionsIn: a].
+				pane transmit
+					to: #liveness;
+					andShow: [ :a | self gtLivenessIn: a].
+			]
+]
+
+{ #category : #inspecting }
+JibFnBodyBlock >> gtInstructionsIn: composite [
+	"<gtInspectorPresentationOrder: 1>"
 	^ composite fastTable
 		title: 'Instructions';
 		display: [ self instrs ];
@@ -121,9 +138,46 @@ JibFnBodyBlock >> gtInstructionsIn: composite [
 		column: 'Instruction' evaluated: [ :insn | insn ]
 ]
 
+{ #category : #inspecting }
+JibFnBodyBlock >> gtLivenessIn: composite [
+	"<gtInspectorPresentationOrder: 2>"
+	composite text
+		title: 'Liveness';		
+		display: [ String streamContents: [ :text |
+				text nextPutAll: 'live-in:'; cr.
+				liveness liveIn do:[:id|
+					text nextPutAll: '    '; nextPutAll: id; cr.
+				].
+				text cr.
+				text nextPutAll: 'live-out:'; cr.
+				liveness liveOut do:[:id|
+					text nextPutAll: '    '; nextPutAll: id; cr.
+				].
+			
+				text cr.
+				text nextPutAll: 'gen-set:'; cr.
+				liveness genSet do:[:id|
+					text nextPutAll: '    '; nextPutAll: id; cr.
+				].
+			
+				text cr.
+				text nextPutAll: 'kill-set'; cr.
+				liveness killSet do:[:id|
+					text nextPutAll: '    '; nextPutAll: id; cr.
+				].
+		]]
+]
+
 { #category : #accessing }
 JibFnBodyBlock >> instrs [
 	^body instrs copyFrom: range first + 1 to: range last + 1
+]
+
+{ #category : #enumerating }
+JibFnBodyBlock >> instrsDo: aBlock [
+	range first + 1 to: range last + 1 do:[:i|
+		aBlock value: (body instrs at: i)
+	].
 ]
 
 { #category : #utilities }
@@ -139,6 +193,16 @@ JibFnBodyBlock >> last [
 	"Return the last instruction in this block"
 	
 	^body instrs at: range last + 1
+]
+
+{ #category : #accessing }
+JibFnBodyBlock >> liveness [
+	^ liveness
+]
+
+{ #category : #accessing }
+JibFnBodyBlock >> liveness: anObject [
+	liveness := anObject
 ]
 
 { #category : #accessing }
@@ -252,4 +316,10 @@ JibFnBodyBlock >> successors [
 
 	successor1 isNil ifTrue:[ ^ { successor2 } ].
 	^ { successor1 . successor2 }
+]
+
+{ #category : #enumerating }
+JibFnBodyBlock >> successorsDo: aBlock [
+	successor1 notNil ifTrue:[aBlock value: successor1].
+	successor2 notNil ifTrue:[aBlock value: successor2].
 ]

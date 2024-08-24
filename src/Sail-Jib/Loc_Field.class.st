@@ -36,6 +36,12 @@ Loc_Field class >> new [
 	self shouldNotImplement
 ]
 
+{ #category : #enumerating }
+Loc_Field >> defdIdsDo: aBlock [
+	loc defdIdsDo: aBlock
+	
+]
+
 { #category : #accessing }
 Loc_Field >> field [
 	^ field
@@ -54,4 +60,12 @@ Loc_Field >> loc [
 { #category : #accessing }
 Loc_Field >> loc: anObject [
 	loc := anObject
+]
+
+{ #category : #printing }
+Loc_Field >> printOn: aStream [
+	loc printOn: aStream.
+	aStream nextPut:$..
+	aStream nextPutAll:field
+
 ]

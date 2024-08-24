@@ -14,3 +14,9 @@ Exp_Call class >> inducedParser [
 	, (Context readState: #parentInducedParser) commaList
 	construct: #(op args)
 ]
+
+{ #category : #enumerating }
+Exp_Call >> usedIdsDo: aBlock [
+	args do:[:e|e usedIdsDo: aBlock]
+	
+]

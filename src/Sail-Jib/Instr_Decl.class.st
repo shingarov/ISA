@@ -30,3 +30,11 @@ Instr_Decl >> addTempDeclTo: aJibFnEnvironment [
 Instr_Decl >> interpretIn: aContext [ 
 	^(aContext declareTemp: id ofSort: ty sort) incrPC
 ]
+
+{ #category : #printing }
+Instr_Decl >> printOn: aStream [
+	"BOGUS: why id is not Loc_Id?"
+	aStream nextPutAll: id.
+	aStream nextPutAll: ' : ...'.
+	"ty printOn: aStream"
+]

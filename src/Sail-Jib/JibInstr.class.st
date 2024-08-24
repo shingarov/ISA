@@ -26,7 +26,6 @@ JibInstr class >> adtSummands [
 { #category : #enumerating }
 JibInstr >> defdIdsDo: aBlock [
 	"Evaluate `aBlock` for each id defined (assigned) by this instruction"
-
 ]
 
 { #category : #accessing }
@@ -35,7 +34,6 @@ JibInstr >> genSet [
 	s := Set new.
 	self usedIdsDo: [ :e|s add:e ].
 	^s
-
 ]
 
 { #category : #'deterministic interpretation' }
@@ -74,7 +72,6 @@ JibInstr >> killSet [
 	s := Set new.
 	self defdIdsDo: [ :e|s add:e ].
 	^s
-
 ]
 
 { #category : #'formal semantics' }
@@ -85,5 +82,4 @@ JibInstr >> toSpriteExprIn: aJibProgram [
 { #category : #enumerating }
 JibInstr >> usedIdsDo: aBlock [
 	"Evaluate `aBlock` for each id used (read, accessed) by this instruction"
-
 ]

@@ -16,3 +16,18 @@ Loc_Id class >> inducedParser [
 JibLoc inducedParser parse: 'xyz'
 "
 ]
+
+{ #category : #enumerating }
+Loc_Id >> defdIdsDo: aBlock [
+	aBlock value: id
+]
+
+{ #category : #accessing }
+Loc_Id >> id [
+	^ id
+]
+
+{ #category : #printing }
+Loc_Id >> printOn: aStream [
+	aStream nextPutAll: id
+]
