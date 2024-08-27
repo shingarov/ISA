@@ -28,6 +28,11 @@ Def_Fn >> addTo: aJibProgram [
 ]
 
 { #category : #accessing }
+Def_Fn >> body [
+	^body
+]
+
+{ #category : #accessing }
 Def_Fn >> instrAt: j [ 
 	^body instrs at: j
 ]
