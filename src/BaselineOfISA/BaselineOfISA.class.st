@@ -13,9 +13,16 @@ BaselineOfISA >> baseline: spec [
 				spec repository: 'github://shingarov/MachineArithmetic:pure-z3'
 		].
 
+		spec baseline: 'Roassal3' with: [
+			spec repository: 'github://ObjectProfile/Roassal3:v0.9.2'
+		].
+
+
 		spec package: 'Sail-Jib' with:[
 			spec requires: 'Sail-Jib-Debugger';
-			     requires: 'Sail-Jib-Parsing'.
+			     requires: 'Sail-Jib-Parsing';
+			     requires: 'Roassal3'.
+
 		].
 
 		spec package: 'Sail-Jib-Debugger' with:[

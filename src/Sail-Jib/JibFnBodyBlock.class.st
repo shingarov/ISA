@@ -105,8 +105,29 @@ JibFnBodyBlock >> body [
 	^ body
 ]
 
+{ #category : #displaying }
+JibFnBodyBlock >> displayStringOn: aStream [
+	aStream nextPutAll:'B '.
+	self range first printOn: aStream
+]
+
+{ #category : #inspecting }
+JibFnBodyBlock >> gtInstructionsIn: composite [
+	<gtInspectorPresentationOrder: 1>
+	^ composite fastTable
+		title: 'Instructions';
+		display: [ self instrs ];
+		column: 'Index'      evaluated: [ :insn | (self instrs indexOf: insn) - 1 + range first ];
+		column: 'Instruction' evaluated: [ :insn | insn ]
+]
+
+{ #category : #accessing }
+JibFnBodyBlock >> instrs [
+	^body instrs copyFrom: range first + 1 to: range last + 1
+]
+
 { #category : #utilities }
-JibFnBodyBlock >> invalidate [	
+JibFnBodyBlock >> invalidate [
 	self setSuccessor1: nil.
 	self setSuccessor2: nil.
 	body := nil.
