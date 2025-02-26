@@ -30,6 +30,28 @@ JibVerificationTest >> refuteReturns42: jibSource [
 	self deny: prog solve isSafe
 ]
 
+{ #category : #'tests - bv?' }
+JibVerificationTest >> testAnyBV1_p [
+	self proveReturns42: '
+val zf : (%bv, %bv) ->  %bv32
+
+fn zf(zx, zy) {
+  return = 0b00000000000000000000000000101010 `100;
+  end;
+}
+
+val zmain : (%i) -> %bv32
+
+fn zmain(zarg) {
+  zz39 : %bv32 `1;
+  zz39 = 0b00000000000000000000000000101010 `2;
+  return = zf(zz39, zz39) `13;
+  end;
+}
+
+'
+]
+
 { #category : #'tests - 42' }
 JibVerificationTest >> testExecuteReturn42a_n [
 	self refuteReturns42: '
