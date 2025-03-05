@@ -1,15 +1,25 @@
 Class {
 	#name : #JibParsingTest,
 	#superclass : #JibTest,
+	#instVars : [
+		'parser',
+		'defParser'
+	],
 	#category : #'Sail-Jib-Tests'
 }
 
-{ #category : #tests }
+{ #category : #running }
+JibParsingTest >> setUp [
+	parser := JibParser new.
+	defParser := parser def.
+]
+
+{ #category : #'tests - program' }
 JibParsingTest >> testParseDuopod [
 	(self parseFileNamed: '/home/boris/work/REMS/duopod.ir') inspect
 ]
 
-{ #category : #tests }
+{ #category : #'tests - program' }
 JibParsingTest >> testParseZhexBits12forwards [
 	"Function zhex_bits_12_forwards from riscv64.ir"
 	| program function b0 b47 b49 |
@@ -100,4 +110,23 @@ fn zhex_bits_12_forwards(zargz3) {
 
 
 
+]
+
+{ #category : #'tests - individual defs' }
+JibParsingTest >> test_struct [
+	| struct |
+	struct := defParser parse: 'struct ztuplez3z5bv12_z5bv5_z5bv5_z5enumz0zziop {
+  ztuplez3z5bv12_z5bv5_z5bv5_z5enumz0zziop0: %bv12,
+  ztuplez3z5bv12_z5bv5_z5bv5_z5enumz0zziop1: %bv5,
+  ztuplez3z5bv12_z5bv5_z5bv5_z5enumz0zziop2: %bv5,
+  ztuplez3z5bv12_z5bv5_z5bv5_z5enumz0zziop3: %enum ziop
+}'.
+	self assert: (struct isKindOf: Def_Struct)
+]
+
+{ #category : #'tests - individual defs' }
+JibParsingTest >> test_val [
+	| val |
+	val := defParser parse: 'val zundefined_bitvector = "undefined_bitvector" : (%i) ->  %bv'.
+	self assert: (val isKindOf: Def_Val)
 ]
