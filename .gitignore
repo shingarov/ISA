@@ -5,6 +5,20 @@ GNUmakefile.local
 pdl
 MachineArithmetic
 
+# Pharo 
+pharo/pharo*
+pharo/Pharo*
+pharo/icon-packs
+pharo/progress.log
+pharo/*.image
+pharo/*.changes
+pharo/*Test.xml
+pharo/bin
+pharo/lib
+pharo/Pharo*.zip
+pharo/crash.dmp
+pharo/LibZ3-generated.st
+
 # Smalltalk/X
 stx/stx
 stx/package-cache
