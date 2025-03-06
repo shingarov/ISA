@@ -16,10 +16,10 @@ Loc_Field class >> inducedParser [
 		| root chase |
 		root := x first.
 		chase := x second.
-		chase inject: root into: [ :soFar :thisTime | Loc_Field loc: (Box with: soFar) field: thisTime ] ]
+		chase inject: root into: [ :soFar :thisTime | Loc_Field loc: soFar field: thisTime ] ]
 	
 "
-JibLoc parser parse: 'a.b.c'
+JibLoc inducedParser  parse: 'a.b.c'
 "
 ]
 

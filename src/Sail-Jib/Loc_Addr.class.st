@@ -11,7 +11,7 @@ Class {
 Loc_Addr class >> inducedParser [
 	^ Loc_Id inducedParser
 	, $* asParser
-	==> [ :x | Loc_Addr with: (Box with: x first) ]
+	==> [ :x | Loc_Addr with: x first ]
 	
 "
 JibLoc inducedParser parse: 'a*'
