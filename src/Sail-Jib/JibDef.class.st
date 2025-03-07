@@ -11,3 +11,8 @@ Class {
 JibDef >> addTo: aJibProgram [
 	self subclassResponsibility
 ]
+
+{ #category : #testing }
+JibDef class >> isAbstract [
+	^self == JibDef
+]

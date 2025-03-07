@@ -23,6 +23,11 @@ JibInstr class >> adtSummands [
 	}
 ]
 
+{ #category : #testing }
+JibInstr class >> isAbstract [
+	^self == JibInstr
+]
+
 { #category : #enumerating }
 JibInstr >> defdIdsDo: aBlock [
 	"Evaluate `aBlock` for each id defined (assigned) by this instruction"

@@ -33,6 +33,11 @@ Ty class >> constructNewFrom: anArray accordingTo: fields [
 	^(super constructNewFrom: anArray accordingTo: fields) spriteType
 ]
 
+{ #category : #testing }
+Ty class >> isAbstract [
+	^self == Ty
+]
+
 { #category : #'formal semantics' }
 Ty >> spriteType [
 	^self subclassResponsibility

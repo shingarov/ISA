@@ -7,6 +7,11 @@ Class {
 	#category : #'Sail-Jib'
 }
 
+{ #category : #testing }
+JibOp class >> isAbstract [
+	^self == JibOp
+]
+
 { #category : #'instance creation' }
 JibOp class >> new [
 	self shouldNotImplement

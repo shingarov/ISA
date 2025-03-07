@@ -22,6 +22,11 @@ JibExp class >> adtSummands [
 	}
 ]
 
+{ #category : #testing }
+JibExp class >> isAbstract [
+	^self == JibExp
+]
+
 { #category : #enumerating }
 JibExp >> usedIdsDo: aBlock [
 	"Evaluate `aBlock` for each id used (read, accessed) by this expression"

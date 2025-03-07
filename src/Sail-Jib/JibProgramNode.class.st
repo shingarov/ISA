@@ -6,7 +6,8 @@ Class {
 
 { #category : #'as yet unclassified' }
 JibProgramNode class >> adtSummands [
-	^self subclasses asSortedCollection: [ :a :b | a name <= b name ]
+	^(self subclasses reject: #isAbstract)
+		asSortedCollection: [ :a :b | a name <= b name ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -27,4 +28,9 @@ JibProgramNode class >> inducedParser [
 		runReader: #parentInducedParser
 		initialState: dp.
 	^dp
+]
+
+{ #category : #testing }
+JibProgramNode class >> isAbstract [
+	^self == JibProgramNode
 ]
