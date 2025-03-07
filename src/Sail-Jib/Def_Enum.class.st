@@ -2,8 +2,8 @@ Class {
 	#name : #'Def_Enum',
 	#superclass : #JibDef,
 	#instVars : [
-		'name',
-		'members'
+		'id',
+		'ids'
 	],
 	#category : #'Sail-Jib'
 }
@@ -13,13 +13,13 @@ Def_Enum class >> inducedParser [
 	^ 'enum' asParser trim
 	, JibParser id trim
 	, JibParser id trim commaSeparated braces
-	construct: #(- name members)
+	construct: #(- id ids)
 ]
 
 { #category : #initialization }
 Def_Enum >> addTo: aJibProgram [ 
 	aJibProgram enums
-		at: name
+		at: id
 		put: self
 ]
 
@@ -27,6 +27,6 @@ Def_Enum >> addTo: aJibProgram [
 Def_Enum >> printOn: aStream [
 	aStream
 		nextPutAll: 'enum ';
-		nextPutAll: name;
+		nextPutAll: id;
 		nextPutAll: ' {…}'
 ]

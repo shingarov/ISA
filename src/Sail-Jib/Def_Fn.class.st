@@ -2,8 +2,8 @@ Class {
 	#name : #'Def_Fn',
 	#superclass : #JibDef,
 	#instVars : [
-		'name',
-		'args',
+		'id',
+		'ids',
 		'body',
 		'Γ'
 	],
@@ -16,13 +16,13 @@ Def_Fn class >> inducedParser [
 	, JibParser id trim
 	, JibParser id trim commaList
 	, JibFnBody inducedParser trim
-	construct: #(- name args body)
+	construct: #(- id ids body)
 ]
 
 { #category : #initialization }
 Def_Fn >> addTo: aJibProgram [
 	aJibProgram values
-		at: name
+		at: id
 		put: self.
 	self program: aJibProgram
 ]
@@ -41,15 +41,15 @@ Def_Fn >> instrAt: j [
 Def_Fn >> printOn: aStream [
 	aStream
 		nextPutAll: 'fn ';
-		nextPutAll: name zdecode
+		nextPutAll: id zdecode
 ]
 
 { #category : #initialization }
 Def_Fn >> program: aJibProgram [
 	"Now that we know enough, we can construct the type environment."
 	| cod_dom cod dom |
-	cod_dom := args
-		inject: {aJibProgram typeEnvironment at: name . #()}
+	cod_dom := ids
+		inject: {aJibProgram typeEnvironment at: id . #()}
 		into: [ :soFar :thisArg | {soFar first t . soFar second, {thisArg->soFar first s}} ].
 	cod := cod_dom first.
 	dom := Dictionary newFromAssociations: cod_dom second.
@@ -69,20 +69,20 @@ Def_Fn >> returnSort [
 
 { #category : #'formal semantics' }
 Def_Fn >> rtype [
-	^Γ at: name
+	^Γ at: id
 ]
 
 { #category : #'formal semantics' }
 Def_Fn >> toSpriteAnn [
 	| ann bodyExpr efun |
 	ann := Refl
-		symbol: name
+		symbol: id
 		rtype: self rtype
 		metric: nil.
 		
 	bodyExpr := body toSpriteExprIn: 	Γ.
 
-	efun := args
+	efun := ids
 		foldr: [ :thisArg :soFar | EFun bind: (SpriteBind id: thisArg) expr: soFar ]
 		fromSeed: bodyExpr.
 	
@@ -99,6 +99,6 @@ Def_Fn >> toSpriteDecl [
 	self halt.
 	
 	^SpriteDecl
-		bind: (SpriteBind id: name)
+		bind: (SpriteBind id: id)
 		expr: self toSpriteAnn
 ]

@@ -2,8 +2,8 @@ Class {
 	#name : #'Def_Struct',
 	#superclass : #JibDef,
 	#instVars : [
-		'name',
-		'members'
+		'id',
+		'ids'
 	],
 	#category : #'Sail-Jib'
 }
@@ -13,13 +13,13 @@ Def_Struct class >> inducedParser [
 	^ 'struct' asParser trim
 	, JibParser id trim
 	, (JibParser id, $: asParser trim, Ty inducedParser) commaSeparated braces
-	construct: #(- name members)
+	construct: #(- id ids)
 ]
 
 { #category : #initialization }
 Def_Struct >> addTo: aJibProgram [
 	aJibProgram structs
-		at: name
+		at: id
 		put: self
 ]
 
@@ -27,6 +27,6 @@ Def_Struct >> addTo: aJibProgram [
 Def_Struct >> printOn: aStream [
 	aStream
 		nextPutAll: 'struct ';
-		nextPutAll: name;
+		nextPutAll: id;
 		nextPutAll: ' {…}'
 ]
