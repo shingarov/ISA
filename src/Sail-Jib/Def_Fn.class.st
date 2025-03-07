@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'id',
 		'ids',
-		'body',
+		'instrs',
 		'Γ'
 	],
 	#category : #'Sail-Jib'
@@ -15,8 +15,8 @@ Def_Fn class >> inducedParser [
 	^ 'fn' asParser trim
 	, JibParser id trim
 	, JibParser id trim commaList
-	, JibFnBody asParser trim
-	construct: #(- id ids body)
+	, (JibInstr asParser, $; asParser trim ==> #first) star braces
+	construct: #(- id ids instrs)
 ]
 
 { #category : #initialization }
@@ -28,13 +28,8 @@ Def_Fn >> addTo: aJibProgram [
 ]
 
 { #category : #accessing }
-Def_Fn >> body [
-	^body
-]
-
-{ #category : #accessing }
 Def_Fn >> instrAt: j [ 
-	^body instrs at: j
+	^instrs at: j
 ]
 
 { #category : #printing }
@@ -58,7 +53,7 @@ Def_Fn >> program: aJibProgram [
 		argTypes: dom
 		tempTypes: (Dictionary newFromAssociations: {'return'->cod})
 		programTypes: aJibProgram typeEnvironment.
-	body addTempsTo: Γ
+	instrs addTempsTo: Γ
 ]
 
 { #category : #'formal semantics' }
@@ -79,8 +74,8 @@ Def_Fn >> toSpriteAnn [
 		symbol: id
 		rtype: self rtype
 		metric: nil.
-		
-	bodyExpr := body toSpriteExprIn: 	Γ.
+
+	bodyExpr := instrs toSpriteExprIn: 	Γ.
 
 	efun := ids
 		foldr: [ :thisArg :soFar | EFun bind: (SpriteBind id: thisArg) expr: soFar ]
@@ -95,7 +90,7 @@ Def_Fn >> toSpriteAnn [
 
 { #category : #'formal semantics' }
 Def_Fn >> toSpriteDecl [
-	body blocks.
+	instrs blocks.
 	self halt.
 	
 	^SpriteDecl
