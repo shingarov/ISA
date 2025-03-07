@@ -1,6 +1,6 @@
 Class {
 	#name : #JibOp,
-	#superclass : #Object,
+	#superclass : #JibProgramNode,
 	#classInstVars : [
 		'uniqueInstance'
 	],

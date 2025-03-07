@@ -1,6 +1,6 @@
 Class {
 	#name : #JibInstr,
-	#superclass : #Object,
+	#superclass : #JibProgramNode,
 	#instVars : [
 		'sourceLoc'
 	],

@@ -1,6 +1,6 @@
 Class {
 	#name : #JibFnBody,
-	#superclass : #Object,
+	#superclass : #JibProgramNode,
 	#instVars : [
 		'instrs',
 		'blocks'

@@ -1,23 +1,12 @@
 Class {
 	#name : #JibExitCause,
-	#superclass : #Object,
+	#superclass : #SharedPool,
 	#classVars : [
 		'Explicit',
 		'MatchFailure'
 	],
 	#category : #'Sail-Jib'
 }
-
-{ #category : #'instance creation' }
-JibExitCause class >> explicit [
-	^Explicit
-]
-
-{ #category : #syntax }
-JibExitCause class >> inducedParser [
-	^ ('match' asParser ==> JibExitCause match K) trim
-	/ ('explicit' asParser ==> JibExitCause explicit K) trim
-]
 
 { #category : #'class initialization' }
 JibExitCause class >> initialize [
@@ -26,11 +15,6 @@ JibExitCause class >> initialize [
 	"
 	MatchFailure := JibExitCause basicNew.
 	Explicit := JibExitCause basicNew.
-]
-
-{ #category : #'instance creation' }
-JibExitCause class >> match [
-	^MatchFailure
 ]
 
 { #category : #'instance creation' }
@@ -52,5 +36,5 @@ JibExitCause >> isMatchFailure [
 JibExitCause >> printOn: aStream [
 	self isExplicit ifTrue: [ ^aStream nextPutAll: 'explicit' ].
 	self isMatchFailure ifTrue: [ ^aStream nextPutAll: 'match failure' ].
-	self error
+	self error:'Should not be reached'
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : #JibProgram,
-	#superclass : #Object,
+	#superclass : #JibProgramNode,
 	#instVars : [
 		'types',
 		'values',

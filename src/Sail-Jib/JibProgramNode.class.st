@@ -1,12 +1,16 @@
-Extension { #name : #Class }
+Class {
+	#name : #JibProgramNode,
+	#superclass : #Object,
+	#category : #'Sail-Jib'
+}
 
-{ #category : #'*Sail-Jib-Parsing' }
-Class >> adtSummands [
+{ #category : #'as yet unclassified' }
+JibProgramNode class >> adtSummands [
 	^self subclasses asSortedCollection: [ :a :b | a name <= b name ]
 ]
 
-{ #category : #'*Sail-Jib-Parsing' }
-Class >> constructNewFrom: anArray accordingTo: fields [
+{ #category : #'as yet unclassified' }
+JibProgramNode class >> constructNewFrom: anArray accordingTo: fields [
 	| inst |
 	inst := self basicNew.
 	(fields zip: anArray) do: [ :ivarNameAndVal |
@@ -15,8 +19,8 @@ Class >> constructNewFrom: anArray accordingTo: fields [
 	^inst
 ]
 
-{ #category : #'*Sail-Jib-Parsing' }
-Class >> inducedParser [
+{ #category : #'as yet unclassified' }
+JibProgramNode class >> inducedParser [
 	| dp |
 	dp := PPDelegateParser new.
 	[ dp setParser: (PPChoiceParser withAll: (self adtSummands collect: #inducedParser)) ]

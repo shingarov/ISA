@@ -5,14 +5,17 @@ Class {
 		'cause',
 		'src'
 	],
+	#pools : [
+		'JibExitCause'
+	],
 	#category : #'Sail-Jib'
 }
 
 { #category : #parsing }
 Instr_Exit class >> inducedParser [
 	^ 'exit' asParser trim
-	, JibExitCause inducedParser
-	, JibSourceLoc inducedParser
+	, ('match' asParser ==> [ :_ | MatchFailure ] / 'explicit' asParser ==> [ :_ | Explicit ])
+	, JibSourceLoc asParser
 	construct: #(- cause src)
 	
 "

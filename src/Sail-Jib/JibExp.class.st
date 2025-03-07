@@ -1,6 +1,6 @@
 Class {
 	#name : #JibExp,
-	#superclass : #Object,
+	#superclass : #JibProgramNode,
 	#category : #'Sail-Jib'
 }
 
