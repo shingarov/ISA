@@ -8,7 +8,7 @@ Class {
 Exp_Struct class >> Fexp [
 	^ JibParser id trim
 	, $= asParser trim
-	, (Context readState: #parentInducedParser)
+	, JibExp asParser
 ]
 
 { #category : #syntax }

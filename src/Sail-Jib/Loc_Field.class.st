@@ -10,7 +10,7 @@ Class {
 
 { #category : #syntax }
 Loc_Field class >> inducedParser [
-	^ Loc_Id inducedParser
+	^ Loc_Id asParser
 	, ($. asParser, JibParser id ==> #second) plus
 	==> [ :x |
 		| root chase |

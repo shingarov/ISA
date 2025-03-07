@@ -11,10 +11,10 @@ Class {
 { #category : #syntax }
 Instr_Jump class >> inducedParser [
 	^ 'jump' asParser trim
-	, JibExp inducedParser trim
+	, JibExp asParser trim
 	, 'goto' asParser trim
 	, PPParser decimalInteger trim
-	, JibSourceLoc inducedParser trim
+	, JibSourceLoc asParser trim
 	construct: #(- exp - target sourceLoc)
 ]
 

@@ -14,7 +14,7 @@ Ty_FixedVector class >> inducedParser [
 	, (
 	    PPParser decimalNat,
 	    $, asParser trim,
-	    (Context readState: #parentInducedParser)
+	    Ty asParser
 	    construct: #(length - ty)
 	  ) parens
 	==> #second

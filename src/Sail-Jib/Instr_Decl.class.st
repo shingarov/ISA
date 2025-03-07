@@ -12,8 +12,8 @@ Class {
 Instr_Decl class >> inducedParser [
 	^ JibParser id
 	, $: asParser trim
-	, Ty inducedParser
-	, JibSourceLoc inducedParser
+	, Ty asParser
+	, JibSourceLoc asParser
 	construct: #(id - ty sourceLoc)
 
 "

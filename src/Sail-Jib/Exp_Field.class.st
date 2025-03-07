@@ -6,6 +6,6 @@ Class {
 
 { #category : #syntax }
 Exp_Field class >> inducedParser [
-	^ Exp_Id inducedParser
+	^ Exp_Id asParser
 	, ($. asParser, JibParser id ==> #second) plus
 ]

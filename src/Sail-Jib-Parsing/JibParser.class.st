@@ -14,7 +14,7 @@ JibParser class >> id [
 
 { #category : #accessing }
 JibParser >> def [
-	^JibDef inducedParser
+	^JibDef asParser
 ]
 
 { #category : #accessing }

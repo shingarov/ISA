@@ -8,10 +8,10 @@ Class {
 Instr_Init class >> inducedParser [
 	^ JibParser id
 	, $: asParser trim
-	, Ty inducedParser
+	, Ty asParser
 	, $= asParser trim
-	, JibExp inducedParser
-	, JibSourceLoc inducedParser
+	, JibExp asParser
+	, JibSourceLoc asParser
 	
 
 "

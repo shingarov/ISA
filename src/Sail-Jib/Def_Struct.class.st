@@ -12,7 +12,7 @@ Class {
 Def_Struct class >> inducedParser [
 	^ 'struct' asParser trim
 	, JibParser id trim
-	, (JibParser id, $: asParser trim, Ty inducedParser) commaSeparated braces
+	, (JibParser id, $: asParser trim, Ty asParser) commaSeparated braces
 	construct: #(- id ids)
 ]
 

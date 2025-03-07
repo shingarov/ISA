@@ -4,28 +4,27 @@ Class {
 	#category : #'Sail-Jib'
 }
 
-{ #category : #syntax }
-Ty class >> adtSummands [
-	^{
-		Ty_I64.
-		Ty_I128.
-		Ty_Bits.
-		Ty_AnyBits.
-		Ty_Unit.
-		Ty_Bool.
-		Ty_Bit.
-		Ty_String.
-		Ty_Real.
-		Ty_Enum.
-		Ty_Vector.
-		Ty_FixedVector.
-		Ty_Float.
-		Ty_List.
-		Ty_RoundingMode.
-		Ty_Ref.
-		Ty_Union.
-		Ty_Struct
-	}
+{ #category : #parsing }
+Ty class >> inducedParser [
+	^	Ty_I64 asParser
+	/	Ty_I128 asParser
+	/	Ty_Bits asParser
+	/	Ty_AnyBits asParser
+	/	Ty_Unit asParser
+	/	Ty_Bool asParser
+	/	Ty_Bit asParser
+	/	Ty_String asParser
+	/	Ty_Real asParser
+	/	Ty_Enum asParser
+	/	Ty_Vector asParser
+	/	Ty_FixedVector asParser
+	/	Ty_Float asParser
+	/	Ty_List asParser
+	/	Ty_RoundingMode asParser
+	/	Ty_Ref asParser
+	/	Ty_Union asParser
+	/	Ty_Struct asParser
+
 ]
 
 { #category : #testing }

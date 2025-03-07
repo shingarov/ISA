@@ -9,7 +9,7 @@ Class {
 
 { #category : #syntax }
 Loc_Addr class >> inducedParser [
-	^ Loc_Id inducedParser
+	^ Loc_Id asParser
 	, $* asParser
 	==> [ :x | Loc_Addr with: x first ]
 	

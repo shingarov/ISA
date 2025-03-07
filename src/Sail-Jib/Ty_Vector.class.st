@@ -7,5 +7,5 @@ Class {
 { #category : #syntax }
 Ty_Vector class >> inducedParser [
 	^ '%vec' asParser
-	, (Context readState: #parentInducedParser) parens
+	, Ty asParser parens
 ]

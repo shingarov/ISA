@@ -15,9 +15,9 @@ Def_Extern class >> inducedParser [
 	    '=' asParser trim,
 	    PPParser doubleQuoted trim,
 	    $: asParser trim
-	    , Ty inducedParser trim commaSeparated parens trim
+	    , Ty asParser trim commaSeparated parens trim
 	    , '->' asParser trim
-	    , Ty inducedParser trim
+	    , Ty asParser trim
 	    construct: #(- id - ext - tys - ty)
 	) / (
 	    'abstract' asParser

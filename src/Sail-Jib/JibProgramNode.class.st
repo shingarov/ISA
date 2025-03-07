@@ -1,16 +1,46 @@
 Class {
 	#name : #JibProgramNode,
 	#superclass : #Object,
+	#classInstVars : [
+		'parser'
+	],
 	#category : #'Sail-Jib'
 }
 
-{ #category : #'as yet unclassified' }
-JibProgramNode class >> adtSummands [
-	^(self subclasses reject: #isAbstract)
-		asSortedCollection: [ :a :b | a name <= b name ]
+{ #category : #parsing }
+JibProgramNode class >> asParser [
+	parser isNil ifTrue:[
+		"Here we keep the parser around (in class-instance variable
+		 'parser' only for as long as we're constructing it. This
+		 is needed because the it may ve recursive.
+
+		 In theory we can keep it forever, but then we'd need to flush
+		 it each time we change #inducedParser so it is easier to just
+		 throw it away each time.
+		"
+
+		| p |
+
+		[
+			parser := p := PPDelegateParser new.
+			parser name: self name.
+			parser setParser: (self inducedParser name: self name; yourself).
+		] ensure:[
+			parser := nil.
+		].
+		^ p.
+	].
+	^parser
+
+	"
+	JibDef asParser
+
+	parser := nil.
+	JibProgramNode allSubclassesDo:[:cls | cls instVarNamed: #parser put: nil ].
+	"
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 JibProgramNode class >> constructNewFrom: anArray accordingTo: fields [
 	| inst |
 	inst := self basicNew.
@@ -20,14 +50,13 @@ JibProgramNode class >> constructNewFrom: anArray accordingTo: fields [
 	^inst
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 JibProgramNode class >> inducedParser [
-	| dp |
-	dp := PPDelegateParser new.
-	[ dp setParser: (PPChoiceParser withAll: (self adtSummands collect: #inducedParser)) ]
-		runReader: #parentInducedParser
-		initialState: dp.
-	^dp
+	"Return a parser that parses this node. Never call this
+	 directly from other #inducedParser implementations, use
+	 #asParser instead!"
+
+	self subclassResponsibility
 ]
 
 { #category : #testing }

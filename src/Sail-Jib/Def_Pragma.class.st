@@ -7,7 +7,7 @@ Class {
 { #category : #syntax }
 Def_Pragma class >> inducedParser [
 	^($# asParser
-	, (PPChoiceParser withAll: (self subclasses collect: #inducedParser))
+	, (PPChoiceParser withAll: (self subclasses collect: #asParser))
 	, Character lf asParser
 	==> #second
 	) trim

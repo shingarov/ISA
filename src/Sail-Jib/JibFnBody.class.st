@@ -10,7 +10,7 @@ Class {
 
 { #category : #syntax }
 JibFnBody class >> inducedParser [
-	^ (PPSequenceParser with: (JibInstr inducedParser, $; asParser trim ==> #first) star braces)
+	^ (PPSequenceParser with: (JibInstr asParser, $; asParser trim ==> #first) star braces)
 	construct: #(instrs)
 ]
 

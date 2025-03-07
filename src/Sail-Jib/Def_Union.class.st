@@ -12,7 +12,7 @@ Class {
 Def_Union class >> inducedParser [
 	^ 'union' asParser trim
 	, JibParser id trim
-	, ((JibParser id, $: asParser trim, Ty inducedParser ==> [ :x | x first -> x last ]) commaSeparated braces
+	, ((JibParser id, $: asParser trim, Ty asParser ==> [ :x | x first -> x last ]) commaSeparated braces
 	  ==> (Dictionary newFromAssociations: □))
 	construct: #(- id ids)
 ]

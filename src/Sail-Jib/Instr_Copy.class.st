@@ -10,10 +10,10 @@ Class {
 
 { #category : #syntax }
 Instr_Copy class >> inducedParser [
-	^ JibLoc inducedParser trim
+	^ JibLoc asParser trim
 	, $= asParser trim
-	, JibExp inducedParser
-	, JibSourceLoc inducedParser optional"??? not according to ir_parser.lalrpop!"
+	, JibExp asParser
+	, JibSourceLoc asParser optional"??? not according to ir_parser.lalrpop!"
 	construct: #(l - e sourceLoc)
 ]
 

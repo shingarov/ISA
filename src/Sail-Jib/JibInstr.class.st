@@ -7,20 +7,18 @@ Class {
 	#category : #'Sail-Jib'
 }
 
-{ #category : #syntax }
-JibInstr class >> adtSummands [
-	^{
-		Instr_Arbitrary.
-		Instr_End.
-		Instr_Goto.
-		Instr_Jump.
-		Instr_Monomorphize.
-		Instr_Call.
-		Instr_Copy.
-		Instr_Decl.
-		Instr_Exit.
-		Instr_Init.
-	}
+{ #category : #parsing }
+JibInstr class >> inducedParser [
+	^	Instr_Arbitrary asParser
+	/	Instr_End asParser
+	/	Instr_Goto asParser
+	/	Instr_Jump asParser
+	/	Instr_Monomorphize asParser
+	/	Instr_Call asParser
+	/	Instr_Copy asParser
+	/	Instr_Decl asParser
+	/	Instr_Exit asParser
+	/	Instr_Init asParser
 ]
 
 { #category : #testing }

@@ -10,8 +10,8 @@ Class {
 
 { #category : #syntax }
 Exp_Call class >> inducedParser [
-	^ JibOp inducedParser
-	, (Context readState: #parentInducedParser) commaList
+	^ JibOp asParser
+	, JibExp asParser commaList
 	construct: #(op args)
 ]
 

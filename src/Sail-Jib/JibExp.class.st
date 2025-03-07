@@ -4,22 +4,35 @@ Class {
 	#category : #'Sail-Jib'
 }
 
-{ #category : #syntax }
-JibExp class >> adtSummands [
-	^{
-		Exp_Kind.
-		Exp_Unwrap.
-		Exp_Bool.
-		Exp_Bits.
-		Exp_Unit.
-		Exp_String.
-		Exp_Struct.
-		Exp_I128.
-		Exp_I64.
-		Exp_Field.
-		Exp_Call.
-		Exp_Id
-	}
+{ #category : #parsing }
+JibExp class >> inducedParser [
+	^	Exp_Field asParser
+	/	Exp_Kind asParser
+	/	Exp_Unwrap asParser
+
+
+	/	Exp_Bits asParser
+	/	Exp_Bool asParser
+	/	Exp_I128 asParser
+	/	Exp_I64 asParser
+	/	Exp_String asParser
+	/	Exp_Struct asParser
+	/	Exp_Unit asParser
+	/	Exp_Id asParser
+	/	Exp_Call asParser
+
+
+
+
+
+"
+JibExp asParser end parse:'xyz'
+JibExp asParser end parse:'xyz.foo'
+Exp_Field asParser end parse:'xyz.foo'
+"
+
+
+
 ]
 
 { #category : #testing }
