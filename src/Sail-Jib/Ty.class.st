@@ -28,11 +28,6 @@ Ty class >> adtSummands [
 	}
 ]
 
-{ #category : #syntax }
-Ty class >> constructNewFrom: anArray accordingTo: fields [
-	^(super constructNewFrom: anArray accordingTo: fields) spriteType
-]
-
 { #category : #testing }
 Ty class >> isAbstract [
 	^self == Ty
