@@ -12,8 +12,3 @@ Def_Pragma class >> inducedParser [
 	==> #second
 	) trim
 ]
-
-{ #category : #initialization }
-Def_Pragma >> addTo: aJibProgram [ 
-	"self shouldBeImplemented." "BOGUS, I don't know what this is, do nothing for now"
-]

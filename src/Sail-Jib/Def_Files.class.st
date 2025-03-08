@@ -19,11 +19,6 @@ Def_Files class >> inducedParser [
 	]
 ]
 
-{ #category : #adding }
-Def_Files >> addTo: aJibProgram [
-	aJibProgram sourceFiles: dict
-]
-
 { #category : #accessing }
 Def_Files >> dict [
 	dict isNil ifTrue: [ dict := Dictionary new ].

@@ -16,13 +16,6 @@ Def_Struct class >> inducedParser [
 	construct: #(- id ids)
 ]
 
-{ #category : #initialization }
-Def_Struct >> addTo: aJibProgram [
-	aJibProgram structs
-		at: id
-		put: self
-]
-
 { #category : #printing }
 Def_Struct >> printOn: aStream [
 	aStream

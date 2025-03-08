@@ -24,14 +24,6 @@ Def_Extern class >> inducedParser [
 	)
 ]
 
-{ #category : #initialization }
-Def_Extern >> addTo: aJibProgram [
-	super addTo: aJibProgram.
-	aJibProgram values
-		at: id
-		put: self
-]
-
 { #category : #printing }
 Def_Extern >> printOn: aStream [
 	aStream nextPut: (Character codePoint: 16r2197).

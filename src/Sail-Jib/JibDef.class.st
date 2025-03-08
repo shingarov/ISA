@@ -31,8 +31,3 @@ JibDef class >> inducedParser [
 JibDef class >> isAbstract [
 	^self == JibDef
 ]
-
-{ #category : #initialization }
-JibDef >> addTo: aJibProgram [
-	self subclassResponsibility
-]

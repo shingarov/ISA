@@ -31,8 +31,3 @@ Ty class >> inducedParser [
 Ty class >> isAbstract [
 	^self == Ty
 ]
-
-{ #category : #'formal semantics' }
-Ty >> spriteType [
-	^self subclassResponsibility
-]

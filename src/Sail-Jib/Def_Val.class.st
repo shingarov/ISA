@@ -19,11 +19,3 @@ Def_Val class >> inducedParser [
 	, Ty asParser trim
 	construct: #(- id - tys - ty)
 ]
-
-{ #category : #initialization }
-Def_Val >> addTo: aJibProgram [ 
-	aJibProgram types
-		at: id
-		ifPresent: [ self error: 'cant have more than one type declaration' ]
-		ifAbsentPut: (tys foldr: [ :thisTime :soFar | thisTime ==> soFar ] fromSeed: ty)
-]

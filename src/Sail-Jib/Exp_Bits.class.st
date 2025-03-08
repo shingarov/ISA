@@ -50,17 +50,3 @@ Exp_Bits >> printOn: aStream [
 		]
 	]
 ]
-
-{ #category : #'formal semantics' }
-Exp_Bits >> toSpriteExprIn: _ [
-	^EImm imm: (ECon prim: (PBitVector
-		length: x length
-		value: x unsignedValue))
-
-]
-
-{ #category : #'deterministic interpretation' }
-Exp_Bits >> valueIn: _ [
-	^x
-
-]

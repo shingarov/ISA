@@ -39,11 +39,6 @@ JibInstr >> genSet [
 	^s
 ]
 
-{ #category : #'deterministic interpretation' }
-JibInstr >> interpretIn: aContext [ 
-	^self subclassResponsibility
-]
-
 { #category : #testing }
 JibInstr >> isBranch [
 	^self isJump or:[self isGoto]
@@ -75,11 +70,6 @@ JibInstr >> killSet [
 	s := Set new.
 	self defdIdsDo: [ :e|s add:e ].
 	^s
-]
-
-{ #category : #'formal semantics' }
-JibInstr >> toSpriteExprIn: aJibProgram [ 
-	self subclassResponsibility 
 ]
 
 { #category : #enumerating }

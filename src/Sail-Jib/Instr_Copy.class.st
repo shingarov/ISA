@@ -35,22 +35,6 @@ Instr_Copy >> printOn: aStream [
 	e printOn: aStream
 ]
 
-{ #category : #'formal semantics' }
-Instr_Copy >> toSpriteELetAround: expr in: aJibFnEnvironment [
-	^ELet
-		decl: (SpriteDecl
-			bind: (SpriteBind id: l)
-			expr: (EAnn
-				expr: (e toSpriteExprIn: aJibFnEnvironment)
-				ann: (Val
-					symbol: l
-					rtype: (aJibFnEnvironment at: l) b bUnknown
-					metric: nil )
-			)
-		)
-		expr: expr
-]
-
 { #category : #enumerating }
 Instr_Copy >> usedIdsDo: aBlock [
 	"BOGUS: look at what is in `e` and `args` instvars, looks like some garbage to me."	

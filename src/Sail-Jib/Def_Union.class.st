@@ -17,13 +17,6 @@ Def_Union class >> inducedParser [
 	construct: #(- id ids)
 ]
 
-{ #category : #initialization }
-Def_Union >> addTo: aJibProgram [
-	aJibProgram unions
-		at: id
-		put: self
-]
-
 { #category : #printing }
 Def_Union >> printOn: aStream [
 	aStream

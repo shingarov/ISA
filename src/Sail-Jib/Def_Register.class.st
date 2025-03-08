@@ -19,13 +19,6 @@ Def_Register class >> inducedParser [
 	construct: #(- id - ty -)
 ]
 
-{ #category : #initialization }
-Def_Register >> addTo: aJibProgram [
-	aJibProgram registers
-		at: id
-		put: self
-]
-
 { #category : #printing }
 Def_Register >> printOn: aStream [
 	aStream nextPut: (Character codePoint: 16rAE).

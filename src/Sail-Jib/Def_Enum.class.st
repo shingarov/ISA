@@ -16,13 +16,6 @@ Def_Enum class >> inducedParser [
 	construct: #(- id ids)
 ]
 
-{ #category : #initialization }
-Def_Enum >> addTo: aJibProgram [ 
-	aJibProgram enums
-		at: id
-		put: self
-]
-
 { #category : #printing }
 Def_Enum >> printOn: aStream [
 	aStream
