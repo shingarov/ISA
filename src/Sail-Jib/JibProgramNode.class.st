@@ -41,13 +41,10 @@ JibProgramNode class >> asParser [
 ]
 
 { #category : #parsing }
-JibProgramNode class >> constructNewFrom: anArray accordingTo: fields [
-	| inst |
-	inst := self basicNew.
-	(fields zip: anArray) do: [ :ivarNameAndVal |
-				ivarNameAndVal key = #- ifFalse: [ inst instVarNamed: ivarNameAndVal key put: ivarNameAndVal value ] ].
-	inst initialize.
-	^inst
+JibProgramNode class >> constructNewFrom: values accordingTo: fields [
+	^self basicNew
+		initializeFrom: values accordingTo: fields;
+		yourself
 ]
 
 { #category : #parsing }
@@ -57,6 +54,21 @@ JibProgramNode class >> inducedParser [
 	 #asParser instead!"
 
 	self subclassResponsibility
+]
+
+{ #category : #initialization }
+JibProgramNode >> initializeFrom: values accordingTo: spec [
+	| instvars |
+
+	instvars := self class allInstVarNames.
+	spec with: values do: [:name :value |
+		name ~~ #'-' ifTrue:[
+			| index |
+
+			index := instvars indexOf: name.
+			self instVarAt: index put: value.
+		]
+	].
 ]
 
 { #category : #testing }
