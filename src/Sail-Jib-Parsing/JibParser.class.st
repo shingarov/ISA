@@ -1,9 +1,6 @@
 Class {
 	#name : #JibParser,
 	#superclass : #PPCompositeParser,
-	#instVars : [
-		'def'
-	],
 	#category : #'Sail-Jib-Parsing'
 }
 
@@ -13,12 +10,6 @@ JibParser class >> id [
 ]
 
 { #category : #accessing }
-JibParser >> def [
-	^JibDef asParser
-]
-
-{ #category : #accessing }
 JibParser >> start [
-	^ def plus end
-	==> (JibProgram fromDefs: □)
+	^ JibProgram asParser end
 ]

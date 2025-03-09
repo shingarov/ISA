@@ -11,7 +11,7 @@ Class {
 { #category : #running }
 JibParsingTest >> setUp [
 	parser := JibParser new.
-	defParser := parser def.
+	defParser := JibDef asParser.
 ]
 
 { #category : #'tests - program' }
