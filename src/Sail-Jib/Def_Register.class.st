@@ -15,7 +15,7 @@ Def_Register class >> inducedParser [
 	, JibParser id trim
 	, $: asParser trim
 	, Ty asParser trim
-	, '{BOGUS}' asParser optional "never happens in riscv_duopod"
+	, (JibInstr asParser, $; asParser trim ==> #first) star braces optional
 	construct: #(- id - ty -)
 ]
 
