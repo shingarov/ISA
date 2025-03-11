@@ -59,9 +59,14 @@ JibProgramNode class >> inducedParser [
 	self subclassResponsibility 
 ]
 
+{ #category : #testing }
+JibProgramNode class >> isAbstract [
+	^self == JibProgramNode
+]
+
 { #category : #accessing }
 JibProgramNode >> children [
-	^ OrderedCollection streamContents:[ :children | self childrenDo:[ :child | children add: child ] ].
+	^ OrderedCollection streamContents:[ :children | self childrenDo:[ :child | children nextPut: child ] ].
 ]
 
 { #category : #enumerating }
@@ -98,9 +103,4 @@ JibProgramNode >> setParent: aJibProgramNode [
 	
 	parent := aJibProgramNode 
 	
-]
-
-{ #category : #testing }
-JibProgramNode class >> isAbstract [
-	^self == JibProgramNode
 ]
