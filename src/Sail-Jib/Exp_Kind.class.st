@@ -10,7 +10,7 @@ Class {
 
 { #category : #syntax }
 Exp_Kind class >> inducedParser [
-	^ Exp_Id asParser trim "this should be Exp; however, this leads to recursion on the left"
+	^ Exp_Id asParser trim "BOGUS: this should be Exp; however, this leads to recursion on the left"
 	, 'is' asParser trim
 	, JibParser id
 	construct: #(exp - id)
