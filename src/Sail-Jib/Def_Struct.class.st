@@ -10,9 +10,13 @@ Class {
 
 { #category : #syntax }
 Def_Struct class >> inducedParser [
+	| arg |
+
+	arg := JibParser id, $: asParser trim, Ty asParser ==> [ :x | x first -> x last ].
+
 	^ 'struct' asParser trim
 	, JibParser id trim
-	, (JibParser id, $: asParser trim, Ty asParser) commaSeparated braces
+	, arg commaSeparated braces
 	construct: #(- id ids)
 ]
 

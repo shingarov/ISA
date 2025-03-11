@@ -10,10 +10,13 @@ Class {
 
 { #category : #syntax }
 Def_Union class >> inducedParser [
+	| arg |
+
+	arg := JibParser id, $: asParser trim, Ty asParser ==> [ :x | x first -> x last ].
+
 	^ 'union' asParser trim
 	, JibParser id trim
-	, ((JibParser id, $: asParser trim, Ty asParser ==> [ :x | x first -> x last ]) commaSeparated braces
-	  ==> (Dictionary newFromAssociations: □))
+	, arg commaSeparated braces
 	construct: #(- id ids)
 ]
 
