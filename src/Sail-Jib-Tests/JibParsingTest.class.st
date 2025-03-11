@@ -112,6 +112,27 @@ fn zhex_bits_12_forwards(zargz3) {
 
 ]
 
+{ #category : #'tests - JibSourceLoc' }
+JibParsingTest >> test_Known [
+	| val |
+	val := JibSourceLoc asParser end parse: '`1234 10:10-20:30'.
+	self assert: (val isKindOf: SourceLoc_Known)
+]
+
+{ #category : #'tests - JibSourceLoc' }
+JibParsingTest >> test_Unknown [
+	| val |
+	val := JibSourceLoc asParser end parse: ''.
+	self assert: (val isKindOf: SourceLoc_Unknown)
+]
+
+{ #category : #'tests - JibSourceLoc' }
+JibParsingTest >> test_UnknownUnique [
+	| val |
+	val := JibSourceLoc asParser end parse: '`1234'.
+	self assert: (val isKindOf: SourceLoc_UnknownUnique)
+]
+
 { #category : #'tests - individual defs' }
 JibParsingTest >> test_struct [
 	| struct |
