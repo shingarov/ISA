@@ -21,6 +21,13 @@ Instr_Decl inducedParser parse: 'zz40 : %bool `6 131:25-134:1'
 "
 ]
 
+{ #category : #enumerating }
+Instr_Decl >> childrenDo: aBlock [
+	aBlock value: ty.
+	aBlock value: sourceLoc 
+	
+]
+
 { #category : #printing }
 Instr_Decl >> printOn: aStream [
 	"BOGUS: why id is not Loc_Id?"

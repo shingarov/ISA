@@ -16,6 +16,13 @@ Exp_Call class >> inducedParser [
 ]
 
 { #category : #enumerating }
+Exp_Call >> childrenDo: aBlock [
+	aBlock value: op.
+	args do: aBlock
+	
+]
+
+{ #category : #enumerating }
 Exp_Call >> usedIdsDo: aBlock [
 	args do:[:e|e usedIdsDo: aBlock]
 	

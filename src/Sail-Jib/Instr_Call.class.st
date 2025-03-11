@@ -20,6 +20,14 @@ Instr_Call class >> inducedParser [
 ]
 
 { #category : #enumerating }
+Instr_Call >> childrenDo: aBlock [
+	aBlock value: lvalue.
+	args do: aBlock.
+	aBlock value: sourceLoc 
+	
+]
+
+{ #category : #enumerating }
 Instr_Call >> defdIdsDo: aBlock [
 	lvalue defdIdsDo: aBlock
 	

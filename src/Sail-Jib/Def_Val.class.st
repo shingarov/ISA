@@ -19,3 +19,11 @@ Def_Val class >> inducedParser [
 	, Ty asParser trim
 	construct: #(- id - tys - ty)
 ]
+
+{ #category : #enumerating }
+Def_Val >> childrenDo: aBlock [
+	tys do: aBlock.
+	aBlock value: ty.
+	
+	
+]

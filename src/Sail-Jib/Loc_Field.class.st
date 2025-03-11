@@ -37,6 +37,12 @@ Loc_Field class >> new [
 ]
 
 { #category : #enumerating }
+Loc_Field >> childrenDo: aBlock [
+	aBlock value: loc.
+	
+]
+
+{ #category : #enumerating }
 Loc_Field >> defdIdsDo: aBlock [
 	loc defdIdsDo: aBlock
 	

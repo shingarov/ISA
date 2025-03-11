@@ -18,6 +18,14 @@ Instr_Copy class >> inducedParser [
 ]
 
 { #category : #enumerating }
+Instr_Copy >> childrenDo: aBlock [
+	aBlock value: l.
+	aBlock value: e.
+	aBlock value: sourceLoc 
+	
+]
+
+{ #category : #enumerating }
 Instr_Copy >> defdIdsDo: aBlock [
 	l defdIdsDo: aBlock
 	

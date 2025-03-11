@@ -20,6 +20,12 @@ Ty_FixedVector class >> inducedParser [
 	==> #second
 ]
 
+{ #category : #enumerating }
+Ty_FixedVector >> childrenDo: aBlock [
+	aBlock value: ty
+	
+]
+
 { #category : #printing }
 Ty_FixedVector >> printOn: aStream [
 	aStream nextPutAll: '%fvec ('.

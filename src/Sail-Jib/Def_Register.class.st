@@ -19,6 +19,15 @@ Def_Register class >> inducedParser [
 	construct: #(- id - ty -)
 ]
 
+{ #category : #enumerating }
+Def_Register >> childrenDo: aBlock [
+	aBlock value: ty.
+	instrs notNil ifTrue:[
+		instrs do: aBlock
+	].
+	
+]
+
 { #category : #printing }
 Def_Register >> printOn: aStream [
 	aStream nextPut: (Character codePoint: 16rAE).

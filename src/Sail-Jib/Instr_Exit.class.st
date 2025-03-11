@@ -24,6 +24,12 @@ Instr_Exit inducedParser parse: 'exit match `6 131:25-134:1'
 	
 ]
 
+{ #category : #enumerating }
+Instr_Exit >> childrenDo: aBlock [
+	aBlock value: src
+
+]
+
 { #category : #testing }
 Instr_Exit >> isExit [
 	^true

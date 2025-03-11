@@ -16,6 +16,12 @@ Def_Enum class >> inducedParser [
 	construct: #(- id ids)
 ]
 
+{ #category : #enumerating }
+Def_Enum >> childrenDo: aBlock [
+	"Enum has no children, it contains just a list of names."
+	
+]
+
 { #category : #printing }
 Def_Enum >> printOn: aStream [
 	aStream

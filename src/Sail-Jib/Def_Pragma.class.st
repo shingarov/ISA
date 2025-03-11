@@ -12,3 +12,9 @@ Def_Pragma class >> inducedParser [
 	==> #second
 	) trim
 ]
+
+{ #category : #enumerating }
+Def_Pragma >> childrenDo: aBlock [
+	"Leaf nodes, nothing to do."
+	
+]

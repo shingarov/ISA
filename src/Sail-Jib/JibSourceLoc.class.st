@@ -15,3 +15,9 @@ JibSourceLoc class >> inducedParser [
 JibSourceLoc class >> isAbstract [
 	^self == JibSourceLoc
 ]
+
+{ #category : #enumerating }
+JibSourceLoc >> childrenDo: aBlock [
+	"Leaf nodes, nothing to do."
+
+]

@@ -13,3 +13,8 @@ Ty_List class >> inducedParser [
 	, Ty asParser parens
 	construct: #(- ty)
 ]
+
+{ #category : #enumerating }
+Ty_List >> childrenDo: aBlock [
+	aBlock value: ty
+]

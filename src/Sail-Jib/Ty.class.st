@@ -31,3 +31,9 @@ Ty class >> inducedParser [
 Ty class >> isAbstract [
 	^self == Ty
 ]
+
+{ #category : #enumerating }
+Ty >> childrenDo: aBlock [
+	"Most of types are leaf nodes, do nothing by default"
+	
+]

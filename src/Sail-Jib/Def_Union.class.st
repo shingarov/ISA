@@ -20,6 +20,13 @@ Def_Union class >> inducedParser [
 	construct: #(- id ids)
 ]
 
+{ #category : #enumerating }
+Def_Union >> childrenDo: aBlock [	
+	ids do:[:arg | aBlock value: arg value].
+	
+	
+]
+
 { #category : #printing }
 Def_Union >> printOn: aStream [
 	aStream

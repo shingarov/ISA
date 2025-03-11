@@ -13,3 +13,9 @@ JibProgram class >> inducedParser [
 	construct: #(defs)
 
 ]
+
+{ #category : #enumerating }
+JibProgram >> childrenDo: aBlock [
+	defs do: aBlock
+	
+]

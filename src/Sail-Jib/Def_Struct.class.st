@@ -20,6 +20,12 @@ Def_Struct class >> inducedParser [
 	construct: #(- id ids)
 ]
 
+{ #category : #enumerating }
+Def_Struct >> childrenDo: aBlock [
+	ids do:[:arg | aBlock value: arg value].
+	
+]
+
 { #category : #printing }
 Def_Struct >> printOn: aStream [
 	aStream

@@ -36,6 +36,12 @@ Exp_Bits class >> inducedParser [
 	"
 ]
 
+{ #category : #enumerating }
+Exp_Bits >> childrenDo: aBlock [
+	"Leaf node, nothing to do."
+	
+]
+
 { #category : #'printing & storing' }
 Exp_Bits >> printOn: aStream [
 	x length == 0 ifTrue:[

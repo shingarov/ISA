@@ -15,3 +15,8 @@ Exp_Field class >> inducedParser [
 	, JibParser id
 	construct: #(exp - id)
 ]
+
+{ #category : #enumerating }
+Exp_Field >> childrenDo: aBlock [
+	aBlock value: exp
+]

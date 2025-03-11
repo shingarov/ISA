@@ -24,3 +24,11 @@ Instr_Init class >> inducedParser [
 Instr_Init parser parse: 'zz43 = zb `6 132:2-132:8'
 "
 ]
+
+{ #category : #enumerating }
+Instr_Init >> childrenDo: aBlock [
+	aBlock value: ty.
+	aBlock value: e.
+	aBlock value: s 
+	
+]

@@ -27,3 +27,9 @@ Exp_Struct class >> inducedParser [
 	, fexp commaSeparated braces
 	construct: #(- id fields)
 ]
+
+{ #category : #enumerating }
+Exp_Struct >> childrenDo: aBlock [
+	fields do:[:field | aBlock value: field value ] 
+	
+]

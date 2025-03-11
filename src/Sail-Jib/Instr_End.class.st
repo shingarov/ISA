@@ -10,9 +10,10 @@ Instr_End class >> inducedParser [
 	==> [ :_ | self new ]
 ]
 
-{ #category : #accessing }
-Instr_End class >> uniqueInstance [
-	^ uniqueInstance ifNil: [ uniqueInstance := self basicNew ]
+{ #category : #enumerating }
+Instr_End >> childrenDo: aBlock [
+	"Leaf node, nothing to do."
+	
 ]
 
 { #category : #testing }

@@ -18,6 +18,12 @@ Def_Fn class >> inducedParser [
 	construct: #(- id ids instrs)
 ]
 
+{ #category : #enumerating }
+Def_Fn >> childrenDo: aBlock [
+	instrs do: aBlock
+	
+]
+
 { #category : #printing }
 Def_Fn >> printOn: aStream [
 	aStream

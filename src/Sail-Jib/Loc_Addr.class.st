@@ -39,3 +39,9 @@ Loc_Addr >> address [
 Loc_Addr >> address: anObject [
 	address := anObject
 ]
+
+{ #category : #enumerating }
+Loc_Addr >> childrenDo: aBlock [
+	aBlock value: address 
+	
+]

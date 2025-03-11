@@ -18,6 +18,13 @@ Instr_Jump class >> inducedParser [
 	construct: #(- exp - target sourceLoc)
 ]
 
+{ #category : #enumerating }
+Instr_Jump >> childrenDo: aBlock [
+	aBlock value: exp.
+	aBlock value: sourceLoc .
+	
+]
+
 { #category : #testing }
 Instr_Jump >> isJump [
 	^true

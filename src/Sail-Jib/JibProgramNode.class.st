@@ -1,6 +1,9 @@
 Class {
 	#name : #JibProgramNode,
 	#superclass : #Object,
+	#instVars : [
+		'parent'
+	],
 	#classInstVars : [
 		'parser'
 	],
@@ -52,8 +55,19 @@ JibProgramNode class >> inducedParser [
 	"Return a parser that parses this node. Never call this
 	 directly from other #inducedParser implementations, use
 	 #asParser instead!"
+	
+	self subclassResponsibility 
+]
 
-	self subclassResponsibility
+{ #category : #accessing }
+JibProgramNode >> children [
+	^ OrderedCollection streamContents:[ :children | self childrenDo:[ :child | children add: child ] ].
+]
+
+{ #category : #enumerating }
+JibProgramNode >> childrenDo: aBlock [
+	self subclassResponsibility 
+	
 ]
 
 { #category : #initialization }
@@ -69,6 +83,21 @@ JibProgramNode >> initializeFrom: values accordingTo: spec [
 			self instVarAt: index put: value.
 		]
 	].
+	self childrenDo:[:child | child setParent: self ]
+]
+
+{ #category : #accessing }
+JibProgramNode >> parent [
+	^ parent
+]
+
+{ #category : #initialization }
+JibProgramNode >> setParent: aJibProgramNode [
+	self assert:(aJibProgramNode isKindOf: JibProgramNode).
+	self assert: parent isNil description: 'Attempting to set parent twice'.
+	
+	parent := aJibProgramNode 
+	
 ]
 
 { #category : #testing }

@@ -13,3 +13,9 @@ Ty_Vector class >> inducedParser [
 	, Ty asParser parens
 	construct: #(- ty)
 ]
+
+{ #category : #enumerating }
+Ty_Vector >> childrenDo: aBlock [
+	aBlock value: ty
+	
+]

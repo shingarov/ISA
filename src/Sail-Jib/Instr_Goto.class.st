@@ -18,6 +18,12 @@ Instr_Goto parser parse: 'goto 10'
 "
 ]
 
+{ #category : #enumerating }
+Instr_Goto >> childrenDo: aBlock [
+	"Leaf node, nothing to do."
+	
+]
+
 { #category : #testing }
 Instr_Goto >> isGoto [
 	^true

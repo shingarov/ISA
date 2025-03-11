@@ -17,6 +17,12 @@ JibExp inducedParser parse: 'xyz'
 "
 ]
 
+{ #category : #enumerating }
+Exp_Id >> childrenDo: aBlock [
+	"Leaf node, nothing to do."
+	
+]
+
 { #category : #accessing }
 Exp_Id >> id [
 	^ id

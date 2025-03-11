@@ -15,3 +15,8 @@ Exp_Unwrap class >> inducedParser [
 	, JibParser id trim
 	construct: #(exp - id)
 ]
+
+{ #category : #enumerating }
+Exp_Unwrap >> childrenDo: aBlock [
+	aBlock value: exp
+]

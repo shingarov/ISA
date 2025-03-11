@@ -13,3 +13,8 @@ Exp_Bool class >> inducedParser [
 	/ (PPSequenceParser with: 'false' asParser ==> [ :_ | Bool false ])
 	construct: #(b)
 ]
+
+{ #category : #enumerating }
+Exp_Bool >> childrenDo: aBlock [
+	"Leaf node, nothing to do."
+]
