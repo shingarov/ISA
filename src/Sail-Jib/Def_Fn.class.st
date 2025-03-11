@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'id',
 		'ids',
-		'instrs'
+		'instrs',
+		'blocks'
 	],
 	#category : #'Sail-Jib'
 }
@@ -18,6 +19,14 @@ Def_Fn class >> inducedParser [
 	construct: #(- id ids instrs)
 ]
 
+{ #category : #accessing }
+Def_Fn >> blocks [
+	blocks isNil ifTrue:[
+		blocks := JibFnBodyBlock analyze: self.
+	].
+	^ blocks
+]
+
 { #category : #enumerating }
 Def_Fn >> childrenDo: aBlock [
 	instrs do: aBlock
@@ -27,6 +36,11 @@ Def_Fn >> childrenDo: aBlock [
 { #category : #accessing }
 Def_Fn >> id [
 	^ id
+]
+
+{ #category : #accessing }
+Def_Fn >> instrs [
+	^ instrs
 ]
 
 { #category : #printing }
