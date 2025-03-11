@@ -9,9 +9,7 @@ Class {
 
 { #category : #syntax }
 Ty_Struct class >> inducedParser [
-	^(PPSequenceParser with:
-		( '%struct' asParser trim
-		, JibParser id
-		) ==> #second
-	) construct: #(id)
+	^ '%struct' asParser trim
+	, JibParser id
+	construct: #(- id)
 ]

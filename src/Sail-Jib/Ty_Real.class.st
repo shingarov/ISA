@@ -7,4 +7,5 @@ Class {
 { #category : #syntax }
 Ty_Real class >> inducedParser [
 	^'%real' asParser
+	==> [ :_ | self new ]
 ]

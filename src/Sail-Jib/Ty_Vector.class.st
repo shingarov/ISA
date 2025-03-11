@@ -1,6 +1,9 @@
 Class {
 	#name : #'Ty_Vector',
 	#superclass : #Ty,
+	#instVars : [
+		'ty'
+	],
 	#category : #'Sail-Jib'
 }
 
@@ -8,4 +11,5 @@ Class {
 Ty_Vector class >> inducedParser [
 	^ '%vec' asParser
 	, Ty asParser parens
+	construct: #(- ty)
 ]

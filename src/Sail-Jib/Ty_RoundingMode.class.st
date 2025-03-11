@@ -7,4 +7,5 @@ Class {
 { #category : #syntax }
 Ty_RoundingMode class >> inducedParser [
 	^ '%rounding_mode' asParser
+	==> [ :_ | self new ]
 ]

@@ -6,5 +6,6 @@ Class {
 
 { #category : #syntax }
 Ty_String class >> inducedParser [
-	^'%string' asParser
+	^ '%string' asParser
+	==> [ :_ | self new ]
 ]

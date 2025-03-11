@@ -7,4 +7,5 @@ Class {
 { #category : #syntax }
 Ty_Ref class >> inducedParser [
 	^ '&' asParser
+	==> [ :_ | self new ]
 ]

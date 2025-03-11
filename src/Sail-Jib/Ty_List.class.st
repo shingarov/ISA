@@ -7,4 +7,5 @@ Class {
 { #category : #syntax }
 Ty_List class >> inducedParser [
 	^ 'LIST' asParser
+	==> [ :_ | self halt ]
 ]
