@@ -1,6 +1,12 @@
 Class {
 	#name : #'Instr_Init',
 	#superclass : #JibInstr,
+	#instVars : [
+		'id',
+		'ty',
+		'e',
+		's'
+	],
 	#category : #'Sail-Jib'
 }
 
@@ -12,7 +18,7 @@ Instr_Init class >> inducedParser [
 	, $= asParser trim
 	, JibExp asParser
 	, JibSourceLoc asParser
-	
+	construct: #(id - ty - e s)
 
 "
 Instr_Init parser parse: 'zz43 = zb `6 132:2-132:8'
