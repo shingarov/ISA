@@ -1,11 +1,15 @@
 Class {
 	#name : #'Ty_List',
 	#superclass : #Ty,
+	#instVars : [
+		'ty'
+	],
 	#category : #'Sail-Jib'
 }
 
 { #category : #syntax }
 Ty_List class >> inducedParser [
-	^ 'LIST' asParser
-	==> [ :_ | self halt ]
+	^ '%list' asParser
+	, Ty asParser parens
+	construct: #(- ty)
 ]
