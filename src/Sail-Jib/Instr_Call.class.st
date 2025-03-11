@@ -11,12 +11,20 @@ Class {
 
 { #category : #syntax }
 Instr_Call class >> inducedParser [
-	^ JibLoc inducedParser trim
+	^ JibLoc asParser trim
 	, $= asParser trim
 	, ($$ asParser optional, JibParser id) flatten trim
-	, JibExp inducedParser commaList trim
-	, JibSourceLoc inducedParser
+	, JibExp asParser commaList trim
+	, JibSourceLoc asParser
 	construct: #(lvalue - f args sourceLoc)
+]
+
+{ #category : #enumerating }
+Instr_Call >> childrenDo: aBlock [
+	aBlock value: lvalue.
+	args do: aBlock.
+	aBlock value: sourceLoc 
+	
 ]
 
 { #category : #enumerating }

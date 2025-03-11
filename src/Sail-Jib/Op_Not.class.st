@@ -7,5 +7,5 @@ Class {
 { #category : #syntax }
 Op_Not class >> inducedParser [
 	^ '@not' asParser
-	==> self uniqueInstance
+	==> [ :_ | self new ]
 ]

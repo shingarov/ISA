@@ -14,10 +14,16 @@ Ty_FixedVector class >> inducedParser [
 	, (
 	    PPParser decimalNat,
 	    $, asParser trim,
-	    (Context readState: #parentInducedParser)
+	    Ty asParser
 	    construct: #(length - ty)
 	  ) parens
 	==> #second
+]
+
+{ #category : #enumerating }
+Ty_FixedVector >> childrenDo: aBlock [
+	aBlock value: ty
+	
 ]
 
 { #category : #printing }
@@ -28,9 +34,4 @@ Ty_FixedVector >> printOn: aStream [
 	ty printOn: aStream.
 	aStream nextPut: $)
 	
-]
-
-{ #category : #'formal semantics' }
-Ty_FixedVector >> spriteType [
-	self shouldBeImplemented.
 ]

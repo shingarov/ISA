@@ -2,8 +2,8 @@ Class {
 	#name : #'Def_Enum',
 	#superclass : #JibDef,
 	#instVars : [
-		'name',
-		'members'
+		'id',
+		'ids'
 	],
 	#category : #'Sail-Jib'
 }
@@ -13,20 +13,19 @@ Def_Enum class >> inducedParser [
 	^ 'enum' asParser trim
 	, JibParser id trim
 	, JibParser id trim commaSeparated braces
-	construct: #(- name members)
+	construct: #(- id ids)
 ]
 
-{ #category : #initialization }
-Def_Enum >> addTo: aJibProgram [ 
-	aJibProgram enums
-		at: name
-		put: self
+{ #category : #enumerating }
+Def_Enum >> childrenDo: aBlock [
+	"Enum has no children, it contains just a list of names."
+	
 ]
 
 { #category : #printing }
 Def_Enum >> printOn: aStream [
 	aStream
 		nextPutAll: 'enum ';
-		nextPutAll: name;
+		nextPutAll: id;
 		nextPutAll: ' {…}'
 ]

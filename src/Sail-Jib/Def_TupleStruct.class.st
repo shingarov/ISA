@@ -6,7 +6,7 @@ Class {
 
 { #category : #syntax }
 Def_TupleStruct class >> inducedParser [
-	^ 'tuplestruct' asParser
+	^ '#tuplestruct' asParser
 	, (#blank asParser plus, JibParser id) plus
 	==> [ :x | self new "BOGUS" ]
 ]

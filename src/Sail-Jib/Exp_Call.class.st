@@ -10,9 +10,16 @@ Class {
 
 { #category : #syntax }
 Exp_Call class >> inducedParser [
-	^ JibOp inducedParser
-	, (Context readState: #parentInducedParser) commaList
+	^ JibOp asParser
+	, JibExp asParser commaList
 	construct: #(op args)
+]
+
+{ #category : #enumerating }
+Exp_Call >> childrenDo: aBlock [
+	aBlock value: op.
+	args do: aBlock
+	
 ]
 
 { #category : #enumerating }

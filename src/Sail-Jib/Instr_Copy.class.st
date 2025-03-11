@@ -10,11 +10,19 @@ Class {
 
 { #category : #syntax }
 Instr_Copy class >> inducedParser [
-	^ JibLoc inducedParser trim
+	^ JibLoc asParser trim
 	, $= asParser trim
-	, JibExp inducedParser
-	, JibSourceLoc inducedParser optional"??? not according to ir_parser.lalrpop!"
+	, JibExp asParser
+	, JibSourceLoc asParser
 	construct: #(l - e sourceLoc)
+]
+
+{ #category : #enumerating }
+Instr_Copy >> childrenDo: aBlock [
+	aBlock value: l.
+	aBlock value: e.
+	aBlock value: sourceLoc 
+	
 ]
 
 { #category : #enumerating }
@@ -33,22 +41,6 @@ Instr_Copy >> printOn: aStream [
 	l printOn: aStream.
 	aStream nextPutAll: ' = '.
 	e printOn: aStream
-]
-
-{ #category : #'formal semantics' }
-Instr_Copy >> toSpriteELetAround: expr in: aJibFnEnvironment [
-	^ELet
-		decl: (SpriteDecl
-			bind: (SpriteBind id: l)
-			expr: (EAnn
-				expr: (e toSpriteExprIn: aJibFnEnvironment)
-				ann: (Val
-					symbol: l
-					rtype: (aJibFnEnvironment at: l) b bUnknown
-					metric: nil )
-			)
-		)
-		expr: expr
 ]
 
 { #category : #enumerating }

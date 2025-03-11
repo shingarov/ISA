@@ -18,6 +18,12 @@ JibLoc inducedParser parse: 'xyz'
 ]
 
 { #category : #enumerating }
+Loc_Id >> childrenDo: aBlock [
+	"Leaf node, do nothing"
+	
+]
+
+{ #category : #enumerating }
 Loc_Id >> defdIdsDo: aBlock [
 	aBlock value: id
 ]

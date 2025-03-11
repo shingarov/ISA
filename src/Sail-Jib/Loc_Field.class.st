@@ -10,16 +10,16 @@ Class {
 
 { #category : #syntax }
 Loc_Field class >> inducedParser [
-	^ Loc_Id inducedParser
+	^ Loc_Id asParser
 	, ($. asParser, JibParser id ==> #second) plus
 	==> [ :x |
 		| root chase |
 		root := x first.
 		chase := x second.
-		chase inject: root into: [ :soFar :thisTime | Loc_Field loc: (Box with: soFar) field: thisTime ] ]
+		chase inject: root into: [ :soFar :thisTime | Loc_Field loc: soFar field: thisTime ] ]
 	
 "
-JibLoc parser parse: 'a.b.c'
+JibLoc inducedParser  parse: 'a.b.c'
 "
 ]
 
@@ -34,6 +34,12 @@ Loc_Field class >> loc: l field: f [
 { #category : #'instance creation' }
 Loc_Field class >> new [
 	self shouldNotImplement
+]
+
+{ #category : #enumerating }
+Loc_Field >> childrenDo: aBlock [
+	aBlock value: loc.
+	
 ]
 
 { #category : #enumerating }

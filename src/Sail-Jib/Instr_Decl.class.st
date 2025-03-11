@@ -12,8 +12,8 @@ Class {
 Instr_Decl class >> inducedParser [
 	^ JibParser id
 	, $: asParser trim
-	, Ty inducedParser
-	, JibSourceLoc inducedParser
+	, Ty asParser
+	, JibSourceLoc asParser
 	construct: #(id - ty sourceLoc)
 
 "
@@ -21,14 +21,11 @@ Instr_Decl inducedParser parse: 'zz40 : %bool `6 131:25-134:1'
 "
 ]
 
-{ #category : #'as yet unclassified' }
-Instr_Decl >> addTempDeclTo: aJibFnEnvironment [ 
-	aJibFnEnvironment temp: id hasType: ty
-]
-
-{ #category : #'deterministic interpretation' }
-Instr_Decl >> interpretIn: aContext [ 
-	^(aContext declareTemp: id ofSort: ty sort) incrPC
+{ #category : #enumerating }
+Instr_Decl >> childrenDo: aBlock [
+	aBlock value: ty.
+	aBlock value: sourceLoc 
+	
 ]
 
 { #category : #printing }

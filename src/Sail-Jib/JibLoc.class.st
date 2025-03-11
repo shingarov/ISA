@@ -1,14 +1,19 @@
 Class {
 	#name : #JibLoc,
-	#superclass : #Object,
+	#superclass : #JibProgramNode,
 	#category : #'Sail-Jib'
 }
 
 { #category : #syntax }
 JibLoc class >> inducedParser [
-	^ Loc_Addr  inducedParser
-	/ Loc_Field inducedParser
-	/ Loc_Id inducedParser
+	^ Loc_Addr  asParser
+	/ Loc_Field asParser
+	/ Loc_Id asParser
+]
+
+{ #category : #testing }
+JibLoc class >> isAbstract [
+	^self == JibLoc
 ]
 
 { #category : #enumerating }

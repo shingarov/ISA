@@ -4,7 +4,7 @@ Extension { #name : #PPParser }
 PPParser >> construct: fields [
 	| cls |
 	cls := Object class findContextReceivingMe receiver.
-	^self ==> (cls constructNewFrom: □ accordingTo: fields)
+	^self ==> [ :values | cls constructNewFrom: values accordingTo: fields ]
 ]
 
 { #category : #'*Sail-Jib-Parsing' }

@@ -1,18 +1,19 @@
 Class {
 	#name : #JibOp,
-	#superclass : #Object,
+	#superclass : #JibProgramNode,
 	#classInstVars : [
 		'uniqueInstance'
 	],
 	#category : #'Sail-Jib'
 }
 
-{ #category : #'instance creation' }
-JibOp class >> new [
-	self shouldNotImplement
+{ #category : #parsing }
+JibOp class >> inducedParser [
+	^ Op_Neq asParser
+	/ Op_Not asParser
 ]
 
-{ #category : #accessing }
-JibOp class >> uniqueInstance [
-	^ uniqueInstance ifNil: [ uniqueInstance := self basicNew ]
+{ #category : #testing }
+JibOp class >> isAbstract [
+	^self == JibOp
 ]

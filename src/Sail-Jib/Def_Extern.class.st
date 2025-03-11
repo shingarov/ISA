@@ -15,21 +15,13 @@ Def_Extern class >> inducedParser [
 	    '=' asParser trim,
 	    PPParser doubleQuoted trim,
 	    $: asParser trim
-	    , Ty inducedParser trim commaSeparated parens trim
+	    , Ty asParser trim commaSeparated parens trim
 	    , '->' asParser trim
-	    , Ty inducedParser trim
+	    , Ty asParser trim
 	    construct: #(- id - ext - tys - ty)
 	) / (
 	    'abstract' asParser
 	)
-]
-
-{ #category : #initialization }
-Def_Extern >> addTo: aJibProgram [
-	super addTo: aJibProgram.
-	aJibProgram values
-		at: id
-		put: self
 ]
 
 { #category : #printing }

@@ -1,6 +1,10 @@
 Class {
 	#name : #'Exp_Struct',
 	#superclass : #JibExp,
+	#instVars : [
+		'id',
+		'fields'
+	],
 	#category : #'Sail-Jib'
 }
 
@@ -8,12 +12,24 @@ Class {
 Exp_Struct class >> Fexp [
 	^ JibParser id trim
 	, $= asParser trim
-	, (Context readState: #parentInducedParser)
+	, JibExp asParser
 ]
 
 { #category : #syntax }
 Exp_Struct class >> inducedParser [
+	| fexp |
+	
+	fexp := (JibParser id , $= asParser trim , JibExp asParser)
+					==> [ :x | x first -> x third ].
+
 	^ 'struct' asParser trim
 	, JibParser id trim
-	, self Fexp commaSeparated braces
+	, fexp commaSeparated braces
+	construct: #(- id fields)
+]
+
+{ #category : #enumerating }
+Exp_Struct >> childrenDo: aBlock [
+	fields do:[:field | aBlock value: field value ] 
+	
 ]

@@ -2,8 +2,9 @@ Class {
 	#name : #'Def_Register',
 	#superclass : #JibDef,
 	#instVars : [
-		'name',
-		'ty'
+		'id',
+		'ty',
+		'instrs'
 	],
 	#category : #'Sail-Jib'
 }
@@ -13,22 +14,24 @@ Def_Register class >> inducedParser [
 	^ 'register' asParser trim
 	, JibParser id trim
 	, $: asParser trim
-	, Ty inducedParser trim
-	, '{BOGUS}' asParser optional "never happens in riscv_duopod"
-	construct: #(- name - ty -)
+	, Ty asParser trim
+	, (JibInstr asParser, $; asParser trim ==> #first) star braces optional
+	construct: #(- id - ty -)
 ]
 
-{ #category : #initialization }
-Def_Register >> addTo: aJibProgram [
-	aJibProgram registers
-		at: name
-		put: self
+{ #category : #enumerating }
+Def_Register >> childrenDo: aBlock [
+	aBlock value: ty.
+	instrs notNil ifTrue:[
+		instrs do: aBlock
+	].
+	
 ]
 
 { #category : #printing }
 Def_Register >> printOn: aStream [
 	aStream nextPut: (Character codePoint: 16rAE).
-	aStream nextPutAll: name zdecode.
+	aStream nextPutAll: id zdecode.
 	aStream nextPutAll: ' ∷ '.
 	ty printOn: aStream
 ]

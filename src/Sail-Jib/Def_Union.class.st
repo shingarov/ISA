@@ -2,32 +2,35 @@ Class {
 	#name : #'Def_Union',
 	#superclass : #JibDef,
 	#instVars : [
-		'name',
-		'members'
+		'id',
+		'ids'
 	],
 	#category : #'Sail-Jib'
 }
 
 { #category : #syntax }
 Def_Union class >> inducedParser [
+	| arg |
+
+	arg := JibParser id, $: asParser trim, Ty asParser ==> [ :x | x first -> x last ].
+
 	^ 'union' asParser trim
 	, JibParser id trim
-	, ((JibParser id, $: asParser trim, Ty inducedParser ==> [ :x | x first -> x last ]) commaSeparated braces
-	  ==> (Dictionary newFromAssociations: □))
-	construct: #(- name members)
+	, arg commaSeparated braces
+	construct: #(- id ids)
 ]
 
-{ #category : #initialization }
-Def_Union >> addTo: aJibProgram [
-	aJibProgram unions
-		at: name
-		put: self
+{ #category : #enumerating }
+Def_Union >> childrenDo: aBlock [	
+	ids do:[:arg | aBlock value: arg value].
+	
+	
 ]
 
 { #category : #printing }
 Def_Union >> printOn: aStream [
 	aStream
 		nextPutAll: 'union ';
-		nextPutAll: name;
+		nextPutAll: id;
 		nextPutAll: ' {…}'
 ]

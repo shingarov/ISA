@@ -10,8 +10,13 @@ Class {
 
 { #category : #syntax }
 Exp_Unwrap class >> inducedParser [
-	^ Exp_Id inducedParser trim "this should be Exp; however, this leads to recursion on the left"
+	^ Exp_Id asParser trim "BOGUS: this should be Exp; however, this leads to recursion on the left"
 	, 'as' asParser trim
-	, (Context readState: #parentInducedParser)
+	, JibParser id trim
 	construct: #(exp - id)
+]
+
+{ #category : #enumerating }
+Exp_Unwrap >> childrenDo: aBlock [
+	aBlock value: exp
 ]

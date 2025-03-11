@@ -14,3 +14,8 @@ Exp_I128 class >> inducedParser [
 	, 'i128' asParser trim
 	construct: #(v - -)
 ]
+
+{ #category : #enumerating }
+Exp_I128 >> childrenDo: aBlock [
+	"Leaf node, nothing to do."
+]

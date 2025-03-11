@@ -9,9 +9,9 @@ Class {
 
 { #category : #syntax }
 Loc_Addr class >> inducedParser [
-	^ Loc_Id inducedParser
+	^ Loc_Id asParser
 	, $* asParser
-	==> [ :x | Loc_Addr with: (Box with: x first) ]
+	==> [ :x | Loc_Addr with: x first ]
 	
 "
 JibLoc inducedParser parse: 'a*'
@@ -38,4 +38,10 @@ Loc_Addr >> address [
 { #category : #accessing }
 Loc_Addr >> address: anObject [
 	address := anObject
+]
+
+{ #category : #enumerating }
+Loc_Addr >> childrenDo: aBlock [
+	aBlock value: address 
+	
 ]

@@ -9,19 +9,7 @@ Class {
 
 { #category : #syntax }
 Ty_Struct class >> inducedParser [
-	^(PPSequenceParser with:
-		( '%struct' asParser trim
-		, JibParser id
-		) ==> #second
-	) construct: #(id)
-]
-
-{ #category : #'formal semantics' }
-Ty_Struct >> spriteType [
-	^Data
-		name: #ident
-		vars: #idents
-		rvars: #rvars
-		ctors: #bindToRType_Assocs
-		inv: #inv
+	^ '%struct' asParser trim
+	, JibParser id
+	construct: #(- id)
 ]
