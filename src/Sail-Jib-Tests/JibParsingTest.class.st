@@ -16,7 +16,38 @@ JibParsingTest >> setUp [
 
 { #category : #'tests - program' }
 JibParsingTest >> testParseDuopod [
-	(self parseFileNamed: '/home/boris/work/REMS/duopod.ir') inspect
+	| p |
+
+	p := self parseFileNamed: JibExamples / 'Jib' / 'duopod.ir'.
+
+	self assert: (p isKindOf: JibProgram)
+]
+
+{ #category : #'tests - program' }
+JibParsingTest >> testParseReturn42 [
+	| p |
+
+	p := self parseFileNamed: JibExamples / 'Jib' / 'return42.ir'.
+
+	self assert: (p isKindOf: JibProgram)
+]
+
+{ #category : #'tests - program' }
+JibParsingTest >> testParseUnify1_n [
+	| p |
+
+	p := self parseFileNamed: JibExamples / 'Jib' / 'unify1_n.ir'.
+
+	self assert: (p isKindOf: JibProgram)
+]
+
+{ #category : #'tests - program' }
+JibParsingTest >> testParseUnify1_p [
+	| p |
+
+	p := self parseFileNamed: JibExamples / 'Jib' / 'unify1_p.ir'.
+
+	self assert: (p isKindOf: JibProgram)
 ]
 
 { #category : #'tests - program' }

@@ -5,16 +5,6 @@ Class {
 }
 
 { #category : #tests }
-JibTest >> jibExamples [
-	^self class definingGitDirectory / 'examples' / 'Jib'
-]
-
-{ #category : #tests }
-JibTest >> parseExampleFileNamed: relativeFileName [
-	^self parseFileNamed: self jibExamples / relativeFileName
-]
-
-{ #category : #tests }
 JibTest >> parseFileNamed: fileName [
 	^self parseString: fileName asFileReference contents
 ]
