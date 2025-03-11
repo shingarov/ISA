@@ -27,3 +27,8 @@ Def_Val >> childrenDo: aBlock [
 	
 	
 ]
+
+{ #category : #accessing }
+Def_Val >> id [
+	^ id
+]

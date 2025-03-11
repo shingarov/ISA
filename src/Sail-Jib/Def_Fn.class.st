@@ -24,6 +24,11 @@ Def_Fn >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #accessing }
+Def_Fn >> id [
+	^ id
+]
+
 { #category : #printing }
 Def_Fn >> printOn: aStream [
 	aStream

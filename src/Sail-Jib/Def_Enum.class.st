@@ -22,6 +22,11 @@ Def_Enum >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #accessing }
+Def_Enum >> id [
+	^ id
+]
+
 { #category : #printing }
 Def_Enum >> printOn: aStream [
 	aStream

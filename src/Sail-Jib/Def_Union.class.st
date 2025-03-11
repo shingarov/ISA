@@ -27,6 +27,11 @@ Def_Union >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #accessing }
+Def_Union >> id [
+	^ id
+]
+
 { #category : #printing }
 Def_Union >> printOn: aStream [
 	aStream

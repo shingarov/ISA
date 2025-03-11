@@ -28,6 +28,11 @@ Def_Register >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #accessing }
+Def_Register >> id [
+	^ id
+]
+
 { #category : #printing }
 Def_Register >> printOn: aStream [
 	aStream nextPut: (Character codePoint: 16rAE).

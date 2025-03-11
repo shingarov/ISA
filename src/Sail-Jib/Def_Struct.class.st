@@ -26,6 +26,11 @@ Def_Struct >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #accessing }
+Def_Struct >> id [
+	^ id
+]
+
 { #category : #printing }
 Def_Struct >> printOn: aStream [
 	aStream
