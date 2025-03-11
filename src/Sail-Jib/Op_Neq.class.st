@@ -7,5 +7,5 @@ Class {
 { #category : #syntax }
 Op_Neq class >> inducedParser [
 	^ '@neq' asParser
-	==> self uniqueInstance
+	==> [ :_ | self new ]
 ]

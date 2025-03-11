@@ -1,16 +1,13 @@
 Class {
 	#name : #'Instr_End',
 	#superclass : #JibInstr,
-	#classInstVars : [
-		'uniqueInstance'
-	],
 	#category : #'Sail-Jib'
 }
 
 { #category : #syntax }
 Instr_End class >> inducedParser [
 	^ 'end' asParser
-	==> self uniqueInstance
+	==> [ :_ | self new ]
 ]
 
 { #category : #accessing }

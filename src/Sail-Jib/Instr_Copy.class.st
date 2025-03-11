@@ -13,7 +13,7 @@ Instr_Copy class >> inducedParser [
 	^ JibLoc asParser trim
 	, $= asParser trim
 	, JibExp asParser
-	, JibSourceLoc asParser optional"??? not according to ir_parser.lalrpop!"
+	, JibSourceLoc asParser
 	construct: #(l - e sourceLoc)
 ]
 
