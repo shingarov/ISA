@@ -31,3 +31,22 @@ JibDef class >> inducedParser [
 JibDef class >> isAbstract [
 	^self == JibDef
 ]
+
+{ #category : #testing }
+JibDef >> isFn [
+	^false
+]
+
+{ #category : #testing }
+JibDef >> isVal [
+	^false
+]
+
+{ #category : #initialization }
+JibDef >> setParent: aJibProgram [
+	self assert:(aJibProgram isKindOf: JibProgram).
+	self assert: parent isNil description: 'Attempting to set parent twice'.
+
+	parent := aJibProgram
+
+]

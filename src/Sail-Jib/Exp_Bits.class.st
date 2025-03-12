@@ -56,3 +56,8 @@ Exp_Bits >> printOn: aStream [
 		]
 	]
 ]
+
+{ #category : #accessing }
+Exp_Bits >> value [
+	^ x
+]

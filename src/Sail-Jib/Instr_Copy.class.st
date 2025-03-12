@@ -31,6 +31,16 @@ Instr_Copy >> defdIdsDo: aBlock [
 	
 ]
 
+{ #category : #accessing }
+Instr_Copy >> expression [
+	^e
+]
+
+{ #category : #accessing }
+Instr_Copy >> location [
+	^l
+]
+
 { #category : #printing }
 Instr_Copy >> printOn: aStream [
 	l printOn: aStream.

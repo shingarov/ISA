@@ -19,6 +19,12 @@ Instr_Call class >> inducedParser [
 	construct: #(lvalue - f args sourceLoc)
 ]
 
+{ #category : #accessing }
+Instr_Call >> argExprs [
+	^ args
+
+]
+
 { #category : #enumerating }
 Instr_Call >> childrenDo: aBlock [
 	aBlock value: lvalue.
@@ -31,6 +37,17 @@ Instr_Call >> childrenDo: aBlock [
 Instr_Call >> defdIdsDo: aBlock [
 	lvalue defdIdsDo: aBlock
 	
+]
+
+{ #category : #accessing }
+Instr_Call >> function [
+	^ self program lookupFunction: f
+
+]
+
+{ #category : #accessing }
+Instr_Call >> location [
+	^lvalue
 ]
 
 { #category : #printing }
