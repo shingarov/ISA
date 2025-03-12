@@ -16,7 +16,38 @@ JibParsingTest >> setUp [
 
 { #category : #'tests - program' }
 JibParsingTest >> testParseDuopod [
-	(self parseFileNamed: '/home/boris/work/REMS/duopod.ir') inspect
+	| p |
+
+	p := self parseFileNamed: JibExamples / 'Jib' / 'duopod.ir'.
+
+	self assert: (p isKindOf: JibProgram)
+]
+
+{ #category : #'tests - program' }
+JibParsingTest >> testParseReturn42 [
+	| p |
+
+	p := self parseFileNamed: JibExamples / 'Jib' / 'return42.ir'.
+
+	self assert: (p isKindOf: JibProgram)
+]
+
+{ #category : #'tests - program' }
+JibParsingTest >> testParseUnify1_n [
+	| p |
+
+	p := self parseFileNamed: JibExamples / 'Jib' / 'unify1_n.ir'.
+
+	self assert: (p isKindOf: JibProgram)
+]
+
+{ #category : #'tests - program' }
+JibParsingTest >> testParseUnify1_p [
+	| p |
+
+	p := self parseFileNamed: JibExamples / 'Jib' / 'unify1_p.ir'.
+
+	self assert: (p isKindOf: JibProgram)
 ]
 
 { #category : #'tests - program' }
@@ -80,28 +111,30 @@ fn zhex_bits_12_forwards(zargz3) {
 
 '.
 
-	function := program values at: 'zhex_bits_12_forwards'.
+	function := program children first.
+	
+	self assert: function id = 'zhex_bits_12_forwards'.
 
-	self assert: (function body instrs at: 47 + 1) isExit.
-	self assert: (function body instrs at: 49 + 1) isEnd.
+	self assert: (function instrs at: 47 + 1) isExit.
+	self assert: (function instrs at: 49 + 1) isEnd.
 
 	"Check that entry block has two successors..."
-	b0 := function body blocks detect:[:bb | bb range first == 0].
+	b0 := function blocks detect:[:bb | bb range first == 0].
 	self assert: b0 successor1 notNil.
 	self assert: b0 successor2 notNil.
 
 	"Check that block with exit has no successors"
-	b47 := function body blocks detect:[:bb | bb range last == 47"index of exit"].
+	b47 := function blocks detect:[:bb | bb range last == 47"index of exit"].
 	self assert: b47 successor1 isNil.
 	self assert: b47 successor2 isNil.
 
 	"Check that block with end has no successors"
-	b49 := function body blocks detect:[:bb | bb range last == 49"index of end"].
+	b49 := function blocks detect:[:bb | bb range last == 49"index of end"].
 	self assert: b49 successor1 isNil.
 	self assert: b49 successor2 isNil.
 
 	"Now, compute liveness..."
-	JibFnBodyBlockLiveness compute: function body.
+	JibFnBodyBlockLiveness compute: function.
 	"...and check that entry blocks' live-ins are only arguments"
 	self assert: (b0 liveness liveIn allSatisfy:[:id|id beginsWith:'zarg']).
 	"...and also that terminal blocks have no live-outs"

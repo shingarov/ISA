@@ -2,7 +2,7 @@ Class {
 	#name : #JibFnBodyBlock,
 	#superclass : #Object,
 	#instVars : [
-		'body',
+		'function',
 		'range',
 		'precedessors',
 		'successor1',
@@ -13,8 +13,8 @@ Class {
 }
 
 { #category : #utilities }
-JibFnBodyBlock class >> analyze: aJibFnBody [
-	"Analyze (jib) function body, create and connect basic blocks and return
+JibFnBodyBlock class >> analyze: function [
+	"Analyze (jib) function, create and connect basic blocks and return
     them in a collection. Entry block is guaranteed to be the first one in
     returned collection."
 
@@ -24,14 +24,14 @@ JibFnBodyBlock class >> analyze: aJibFnBody [
 	after each goto or end instruction."	
 	blocks := OrderedCollection new.
 	curBB := self new.
-	aJibFnBody instrs withIndexDo:[:last :lastIplus1 | 
+	function instrs withIndexDo:[:last :lastIplus1 | 
 		firstI isNil ifTrue:[
   			firstI := lastIplus1 - 1
 		].		
 		last isJump ifTrue:[
 			| prevBB |
 		
-			curBB setBody: aJibFnBody range: (firstI to: lastIplus1 - 1).
+			curBB setFunction: function range: (firstI to: lastIplus1 - 1).
 			blocks add: curBB.
 			prevBB := curBB.
 			curBB := self new.
@@ -39,14 +39,14 @@ JibFnBodyBlock class >> analyze: aJibFnBody [
 			firstI := nil.
 	  ] ifFalse:[
 	  (last isGoto or:[last isEnd or:[last isExit]]) ifTrue:[
-			curBB setBody: aJibFnBody range: (firstI to: lastIplus1 - 1).
+			curBB setFunction: function range: (firstI to: lastIplus1 - 1).
 			blocks add: curBB.
 			curBB := self new.
 			firstI := nil.
 		]].
 	].
 	firstI notNil ifTrue:[
-		curBB setBody: aJibFnBody range: (firstI to: aJibFnBody instrs size - 1).
+		curBB setFunction: function range: (firstI to: function instrs size - 1).
 		blocks add: curBB.
 	]. 
 
@@ -103,7 +103,7 @@ JibFnBodyBlock >> addPrecedessor: aJibFnBodyBlock [
 
 { #category : #accessing }
 JibFnBodyBlock >> body [
-	^ body
+	^ function
 ]
 
 { #category : #displaying }
@@ -170,13 +170,13 @@ JibFnBodyBlock >> gtLivenessIn: composite [
 
 { #category : #accessing }
 JibFnBodyBlock >> instrs [
-	^body instrs copyFrom: range first + 1 to: range last + 1
+	^function instrs copyFrom: range first + 1 to: range last + 1
 ]
 
 { #category : #enumerating }
 JibFnBodyBlock >> instrsDo: aBlock [
 	range first + 1 to: range last + 1 do:[:i|
-		aBlock value: (body instrs at: i)
+		aBlock value: (function instrs at: i)
 	].
 ]
 
@@ -184,7 +184,7 @@ JibFnBodyBlock >> instrsDo: aBlock [
 JibFnBodyBlock >> invalidate [
 	self setSuccessor1: nil.
 	self setSuccessor2: nil.
-	body := nil.
+	function := nil.
 	range := -1 to: -1.
 ]
 
@@ -192,7 +192,7 @@ JibFnBodyBlock >> invalidate [
 JibFnBodyBlock >> last [
 	"Return the last instruction in this block"
 	
-	^body instrs at: range last + 1
+	^function instrs at: range last + 1
 ]
 
 { #category : #accessing }
@@ -238,11 +238,11 @@ JibFnBodyBlock >> removePrecedessor: aJibFnBodyBlock [
 ]
 
 { #category : #initialization }
-JibFnBodyBlock >> setBody: aJibFnBody range: anInterval [
-	self assert: (anInterval first between: 0 and: aJibFnBody instrs size - 1).
-	self assert: (anInterval last between:  0 and: aJibFnBody instrs size - 1).
+JibFnBodyBlock >> setFunction: aDef_Fn range: anInterval [
+	self assert: (anInterval first between: 0 and: aDef_Fn instrs size - 1).
+	self assert: (anInterval last between:  0 and: aDef_Fn instrs size - 1).
 		
-	body := aJibFnBody.
+	function := aDef_Fn.
 	range := anInterval.
 ]
 
@@ -274,8 +274,8 @@ JibFnBodyBlock >> splitAt: target [
 
 	self assert:(range includes: target).
 
-	bb1 := self class new setBody: body range: (range first to: target - 1).
-	bb2 := self class new setBody: body range: (target to: range last).
+	bb1 := self class new setFunction: function range: (range first to: target - 1).
+	bb2 := self class new setFunction: function range: (target to: range last).
 
 	bb1 setSuccessor1: bb2.
  	bb2 setSuccessor1: successor1.
