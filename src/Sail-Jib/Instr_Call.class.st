@@ -33,19 +33,6 @@ Instr_Call >> defdIdsDo: aBlock [
 	
 ]
 
-{ #category : #'deterministic interpretation' }
-Instr_Call >> interpretIn: aContext [
-	| fn callee |
-	fn := aContext at: f.
-	callee := JibDeterministicContext new.
-	callee
-		fn: fn;
-		temps: (Dictionary newFromAssociations: {'return'->fn returnSort undefinedElement});
-		sender: aContext;
-		pc: 1.
-	^callee
-]
-
 { #category : #printing }
 Instr_Call >> printOn: aStream [
 	lvalue printOn: aStream.

@@ -31,11 +31,6 @@ Instr_Copy >> defdIdsDo: aBlock [
 	
 ]
 
-{ #category : #'deterministic interpretation' }
-Instr_Copy >> interpretIn: aContext [
-	^(aContext at: l put: (e valueIn: aContext)) incrPC
-]
-
 { #category : #printing }
 Instr_Copy >> printOn: aStream [
 	l printOn: aStream.
