@@ -96,6 +96,14 @@ JibProgramNode >> parent [
 	^ parent
 ]
 
+{ #category : #accessing }
+JibProgramNode >> program [
+	parent notNil ifTrue:[
+		^ parent program
+	].
+	^ nil
+]
+
 { #category : #initialization }
 JibProgramNode >> setParent: aJibProgramNode [
 	self assert:(aJibProgramNode isKindOf: JibProgramNode).

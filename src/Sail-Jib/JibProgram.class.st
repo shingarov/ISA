@@ -19,3 +19,8 @@ JibProgram >> childrenDo: aBlock [
 	defs do: aBlock
 	
 ]
+
+{ #category : #accessing }
+JibProgram >> program [
+	^ self
+]
