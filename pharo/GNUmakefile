@@ -33,7 +33,8 @@ run: build
 
 test: build
 	 $(PHARO_VM_HEADLESS) $(PROJECT).image test --fail-on-failure \
-		"Sail-Jib-Tests"
+		"Sail-Jib-Tests" \
+		"Sail-Jib-Interpreter-Tests"
 
 clean::
 	rm -f $(PROJECT).image $(PROJECT).changes
