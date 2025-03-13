@@ -91,6 +91,12 @@ JibInterpreter >> interpretBits: expr [
 
 ]
 
+{ #category : #'interpreting - exprs' }
+JibInterpreter >> interpretBool: expr [
+	^ expr value
+
+]
+
 { #category : #'interpreting - insns' }
 JibInterpreter >> interpretCall: insn [
 	| args fn |

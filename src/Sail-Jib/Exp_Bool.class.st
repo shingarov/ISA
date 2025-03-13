@@ -18,3 +18,8 @@ Exp_Bool class >> inducedParser [
 Exp_Bool >> childrenDo: aBlock [
 	"Leaf node, nothing to do."
 ]
+
+{ #category : #accessing }
+Exp_Bool >> value [
+	^b
+]
