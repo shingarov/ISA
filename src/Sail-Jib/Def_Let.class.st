@@ -6,5 +6,5 @@ Class {
 
 { #category : #syntax }
 Def_Let class >> inducedParser [
-^'let' asParser
+	^'let' asParser "BOGUS, completely!"
 ]
