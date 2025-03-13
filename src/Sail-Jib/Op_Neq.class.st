@@ -4,8 +4,12 @@ Class {
 	#category : #'Sail-Jib'
 }
 
-{ #category : #syntax }
-Op_Neq class >> inducedParser [
-	^ '@neq' asParser
-	==> [ :_ | self new ]
+{ #category : #accessing }
+Op_Neq class >> id [
+	^ '@neq'
+]
+
+{ #category : #evaluating }
+Op_Neq >> evaluateWithArguments: args [
+	^ args first ~= args second
 ]

@@ -17,7 +17,6 @@ Exp_Call class >> inducedParser [
 
 { #category : #enumerating }
 Exp_Call >> childrenDo: aBlock [
-	aBlock value: op.
 	args do: aBlock
 	
 ]
