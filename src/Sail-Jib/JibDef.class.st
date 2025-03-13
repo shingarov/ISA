@@ -33,6 +33,11 @@ JibDef class >> isAbstract [
 ]
 
 { #category : #testing }
+JibDef >> isExtern [
+	^false
+]
+
+{ #category : #testing }
 JibDef >> isFn [
 	^false
 ]

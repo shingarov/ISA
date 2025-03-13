@@ -99,10 +99,19 @@ JibInterpreter >> interpretBool: expr [
 
 { #category : #'interpreting - insns' }
 JibInterpreter >> interpretCall: insn [
-	| args fn |
+	| args func |
 
 	args := insn argExprs collect:[:expr | expr interpretIn: self ].
-	context := JibInterpreterContext for: insn function arguments: args caller: context.
+	func := insn function.
+	
+	func isExtern ifTrue:[
+		| retv |
+		
+		retv := func extern evaluateWithArguments: args.
+		insn location assign: retv in: self.		
+	] ifFalse:[	
+		context := JibInterpreterContext for: insn function arguments: args caller: context.
+	].
 
 
 

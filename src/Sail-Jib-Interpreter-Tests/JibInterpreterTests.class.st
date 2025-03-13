@@ -154,3 +154,33 @@ fn zmain(zarg) {
 
 
 ]
+
+{ #category : #tests }
+JibInterpreterTests >> test_05 [
+	| program main interpreter |
+	program := JibParser parse:'
+
+val zsign_extend = "sign_extend" : (%bv, %i) ->  %bv	
+
+val zmain : (%bv16) ->  %bv32
+
+fn zmain(zarg) {
+  zz1 : %bv32;
+  zz1 = zsign_extend(zarg, 16);
+  return = zz1;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: { -1 toBitVector: 16 }.
+
+	interpreter interpret.
+
+	self assert: interpreter retVal simplify = (-1 toBitVector: 32).
+
+
+
+]
