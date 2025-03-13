@@ -50,3 +50,9 @@ JibProgram >> lookupFunctionSignature: id [
 JibProgram >> program [
 	^ self
 ]
+
+{ #category : #enumerating }
+JibProgram >> registersDo: aBlock [
+	defs do: [ :def | def isRegister ifTrue:[ aBlock value: def ] ]
+
+]

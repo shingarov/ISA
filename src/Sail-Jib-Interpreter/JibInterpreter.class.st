@@ -2,7 +2,9 @@ Class {
 	#name : #JibInterpreter,
 	#superclass : #Object,
 	#instVars : [
+		'program',
 		'context',
+		'registers',
 		'retval'
 	],
 	#category : #'Sail-Jib-Interpreter-Interpreter'
@@ -20,9 +22,36 @@ JibInterpreter >> context [
 	^ context
 ]
 
+{ #category : #'accessing - variables' }
+JibInterpreter >> get: id [
+	(registers includesKey: id) ifTrue:[
+		^ registers at: id
+	] ifFalse:[
+		^ context get: id
+	]
+]
+
+{ #category : #'accessing - registers' }
+JibInterpreter >> getRegister: id [
+	self assert:(registers includesKey: id).
+
+	^ registers at: id
+]
+
 { #category : #initialization }
 JibInterpreter >> initializeWithFunction: fn arguments: args [
-	context := JibInterpreterContext for: fn arguments: args
+	program := fn program.
+	context := JibInterpreterContext for: fn arguments: args.
+	registers := OrderedDictionary new.
+	program registersDo: [ :register |
+		register instrs notEmpty ifTrue:[
+			self notYetImplemented
+		].
+
+		registers at: register id put: register regType newUndefined
+	]
+
+
 ]
 
 { #category : #interpreting }
@@ -129,7 +158,7 @@ JibInterpreter >> interpretGoto: insn [
 
 { #category : #'interpreting - exprs' }
 JibInterpreter >> interpretId: expr [
-	^ context get: expr id
+	^ self get: expr id
 
 ]
 
@@ -159,6 +188,22 @@ JibInterpreter >> interpretUntil: condition [
 { #category : #accessing }
 JibInterpreter >> retVal [
 	^retval
+]
+
+{ #category : #'accessing - variables' }
+JibInterpreter >> set: id to: value [
+	(registers includesKey: id) ifTrue:[
+		registers at: id put: value.
+	] ifFalse:[
+		context set: id to: value
+	]
+]
+
+{ #category : #'accessing - registers' }
+JibInterpreter >> setRegister: id to: value [
+	self assert:(registers includesKey: id).
+
+	registers at: id put: value
 ]
 
 { #category : #'debugging support' }

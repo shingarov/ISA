@@ -40,3 +40,8 @@ Instr_Decl >> printOn: aStream [
 	aStream nextPutAll: ' : '.
 	ty printOn: aStream
 ]
+
+{ #category : #accessing }
+Instr_Decl >> varType [
+	^ ty
+]
