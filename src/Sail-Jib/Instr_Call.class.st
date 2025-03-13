@@ -19,6 +19,12 @@ Instr_Call class >> inducedParser [
 	construct: #(lvalue - f args sourceLoc)
 ]
 
+{ #category : #accessing }
+Instr_Call >> argExprs [
+	^ args
+
+]
+
 { #category : #enumerating }
 Instr_Call >> childrenDo: aBlock [
 	aBlock value: lvalue.
@@ -33,17 +39,15 @@ Instr_Call >> defdIdsDo: aBlock [
 	
 ]
 
-{ #category : #'deterministic interpretation' }
-Instr_Call >> interpretIn: aContext [
-	| fn callee |
-	fn := aContext at: f.
-	callee := JibDeterministicContext new.
-	callee
-		fn: fn;
-		temps: (Dictionary newFromAssociations: {'return'->fn returnSort undefinedElement});
-		sender: aContext;
-		pc: 1.
-	^callee
+{ #category : #accessing }
+Instr_Call >> function [
+	^ self program lookupFunction: f
+
+]
+
+{ #category : #accessing }
+Instr_Call >> location [
+	^lvalue
 ]
 
 { #category : #printing }

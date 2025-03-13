@@ -19,13 +19,16 @@ BaselineOfISA >> baseline: spec [
 
 
 		spec package: 'Sail-Jib' with:[
-			spec requires: 'Sail-Jib-Debugger';
-			     requires: 'Sail-Jib-Parsing';
+			spec requires: 'Sail-Jib-Parsing';
 			     requires: 'Roassal3'.
-
 		].
 
-		spec package: 'Sail-Jib-Debugger' with:[
+		spec package: 'Sail-Jib-Interpreter' with:[
+			spec requires: 'Sail-Jib'
+		].
+
+		spec package: 'Sail-Jib-Interpreter-Tests' with:[
+			spec requires: 'Sail-Jib-Interpreter'
 		].
 
 		spec package: 'Sail-Jib-Parsing' with:[
@@ -33,8 +36,7 @@ BaselineOfISA >> baseline: spec [
 		].
 
 		spec package: 'Sail-Jib-Tests' with:[
-			spec requires: 'Sail-Jib-Debugger';
-			     requires: 'Sail-Jib-Parsing';
+			spec requires: 'Sail-Jib-Parsing';
 			     requires: 'Sail-Jib'.
 		].
  ]

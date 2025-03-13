@@ -31,9 +31,14 @@ Instr_Copy >> defdIdsDo: aBlock [
 	
 ]
 
-{ #category : #'deterministic interpretation' }
-Instr_Copy >> interpretIn: aContext [
-	^(aContext at: l put: (e valueIn: aContext)) incrPC
+{ #category : #accessing }
+Instr_Copy >> expression [
+	^e
+]
+
+{ #category : #accessing }
+Instr_Copy >> location [
+	^l
 ]
 
 { #category : #printing }

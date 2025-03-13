@@ -20,3 +20,8 @@ Instr_End >> childrenDo: aBlock [
 Instr_End >> isEnd [
 	^true
 ]
+
+{ #category : #printing }
+Instr_End >> printOn: aStream [
+	aStream nextPutAll: 'end'.
+]

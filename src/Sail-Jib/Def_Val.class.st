@@ -20,6 +20,11 @@ Def_Val class >> inducedParser [
 	construct: #(- id - tys - ty)
 ]
 
+{ #category : #accessing }
+Def_Val >> argTypes [
+	^ tys
+]
+
 { #category : #enumerating }
 Def_Val >> childrenDo: aBlock [
 	tys do: aBlock.
@@ -31,4 +36,14 @@ Def_Val >> childrenDo: aBlock [
 { #category : #accessing }
 Def_Val >> id [
 	^ id
+]
+
+{ #category : #testing }
+Def_Val >> isVal [
+	^ true
+]
+
+{ #category : #accessing }
+Def_Val >> retType [
+	^ ty
 ]

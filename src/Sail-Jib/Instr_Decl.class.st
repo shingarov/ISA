@@ -28,10 +28,15 @@ Instr_Decl >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #accessing }
+Instr_Decl >> id [
+	^ id
+]
+
 { #category : #printing }
 Instr_Decl >> printOn: aStream [
 	"BOGUS: why id is not Loc_Id?"
 	aStream nextPutAll: id.
-	aStream nextPutAll: ' : ...'.
-	"ty printOn: aStream"
+	aStream nextPutAll: ' : '.
+	ty printOn: aStream
 ]
