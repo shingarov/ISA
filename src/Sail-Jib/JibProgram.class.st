@@ -20,15 +20,29 @@ JibProgram >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #enumerating }
+JibProgram >> functionSignaturesDo: aBlock [
+	defs do: [ :def | def isVal ifTrue:[ aBlock value: def ] ]
+	
+]
+
+{ #category : #enumerating }
+JibProgram >> functionsDo: aBlock [
+	defs do: [ :def | def isFn ifTrue:[ aBlock value: def ] ]
+	
+]
+
 { #category : #lookup }
 JibProgram >> lookupFunction: id [
-	^ defs detect:[:def | def isFn and:[def id = id]] ifNone:[self error:'No ''fn'' named ''' , id , ''''].
+	self functionsDo: [ :fn | fn id = id ifTrue:[ ^fn ] ].
+	self error:'No ''fn'' named ''' , id , ''''.
 
 ]
 
 { #category : #lookup }
 JibProgram >> lookupFunctionSignature: id [
-	^ defs detect:[:def | def isVal and:[def id = id]] ifNone:[self error:'No ''val'' named ''' , id , ''''].
+	self functionSignaturesDo: [ :fn | fn id = id ifTrue:[ ^fn ] ].
+	self error:'No ''val'' named ''' , id , ''''.
 
 ]
 
