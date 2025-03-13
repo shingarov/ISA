@@ -1,6 +1,9 @@
 Class {
 	#name : #Ty,
 	#superclass : #JibProgramNode,
+	#classVars : [
+		'UndefinedValue'
+	],
 	#category : #'Sail-Jib'
 }
 
@@ -27,6 +30,11 @@ Ty class >> inducedParser [
 
 ]
 
+{ #category : #initialization }
+Ty class >> initialize [
+	UndefinedValue := '<undefined>' copy.
+]
+
 { #category : #testing }
 Ty class >> isAbstract [
 	^self == Ty
@@ -36,4 +44,12 @@ Ty class >> isAbstract [
 Ty >> childrenDo: aBlock [
 	"Most of types are leaf nodes, do nothing by default"
 	
+]
+
+{ #category : #'instance creation' }
+Ty >> newUndefined [
+	"Return 'undefined' value of this type. This will be the initial
+	 value before first assignment."
+	
+	^UndefinedValue "BOGUS, fix once we have type elaboration in place"
 ]

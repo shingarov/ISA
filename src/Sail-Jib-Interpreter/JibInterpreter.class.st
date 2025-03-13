@@ -5,9 +5,6 @@ Class {
 		'context',
 		'retval'
 	],
-	#classVars : [
-		'UndefinedValue'
-	],
 	#category : #'Sail-Jib-Interpreter-Interpreter'
 }
 
@@ -90,7 +87,7 @@ JibInterpreter >> interpretCopy: insn [
 
 { #category : #'interpreting - insns' }
 JibInterpreter >> interpretDecl: insn [
-	context def: insn id
+	context def: insn id to: insn varType newUndefined
 
 ]
 
