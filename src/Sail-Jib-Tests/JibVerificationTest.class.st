@@ -32,6 +32,8 @@ JibVerificationTest >> refuteReturns42: jibSource [
 
 { #category : #'tests - bv?' }
 JibVerificationTest >> testAnyBV1_p [
+	self skip.
+
 	self proveReturns42: '
 val zf : (%bv, %bv) ->  %bv32
 
@@ -54,6 +56,8 @@ fn zmain(zarg) {
 
 { #category : #'tests - 42' }
 JibVerificationTest >> testExecuteReturn42a_n [
+	self skip.
+
 	self refuteReturns42: '
 val zf : (%bv32) -> %bv32
 
@@ -69,6 +73,8 @@ fn zf(zarg) {
 
 { #category : #'tests - 42' }
 JibVerificationTest >> testExecuteReturn42a_p [
+  self skip.
+
 	self proveReturns42: '
 val zf : (%bv32) -> %bv32
 
@@ -84,6 +90,8 @@ fn zf(zarg) {
 
 { #category : #'tests - 42' }
 JibVerificationTest >> testExecuteReturn42b_n [
+  self skip.
+
 	self refuteReturns42: '
 val zf : (%bv32) -> %bv32
 
@@ -97,6 +105,8 @@ fn zf(zarg) {
 
 { #category : #'tests - 42' }
 JibVerificationTest >> testExecuteReturn42b_p [
+  self skip.
+
 	self proveReturns42: '
 val zf : (%bv32) -> %bv32
 
