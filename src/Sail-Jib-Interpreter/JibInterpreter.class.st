@@ -108,6 +108,19 @@ JibInterpreter >> interpretCall: insn [
 
 ]
 
+{ #category : #'interpreting - exprs' }
+JibInterpreter >> interpretCallOp: expr [
+	"This is called #interpretCallOp: and not #interpretCall: since the
+	 latter is already used for Instr_Call."
+
+	| args |
+
+	args := expr argExprs collect:[:argExpr | argExpr interpretIn: self ].
+	^expr op evaluateWithArguments: args.
+
+
+]
+
 { #category : #'interpreting - insns' }
 JibInterpreter >> interpretCopy: insn [
 	| val loc |

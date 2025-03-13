@@ -125,6 +125,31 @@ fn zmain() {
 
 	self assert: interpreter retVal = 16r2A.
 	self assert:(interpreter getRegister: 'zPC') = 16r2A.
+]
+
+{ #category : #tests }
+JibInterpreterTests >> test_04 [
+	| program main interpreter |
+	program := JibParser parse:'
+val zmain : (%bool) ->  %bool
+
+fn zmain(zarg) {
+  zz1 : %bool;
+  zz1 = @neq(zarg, false);
+  zz1 = @not(zarg);
+  return = zz1;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: { true toBool }.
+
+	interpreter interpret.
+
+	self assert: interpreter retVal = false.
 
 
 
