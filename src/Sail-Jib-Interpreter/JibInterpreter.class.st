@@ -163,6 +163,12 @@ JibInterpreter >> interpretGoto: insn [
 ]
 
 { #category : #'interpreting - exprs' }
+JibInterpreter >> interpretI64: expr [
+	^ expr value
+
+]
+
+{ #category : #'interpreting - exprs' }
 JibInterpreter >> interpretId: expr [
 	^ self get: expr id
 

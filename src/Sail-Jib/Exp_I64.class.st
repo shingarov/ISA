@@ -18,3 +18,8 @@ Exp_I64 class >> inducedParser [
 Exp_I64 >> childrenDo: aBlock [
 	"Leaf node, nothing to do."
 ]
+
+{ #category : #accessing }
+Exp_I64 >> value [
+	^ v
+]
