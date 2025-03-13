@@ -15,8 +15,8 @@ Def_Register class >> inducedParser [
 	, JibParser id trim
 	, $: asParser trim
 	, Ty asParser trim
-	, (JibInstr asParser, $; asParser trim ==> #first) star braces optional
-	construct: #(- id - ty -)
+	, ((JibInstr asParser, $; asParser trim ==> #first) star braces optional ==> [ :x|x ifNil:#() ])
+	construct: #(- id - ty instrs)
 ]
 
 { #category : #enumerating }
@@ -31,6 +31,11 @@ Def_Register >> childrenDo: aBlock [
 { #category : #accessing }
 Def_Register >> id [
 	^ id
+]
+
+{ #category : #accessing }
+Def_Register >> instrs [
+	^instrs
 ]
 
 { #category : #printing }
