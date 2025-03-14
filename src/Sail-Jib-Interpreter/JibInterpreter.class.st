@@ -91,13 +91,41 @@ JibInterpreter >> interpretBits: expr [
 
 ]
 
+{ #category : #'interpreting - exprs' }
+JibInterpreter >> interpretBool: expr [
+	^ expr value
+
+]
+
 { #category : #'interpreting - insns' }
 JibInterpreter >> interpretCall: insn [
-	| args fn |
+	| args func |
 
 	args := insn argExprs collect:[:expr | expr interpretIn: self ].
-	context := JibInterpreterContext for: insn function arguments: args caller: context.
+	func := insn function.
+	
+	func isExtern ifTrue:[
+		| retv |
+		
+		retv := func extern evaluateWithArguments: args.
+		insn location assign: retv in: self.		
+	] ifFalse:[	
+		context := JibInterpreterContext for: insn function arguments: args caller: context.
+	].
 
+
+
+]
+
+{ #category : #'interpreting - exprs' }
+JibInterpreter >> interpretCallOp: expr [
+	"This is called #interpretCallOp: and not #interpretCall: since the
+	 latter is already used for Instr_Call."
+
+	| args |
+
+	args := expr argExprs collect:[:argExpr | argExpr interpretIn: self ].
+	^expr op evaluateWithArguments: args.
 
 
 ]
@@ -153,6 +181,12 @@ JibInterpreter >> interpretExit: insn [
 JibInterpreter >> interpretGoto: insn [
 	self notYetImplemented
 
+
+]
+
+{ #category : #'interpreting - exprs' }
+JibInterpreter >> interpretI64: expr [
+	^ expr value
 
 ]
 

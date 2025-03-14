@@ -4,8 +4,12 @@ Class {
 	#category : #'Sail-Jib'
 }
 
-{ #category : #syntax }
-Op_Not class >> inducedParser [
-	^ '@not' asParser
-	==> [ :_ | self new ]
+{ #category : #accessing }
+Op_Not class >> id [
+	^ '@not'
+]
+
+{ #category : #evaluating }
+Op_Not >> evaluateWithArguments: args [
+	^ args first not
 ]

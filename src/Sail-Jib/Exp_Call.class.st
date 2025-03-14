@@ -15,11 +15,20 @@ Exp_Call class >> inducedParser [
 	construct: #(op args)
 ]
 
+{ #category : #accessing }
+Exp_Call >> argExprs [
+	^ args
+]
+
 { #category : #enumerating }
 Exp_Call >> childrenDo: aBlock [
-	aBlock value: op.
 	args do: aBlock
 	
+]
+
+{ #category : #accessing }
+Exp_Call >> op [
+	^ op
 ]
 
 { #category : #enumerating }

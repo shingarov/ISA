@@ -24,6 +24,16 @@ Def_Extern class >> inducedParser [
 	)
 ]
 
+{ #category : #accessing }
+Def_Extern >> extern [
+	^JibExtern named: ext
+]
+
+{ #category : #testing }
+Def_Extern >> isExtern [
+	^true
+]
+
 { #category : #printing }
 Def_Extern >> printOn: aStream [
 	aStream nextPut: (Character codePoint: 16r2197).

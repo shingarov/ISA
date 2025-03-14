@@ -28,15 +28,13 @@ JibProgram >> functionSignaturesDo: aBlock [
 
 { #category : #enumerating }
 JibProgram >> functionsDo: aBlock [
-	defs do: [ :def | def isFn ifTrue:[ aBlock value: def ] ]
-	
+	defs do: [ :def | (def isFn or:[def isExtern]) ifTrue:[ aBlock value: def ] ]
 ]
 
 { #category : #lookup }
 JibProgram >> lookupFunction: id [
 	self functionsDo: [ :fn | fn id = id ifTrue:[ ^fn ] ].
 	self error:'No ''fn'' named ''' , id , ''''.
-
 ]
 
 { #category : #lookup }
