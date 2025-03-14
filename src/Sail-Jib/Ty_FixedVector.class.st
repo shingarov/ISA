@@ -26,6 +26,11 @@ Ty_FixedVector >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #'instance creation' }
+Ty_FixedVector >> newUndefined [
+	^Array new: length withAll: ty newUndefined "BOGUS, fix once we have type elaboration in place"
+]
+
 { #category : #printing }
 Ty_FixedVector >> printOn: aStream [
 	aStream nextPutAll: '%fvec ('.

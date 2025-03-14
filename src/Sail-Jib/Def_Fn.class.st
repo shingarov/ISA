@@ -14,7 +14,7 @@ Class {
 Def_Fn class >> inducedParser [
 	^ 'fn' asParser trim
 	, JibParser id trim
-	, JibParser id trim commaList
+	, (JibParser id trim commaList ==> [ :x|x ifNil:#() ])
 	, (JibInstr asParser, $; asParser trim ==> #first) star braces
 	construct: #(- id ids instrs)
 ]

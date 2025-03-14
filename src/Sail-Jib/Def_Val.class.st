@@ -14,7 +14,7 @@ Def_Val class >> inducedParser [
 	^'val' asParser trim
 	, JibParser id trim
 	, $: asParser trim
-	, Ty asParser trim commaSeparated parens
+	, (Ty asParser trim commaSeparated parens ==> [ :x | x ifNil:#() ])
 	, '->' asParser trim
 	, Ty asParser trim
 	construct: #(- id - tys - ty)

@@ -7,9 +7,6 @@ Class {
 		'caller',
 		'pc'
 	],
-	#classVars : [
-		'UndefinedValue'
-	],
 	#category : #'Sail-Jib-Interpreter-Interpreter'
 }
 
@@ -23,20 +20,16 @@ JibInterpreterContext class >> for: fn arguments: args caller: caller [
 	^self basicNew initializeWithFunction: fn arguments: args caller: caller
 ]
 
-{ #category : #initialization }
-JibInterpreterContext class >> initialize [
-	UndefinedValue := '<undefined>' copy.
-]
-
 { #category : #accessing }
 JibInterpreterContext >> caller [
 	^ caller
 ]
 
 { #category : #'accessing - variables' }
-JibInterpreterContext >> def: id [
+JibInterpreterContext >> def: id to: value [
+	"Define new variable and set value to value"
 	self assert: (values includesKey: id) not.
-	values at: id put: UndefinedValue.
+	values at: id put: value
 ]
 
 { #category : #accessing }
@@ -46,13 +39,9 @@ JibInterpreterContext >> function [
 
 { #category : #'accessing - variables' }
 JibInterpreterContext >> get: id [
-	| value |
-
 	self assert: (values includesKey: id).
-	value := values at: id.
+	^ values at: id.
 
-	self assert: (value ~~ UndefinedValue).
-	^value
 ]
 
 { #category : #'accessing - variables' }
@@ -90,7 +79,7 @@ JibInterpreterContext >> initializeWithFunction: fn arguments: args caller: call
 	pc := 1.
 
 	signature := function signature.
-	values at: function retName put: UndefinedValue.
+	values at: function retName put: signature retType newUndefined.
 	function argNames with: args do:[:argName :argValue  |
 		values at: argName put: argValue.
 	].

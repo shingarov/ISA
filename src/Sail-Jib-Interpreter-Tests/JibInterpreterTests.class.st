@@ -95,3 +95,37 @@ fn zmain(zarg) {
 
 
 ]
+
+{ #category : #tests }
+JibInterpreterTests >> test_03 [
+	| program main interpreter |
+	program := JibParser parse:'
+register zPC : %bv32
+
+val zmain : () ->  %bv32
+
+fn zmain() {
+  zz39 : %bv32;
+  zz39 = 0x0000002A;
+  zPC = zz39;
+  zz40 : %bv32;
+  zz40 = zPC;
+  return = zz40;
+  end;
+}
+
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: { }.
+
+	interpreter interpret.
+
+	self assert: interpreter retVal = 16r2A.
+	self assert:(interpreter getRegister: 'zPC') = 16r2A.
+
+
+
+]
