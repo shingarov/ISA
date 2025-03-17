@@ -27,11 +27,3 @@ JibOp class >> inducedParser [
 JibOp class >> isAbstract [
 	^self == JibOp
 ]
-
-{ #category : #parsing }
-JibOp class >> signature [
-	"Return this prim's signature (as a synthetic instance of `Def_Val`).
-	 This is needed for type unification."
-	
-	^ self subclassResponsibility 
-]
