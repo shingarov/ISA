@@ -49,6 +49,7 @@ JibParser >> exp [
 	/ exp_string	
 	/ exp_unit
 	""
+	/ exp_ref
 	/ exp_id
 	
 	
