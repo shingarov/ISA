@@ -4,8 +4,11 @@ Class {
 	#instVars : [
 		'program',
 		'context',
+		'lets',
 		'registers',
-		'retval'
+		'entry',
+		'retval',
+		'todo'
 	],
 	#category : #'Sail-Jib-Interpreter-Interpreter'
 }
@@ -24,14 +27,23 @@ JibInterpreter >> context [
 
 { #category : #'accessing - variables' }
 JibInterpreter >> get: id [
-	(registers includesKey: id) ifTrue:[
+	(lets includesKey: id) ifTrue:[
+		^ lets at: id
+	] ifFalse:[(registers includesKey: id) ifTrue:[
 		^ registers at: id
 	] ifFalse:[
 		^ context get: id
-	]
+	]]
 ]
 
-{ #category : #'accessing - registers' }
+{ #category : #'accessing - globals' }
+JibInterpreter >> getGlobal: id [
+	self assert:(lets includesKey: id).
+
+	^ lets at: id
+]
+
+{ #category : #'accessing - globals' }
 JibInterpreter >> getRegister: id [
 	self assert:(registers includesKey: id).
 
@@ -40,16 +52,33 @@ JibInterpreter >> getRegister: id [
 
 { #category : #initialization }
 JibInterpreter >> initializeWithFunction: fn arguments: args [
+	entry := fn.
 	program := fn program.
-	context := JibInterpreterContext for: fn arguments: args.
 	registers := OrderedDictionary new.
+	lets := OrderedDictionary new.
+	todo := OrderedCollection new.
+
 	program registersDo: [ :register |
-		register instrs notEmpty ifTrue:[
-			self notYetImplemented
+		registers at: register id put: register regType newUndefined.
+
+		register hasInitializer ifTrue:[
+			todo add: (JibInterpreterContext for: register arguments: #())
+		]
+	].
+
+	program letsDo: [ :let |
+		let variables do: [ :nameAndType |
+			lets at: nameAndType key put: nameAndType value newUndefined.
 		].
 
-		registers at: register id put: register regType newUndefined
-	]
+		let hasInitializer ifTrue:[
+			todo add: (JibInterpreterContext for: let arguments: #())
+		]
+	].
+
+	todo add: (JibInterpreterContext for: fn arguments: args).
+
+	context := todo removeFirst.
 
 
 ]
@@ -66,8 +95,6 @@ JibInterpreter >> interpret1 [
 	"Interpret exactly one instruction."
 	| instr |
 
-	self assert: (context pc between: 1 and: context function instrs size).
-
 	instr := context function instrs at: context pc.
 	"Here we advance pc to following instruction. However, the pc
 	 can be changed as part of interpreting that instruction (for
@@ -76,6 +103,17 @@ JibInterpreter >> interpret1 [
 	 instructions. Maybe not a great idea, will see."
 	context pc: context pc + 1.
 	instr interpretIn: self.
+
+	(context notNil and:[context function isFn not]) ifTrue:[
+		"For some unknown reason, let and register initializers do not
+		 have an 'end' instruction. So here we check if PC is past the
+		 instruction sequence of current initilalizer and if so, finish
+		 its execution by interpreting fabricated Instr_End (this is
+		 merely a trick to have function return logic at one place)."
+		(context pc) == (context function instrs size + 1) ifTrue:[
+			self interpretEnd: Instr_End new.
+		].
+	].
 ]
 
 { #category : #'interpreting - insns' }
@@ -158,10 +196,13 @@ JibInterpreter >> interpretEnd: insn [
 	"Drop the current context"
 	context := caller.
 
-
 	caller isNil ifTrue:[
-		"We're done, just note the resulting value."
-		retval := callee getRetVal.
+		todo isEmpty ifTrue:[
+			"We're done, just note the resulting value."
+			retval := callee getRetVal.
+		] ifFalse:[
+			context := todo removeFirst.
+		]
 	] ifFalse:[
 		| call |
 
@@ -226,14 +267,23 @@ JibInterpreter >> retVal [
 
 { #category : #'accessing - variables' }
 JibInterpreter >> set: id to: value [
-	(registers includesKey: id) ifTrue:[
+	(lets includesKey: id) ifTrue:[
+		lets at: id put: value.
+	] ifFalse:[(registers includesKey: id) ifTrue:[
 		registers at: id put: value.
 	] ifFalse:[
 		context set: id to: value
-	]
+	]]
 ]
 
-{ #category : #'accessing - registers' }
+{ #category : #'accessing - globals' }
+JibInterpreter >> setGlobal: id to: value [
+	self assert:(lets includesKey: id).
+
+	lets at: id put: value
+]
+
+{ #category : #'accessing - globals' }
 JibInterpreter >> setRegister: id to: value [
 	self assert:(registers includesKey: id).
 

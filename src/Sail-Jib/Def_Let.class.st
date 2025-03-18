@@ -30,7 +30,24 @@ Def_Let >> childrenDo: aBlock [
 	instrs do: aBlock
 ]
 
+{ #category : #printing }
+Def_Let >> displayStringOn: aStream [
+	aStream nextPutAll: 'let '.
+	ids do:[:nameAndType | aStream nextPutAll: nameAndType key zdecode ]
+		  separatedBy:[aStream nextPutAll: ', ']
+]
+
 { #category : #accessing }
 Def_Let >> instrs [
 	^instrs
+]
+
+{ #category : #testing }
+Def_Let >> isLet [
+	^ true
+]
+
+{ #category : #accessing }
+Def_Let >> variables [
+	^ ids
 ]
