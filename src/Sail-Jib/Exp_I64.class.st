@@ -7,13 +7,6 @@ Class {
 	#category : #'Sail-Jib'
 }
 
-{ #category : #syntax }
-Exp_I64 class >> inducedParser [
-	^ PPParser decimalInteger
-	, ($: asParser trim, 'i64' asParser trim) optional
-	construct: #(v -)
-]
-
 { #category : #enumerating }
 Exp_I64 >> childrenDo: aBlock [
 	"Leaf node, nothing to do."

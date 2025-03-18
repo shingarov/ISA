@@ -8,13 +8,6 @@ Class {
 	#category : #'Sail-Jib'
 }
 
-{ #category : #syntax }
-Exp_Call class >> inducedParser [
-	^ JibOp asParser
-	, JibExp asParser commaList
-	construct: #(op args)
-]
-
 { #category : #accessing }
 Exp_Call >> argExprs [
 	^ args
