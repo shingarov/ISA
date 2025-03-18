@@ -1,10 +1,36 @@
 Class {
 	#name : #'Def_Let',
 	#superclass : #JibDef,
+	#instVars : [
+		'ids',
+		'instrs'
+	],
 	#category : #'Sail-Jib'
 }
 
 { #category : #syntax }
 Def_Let class >> inducedParser [
-	^'let' asParser "BOGUS, completely!"
+	"
+	'let' '(' <ids:Comma<Arg>> ')' '{' <instrs:Semi<Instr>> '}' =>
+        Def::Let(ids, instrs),
+	"
+	| arg |
+	
+	arg := JibParser id, $: asParser trim, Ty asParser ==> [ :x | x first -> x last ].
+	
+	^ 'let' asParser trim
+	, (arg trim commaList ==> [ :x|x ifNil:#() ])
+	, (JibInstr asParser, $; asParser trim ==> #first) star braces
+	construct: #(- ids instrs)
+]
+
+{ #category : #enumerating }
+Def_Let >> childrenDo: aBlock [
+	ids do:[:arg | aBlock value: arg value].
+	instrs do: aBlock
+]
+
+{ #category : #accessing }
+Def_Let >> instrs [
+	^instrs
 ]

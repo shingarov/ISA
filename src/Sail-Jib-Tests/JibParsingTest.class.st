@@ -167,6 +167,25 @@ JibParsingTest >> test_UnknownUnique [
 ]
 
 { #category : #'tests - individual defs' }
+JibParsingTest >> test_let [
+	| val |
+	val := defParser parse: '
+let (zdefault_meta: %unit) {
+  zz40 : %unit `8 15:30-15:32;
+  zz40 = () `8 15:30-15:32;
+  zdefault_meta = zz40 `8 15:4-15:16;
+}
+
+val zmain : () -> %unit
+
+fn zmain() { 
+  return =();
+  end;
+}
+'.
+	self assert: (val isKindOf: Def_Let).
+]
+
 JibParsingTest >> test_struct [
 	| struct |
 	struct := defParser parse: 'struct ztuplez3z5bv12_z5bv5_z5bv5_z5enumz0zziop {
