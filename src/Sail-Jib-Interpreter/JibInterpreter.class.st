@@ -8,7 +8,8 @@ Class {
 		'registers',
 		'entry',
 		'retval',
-		'todo'
+		'todo',
+		'breakpoints'
 	],
 	#category : #'Sail-Jib-Interpreter-Interpreter'
 }
@@ -16,6 +17,21 @@ Class {
 { #category : #'tests - instance' }
 JibInterpreter class >> for: fn arguments: args [
 	^self basicNew initializeWithFunction: fn arguments: args
+]
+
+{ #category : #'adding & removing breakpoints' }
+JibInterpreter >> addBreakpoint: aJibInterpreterBreakpoint [
+	self assert: aJibInterpreterBreakpoint instr program == program.
+	self assert:(breakpoints includesKey: aJibInterpreterBreakpoint instr) not.
+	
+	breakpoints at: aJibInterpreterBreakpoint instr put: aJibInterpreterBreakpoint
+	
+ 
+]
+
+{ #category : #accessing }
+JibInterpreter >> breakpoints [
+	^ breakpoints 
 ]
 
 { #category : #accessing }
@@ -57,6 +73,7 @@ JibInterpreter >> initializeWithFunction: fn arguments: args [
 	registers := OrderedDictionary new.
 	lets := OrderedDictionary new.
 	todo := OrderedCollection new.
+	breakpoints := IdentityDictionary new.
 
 	program registersDo: [ :register |
 		registers at: register id put: register regType newUndefined.
@@ -93,9 +110,16 @@ JibInterpreter >> interpret [
 { #category : #interpreting }
 JibInterpreter >> interpret1 [
 	"Interpret exactly one instruction."
-	| instr |
+	| instr breakpoint |
 
 	instr := context function instrs at: context pc.
+	
+	"Check for breakpoint."
+	breakpoint := breakpoints at: instr ifAbsent:[nil].
+	breakpoint notNil ifTrue:[				
+		breakpoint stopIn: self.
+	].
+	
 	"Here we advance pc to following instruction. However, the pc
 	 can be changed as part of interpreting that instruction (for
 	 example to implement jumps). This is done here eagerly so one
@@ -258,6 +282,16 @@ JibInterpreter >> interpretUntil: condition [
 	condition whileTrue:[
 		self interpret1.
 	]
+]
+
+{ #category : #'adding & removing breakpoints' }
+JibInterpreter >> removeBreakpoint: aJibInterpreterBreakpoint [
+	self assert: aJibInterpreterBreakpoint instr program == program.
+	self assert:(breakpoints includesKey: aJibInterpreterBreakpoint instr).
+	
+	breakpoints removeKey: aJibInterpreterBreakpoint instr
+	
+ 
 ]
 
 { #category : #accessing }

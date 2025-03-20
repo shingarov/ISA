@@ -118,9 +118,19 @@ JibInterpreterContext >> pc: anInteger [
 	pc := anInteger
 ]
 
+{ #category : #printing }
+JibInterpreterContext >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPutAll: '(in '.
+	function displayStringOn: aStream.
+	aStream nextPutAll: ' at '.
+	pc printOn: aStream.
+	aStream nextPut: $).
+]
+
 { #category : #'accessing - variables' }
 JibInterpreterContext >> set: id to: value [
 	self assert: (values includesKey: id).
-
+	
 	values at: id put: value
 ]
