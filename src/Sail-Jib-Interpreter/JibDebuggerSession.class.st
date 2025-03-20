@@ -13,7 +13,7 @@ JibDebuggerSession class >> debuggingActionsForPragma: aSymbol for: aDebugger [
 		"ResumeDebugAction ."
 		"RestartDebugAction ."
 		StepIntoDebugAction .
-		"StepOverDebugAction ."
+		StepOverDebugAction .
 	} inject: OrderedCollection new
 		into: [ :currentActions :aClass |
 			currentActions
@@ -69,6 +69,17 @@ JibDebuggerSession >> clear [
 	interpreter := nil.
 ]
 
+{ #category : #private }
+JibDebuggerSession >> cont [
+	"Continue until a breakpoint is hit or intepreter terminates."
+
+	[
+		interpreter interpret
+	] on: JibInterpreterBreakpointHitNotification do: [ :hit |
+		"Stop"
+	].
+]
+
 { #category : #initialization }
 JibDebuggerSession >> initializeWithInterpreter: aJibInterpreter [
 	self assert: (aJibInterpreter isKindOf: JibInterpreter).
@@ -109,12 +120,34 @@ JibDebuggerSession >> stack [
 	^stack
 ]
 
+{ #category : #private }
+JibDebuggerSession >> step [
+	"Execute exactly one instruction."
+
+	interpreter interpret1
+]
+
 { #category : #'debugging actions' }
 JibDebuggerSession >> stepInto: context [
 	context == interpreter context ifTrue:[
-		interpreter interpret1.
+		"If we're stepping in top-most context, just
+		 execute one instruction and stop."
+		self step.
 	] ifFalse:[
-		self notYetImplemented
+		"If we're stepping in any other context, 'step-into' means
+		 'step to next instruction in this context'. So we setup a
+		 temporary breakpoint on that instruction and continue until
+		 this (or some other) breakpoint hits."
+
+		| instr break |
+
+		instr := context function instrs at: context pc.
+		break := JibInterpreterBreakpoint at: instr.
+		break temporary: true.
+
+		interpreter addBreakpoint: break.
+
+		self cont.
 	].
 
 	self triggerEvent: #stepInto
