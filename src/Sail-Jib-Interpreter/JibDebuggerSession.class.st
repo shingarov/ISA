@@ -155,7 +155,41 @@ JibDebuggerSession >> stepInto: context [
 
 { #category : #'debugging actions' }
 JibDebuggerSession >> stepOver: context [
-	self notYetImplemented
+	"If we're step-over in current (top-most) context, first
+	 execute a single instruction. This instruction must be executed
+	 anyway (step-over executes at least one instruction) and as a
+	 sideefect, a PC gets updated to the PC of next instruction.
+	 This is important, see below."
+	
+	context == interpreter context ifTrue:[
+		self step.
+	].
+	
+	"
+	 Now, if the current (top-most) context is not the context 
+	 in which we should step-over (either never was, or the instruction
+	 stepped above was a call), then we arrange a temporary breakpoint
+	 right after the call instruction and continue until this (or some other)
+	 breakpoint hits.
+	
+	 Also: the `self step` above may have executed entry point's `end` 
+	 instruction in which case interpreter terminates (there's no more 
+	 instructions to execute). Hence the below notNil guard."	
+	interpreter context notNil ifTrue:[
+		context ~~ interpreter context ifTrue:[
+			| instr break |
+				
+			instr := context function instrs at: context pc. 
+			break := JibInterpreterBreakpoint at: instr.
+			break temporary: true.
+	
+			interpreter addBreakpoint: break.
+		
+			self cont.
+		].
+	].
+	self triggerEvent: #stepOver 
+	
 ]
 
 { #category : #'debugging actions' }
