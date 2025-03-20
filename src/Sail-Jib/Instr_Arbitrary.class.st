@@ -6,5 +6,5 @@ Class {
 
 { #category : #syntax }
 Instr_Arbitrary class >> inducedParser [
-	^'arbitrary' asParser
+	^'arbitrary' asParser ==> [:_ | self new ]
 ]

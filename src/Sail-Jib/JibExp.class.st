@@ -5,22 +5,28 @@ Class {
 }
 
 { #category : #parsing }
+JibExp class >> asParser [
+	"
+	Expressions are parsed traditionally, using JibParser.
+	"
+	^ JibParser new productionAt: #exp
+
+	"
+	JibExp asParser end parse:'xyz'
+	JibExp asParser end parse:'xyz.foo'
+	Exp_Field asParser end parse:'xyz.foo'
+	"
+
+
+
+]
+
+{ #category : #parsing }
 JibExp class >> inducedParser [
-	^	Exp_Field asParser
-	/	Exp_Kind asParser
-	/	Exp_Unwrap asParser
-
-
-	/	Exp_Bits asParser
-	/	Exp_Bool asParser
-	/	Exp_I128 asParser
-	/	Exp_I64 asParser
-	/	Exp_String asParser
-	/	Exp_Struct asParser
-	/	Exp_Unit asParser
-	/	Exp_Id asParser
-	/	Exp_Call asParser
-
+	"
+	Expressions are parsed traditionally, using JibParser.
+	"
+	self shouldNotImplement 
 
 
 

@@ -7,16 +7,6 @@ Class {
 	#category : #'Sail-Jib'
 }
 
-{ #category : #syntax }
-Exp_Id class >> inducedParser [
-	^ (PPSequenceParser with: JibParser id)
-	construct: #(id)
-	
-"
-JibExp inducedParser parse: 'xyz'
-"
-]
-
 { #category : #enumerating }
 Exp_Id >> childrenDo: aBlock [
 	"Leaf node, nothing to do."

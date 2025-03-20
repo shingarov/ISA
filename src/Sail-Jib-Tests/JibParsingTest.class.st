@@ -166,6 +166,181 @@ JibParsingTest >> test_UnknownUnique [
 	self assert: (val isKindOf: SourceLoc_UnknownUnique)
 ]
 
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_field_of_id [
+	| src val |
+	
+	src := 'zmergez3var.ztuplez3z5bv12_z5bv5_z5bv5_z5enumz0zziop3'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Field).
+	self assert: (val children size == 1).
+	self assert: (val children first isKindOf: Exp_Id).
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
+]
+
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_field_of_struct [
+	| src val |
+	
+	src := 'struct ztuplez3z5enumz0zzArchitecture_z5bv4 {ztuplez3z5enumz0zzArchitecture_z5bv40 = za, ztuplez3z5enumz0zzArchitecture_z5bv41 = zm}.ztuplez3z5enumz0zzArchitecture_z5bv41'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Field).
+	self assert: (val children size == 1).
+	self assert: (val children first isKindOf: Exp_Struct).
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
+]
+
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_field_of_unwrap [
+	| src val |
+	
+	src := 'zmergez3var as zITYPE.ztuplez3z5bv12_z5bv5_z5bv5_z5enumz0zziop3'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Field).
+	self assert: (val children size == 1).
+	self assert: (val children first isKindOf: Exp_Unwrap).
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
+]
+
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_field_of_unwrap_of_field_of_struct [
+	| src val |
+	
+	src := 'struct A {B = zt, C = zz40}.D as E.F'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Field).
+	
+	self assert: (val children size == 1).
+	self assert: (val children first isKindOf: Exp_Unwrap).
+	
+	self assert: (val children first children size == 1).
+	self assert: (val children first children first isKindOf: Exp_Field).
+	
+	self assert: (val children first children first children size == 1).
+	self assert: (val children first children first children first isKindOf: Exp_Struct).
+
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
+]
+
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_id [
+	| src val |
+	
+	src := 'ztuplez3z5enumz0zzArchitecture_z5bv4'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Id).
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
+]
+
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_kind_of_field [
+	| src val |
+	
+	src := 'struct ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result {ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result0 = zcur_priv, ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result1 = zctl}.ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result1 is zCTL_TRAP'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Kind).
+	
+	self assert: (val children size == 1).
+	self assert: (val children first isKindOf: Exp_Field).
+	
+	self assert: (val children first children size == 1).
+	self assert: (val children first children first isKindOf: Exp_Struct).
+	
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
+]
+
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_kind_of_id [
+	| src val |
+	
+	src := 'ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result1 is zCTL_TRAP'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Kind).
+	
+	self assert: (val children size == 1).
+	self assert: (val children first isKindOf: Exp_Id).
+	
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
+]
+
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_kind_of_struct [
+	| src val |
+	
+	src := 'struct ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result {ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result0 = zcur_priv, ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result1 = zctl} is zCTL_TRAP'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Kind).
+	self assert: (val children size == 1).
+	self assert: (val children first isKindOf: Exp_Struct).
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
+]
+
+{ #category : #'tests - individual defs' }
+JibParsingTest >> test_let [
+	| val |
+	val := defParser parse: '
+let (zdefault_meta: %unit) {
+  zz40 : %unit `8 15:30-15:32;
+  zz40 = () `8 15:30-15:32;
+  zdefault_meta = zz40 `8 15:4-15:16;
+}
+
+val zmain : () -> %unit
+
+fn zmain() { 
+  return =();
+  end;
+}
+'.
+	self assert: (val isKindOf: Def_Let).
+]
+
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_ref [
+	| src val |
+	
+	src := '&zmergez3var'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Ref).
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
+]
+
 { #category : #'tests - individual defs' }
 JibParsingTest >> test_struct [
 	| struct |
@@ -176,6 +351,75 @@ JibParsingTest >> test_struct [
   ztuplez3z5bv12_z5bv5_z5bv5_z5enumz0zziop3: %enum ziop
 }'.
 	self assert: (struct isKindOf: Def_Struct)
+]
+
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_struct_e [
+	| src val |
+	
+	src := 'struct ztuplez3z5enumz0zzArchitecture_z5bv4 {ztuplez3z5enumz0zzArchitecture_z5bv40 = za, ztuplez3z5enumz0zzArchitecture_z5bv41 = zm}'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Struct).
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
+]
+
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_unwrap_of_field [
+	| src val |
+	
+	src := 'struct ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result {ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result0 = zcur_priv, ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result1 = zctl}.ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result1 as zCTL_TRAP'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Unwrap).
+	
+	self assert: (val children size == 1).
+	self assert: (val children first isKindOf: Exp_Field).
+	
+	self assert: (val children first children size == 1).
+	self assert: (val children first children first isKindOf: Exp_Struct).
+	
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
+]
+
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_unwrap_of_id [
+	| src val |
+	
+	src := 'ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result1 as zCTL_TRAP'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Unwrap).
+	
+	self assert: (val children size == 1).
+	self assert: (val children first isKindOf: Exp_Id).
+	
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
+]
+
+{ #category : #'tests - expressions' }
+JibParsingTest >> test_unwrap_of_struct [
+	| src val |
+	
+	src := 'struct ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result {ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result0 = zcur_priv, ztuplez3z5enumz0zzPrivilege_z5unionz0zzctl_result1 = zctl} as zCTL_TRAP'.
+	
+	val := JibExp asParser end parse: src.
+	self assert: (val isKindOf: Exp_Unwrap).
+	self assert: (val children size == 1).
+	self assert: (val children first isKindOf: Exp_Struct).
+	
+	"
+	src copyFrom: val position to: (val position + 100 min: src size)
+	"
 ]
 
 { #category : #'tests - individual defs' }
