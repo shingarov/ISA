@@ -11,13 +11,20 @@ Class {
 }
 
 { #category : #'instance creation' }
-JibInterpreterContext class >> for: fn arguments: args [
-	^self for: fn arguments: args caller: nil
+JibInterpreterContext class >> for: code [
+	self assert: (code isRegister or:[code isLet]).
+
+	^self for: code arguments: #()
 ]
 
 { #category : #'instance creation' }
-JibInterpreterContext class >> for: fn arguments: args caller: caller [
-	^self basicNew initializeWithFunction: fn arguments: args caller: caller
+JibInterpreterContext class >> for: code arguments: args [
+	^self for: code arguments: args caller: nil
+]
+
+{ #category : #'instance creation' }
+JibInterpreterContext class >> for: code arguments: args caller: caller [
+	^self basicNew initializeWith: code arguments: args caller: caller
 ]
 
 { #category : #accessing }
@@ -68,20 +75,26 @@ JibInterpreterContext >> gtLocalsIn: composite [
 ]
 
 { #category : #initialization }
-JibInterpreterContext >> initializeWithFunction: fn arguments: args caller: callr [
-	| signature |
-
-	self assert: (fn isKindOf: Def_Fn).
+JibInterpreterContext >> initializeWith: code arguments: args caller: callr [
+	self assert: code hasCode.
 
 	values := OrderedDictionary new.
-	function := fn.
+	function := code.
 	caller := callr.
 	pc := 1.
 
-	signature := function signature.
-	values at: function retName put: signature retType newUndefined.
-	function argNames with: args do:[:argName :argValue  |
-		values at: argName put: argValue.
+	function isFn ifTrue:[
+		"Initialize arguments and return value. We do this only
+		 for real functions (Def_Fn) since let and register initializers
+		 do not take arguments and have no return value"
+
+		| signature |
+
+		signature := function signature.
+		values at: function retName put: signature retType newUndefined.
+		function argNames with: args do:[:argName :argValue  |
+			values at: argName put: argValue.
+		].
 	].
 
 
@@ -96,7 +109,11 @@ JibInterpreterContext >> pc [
 
 { #category : #accessing }
 JibInterpreterContext >> pc: anInteger [
-	self assert: (pc between: 1 and: function instrs size).
+	"Set the current PC (index into instrs sequence) in this context.
+	 Here we allow to set the PC one beyond the size of an instruction
+	 sequence - this is to signal end of initializer execution. See
+	 JibInterpreter >> interpret1."
+	self assert: (pc between: 1 and: function instrs size + 1).
 
 	pc := anInteger
 ]

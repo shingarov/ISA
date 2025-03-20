@@ -103,3 +103,55 @@ fn zmain(zarg) {
 
 
 ]
+
+{ #category : #tests }
+JibDebuggerSessionTests >> test_03 [
+	| program main interpreter session |
+
+	program := JibParser parse:'
+
+let (zxlen_val: %i64) {
+  zz40 : %i64;
+  zz40 = 64;
+  zxlen_val = zz40;
+}
+
+register zPC : %bv64 {
+	zPC = 0xCAFE0000CAFE0000;
+}
+
+val zmain : () -> %i64
+
+fn zmain() {
+  return = zxlen_val;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: #().
+	session := JibDebuggerSession for: interpreter.
+
+	"
+	JibDebugger openOn: session.
+	"
+	self assert: interpreter context function isRegister.
+	session stepInto: interpreter context. "zz40 : %i64;"
+	session stepInto: interpreter context. "zz40 = 64;"
+	session stepInto: interpreter context. "zxlen_val = zz40;"
+
+	self assert: interpreter context function isLet.
+
+
+
+
+
+
+
+
+
+
+
+]

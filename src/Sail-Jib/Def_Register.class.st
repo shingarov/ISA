@@ -28,6 +28,13 @@ Def_Register >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #printing }
+Def_Register >> displayStringOn: aStream [
+	aStream nextPutAll: 'register '.
+	aStream nextPutAll: id zdecode.
+
+]
+
 { #category : #accessing }
 Def_Register >> id [
 	^ id
@@ -35,7 +42,7 @@ Def_Register >> id [
 
 { #category : #accessing }
 Def_Register >> instrs [
-	^instrs
+	^ instrs
 ]
 
 { #category : #testing }
@@ -54,4 +61,5 @@ Def_Register >> printOn: aStream [
 { #category : #accessing }
 Def_Register >> regType [
 	^ ty
+
 ]

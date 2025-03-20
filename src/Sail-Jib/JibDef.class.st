@@ -43,6 +43,11 @@ JibDef >> isFn [
 ]
 
 { #category : #testing }
+JibDef >> isLet [
+	^ false
+]
+
+{ #category : #testing }
 JibDef >> isRegister [
 	^false
 ]

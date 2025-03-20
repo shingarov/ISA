@@ -16,7 +16,7 @@ JibDebugger >> formatInstruction: insn forContext: context [
 
 { #category : #formatting }
 JibDebugger >> formatStackForContext: context [
-	^context function id
+	^context function displayString
 ]
 
 { #category : #'building presentations' }

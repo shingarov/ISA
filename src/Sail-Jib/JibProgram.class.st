@@ -31,6 +31,12 @@ JibProgram >> functionsDo: aBlock [
 	defs do: [ :def | (def isFn or:[def isExtern]) ifTrue:[ aBlock value: def ] ]
 ]
 
+{ #category : #enumerating }
+JibProgram >> letsDo: aBlock [
+	defs do: [ :def | def isLet ifTrue:[ aBlock value: def ] ]
+
+]
+
 { #category : #lookup }
 JibProgram >> lookupFunction: id [
 	self functionsDo: [ :fn | fn id = id ifTrue:[ ^fn ] ].
