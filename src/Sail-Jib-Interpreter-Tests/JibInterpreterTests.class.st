@@ -248,3 +248,40 @@ fn zmain(zarg) {
 
 
 ]
+
+{ #category : #tests }
+JibInterpreterTests >> test_07 [
+	| program main interpreter |
+	program := JibParser parse:'
+
+let (zxlen_val: %i64) {
+  zxlen_val = zf();
+}
+
+val zf : () -> %i64
+
+fn zf() { 
+  return = 64;
+  end;
+}
+
+val zmain : () -> %i64
+
+fn zmain(zarg) {
+  return = zxlen_val;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: { -1 toBitVector: 16 }.
+
+	interpreter interpret.
+
+	self assert: interpreter retVal  = 64.
+
+
+
+]
