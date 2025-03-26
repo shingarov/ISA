@@ -101,15 +101,15 @@ JibFnBodyBlock >> addPrecedessor: aJibFnBodyBlock [
     ].          
 ]
 
-{ #category : #accessing }
-JibFnBodyBlock >> body [
-	^ function
-]
-
 { #category : #displaying }
 JibFnBodyBlock >> displayStringOn: aStream [
 	aStream nextPutAll:'B '.
 	self range first printOn: aStream
+]
+
+{ #category : #accessing }
+JibFnBodyBlock >> function [
+	^ function
 ]
 
 { #category : #inspecting }
@@ -141,31 +141,43 @@ JibFnBodyBlock >> gtInstructionsIn: composite [
 { #category : #inspecting }
 JibFnBodyBlock >> gtLivenessIn: composite [
 	"<gtInspectorPresentationOrder: 2>"
-	composite text
-		title: 'Liveness';		
-		display: [ String streamContents: [ :text |
-				text nextPutAll: 'live-in:'; cr.
-				liveness liveIn do:[:id|
-					text nextPutAll: '    '; nextPutAll: id; cr.
-				].
-				text cr.
-				text nextPutAll: 'live-out:'; cr.
-				liveness liveOut do:[:id|
-					text nextPutAll: '    '; nextPutAll: id; cr.
-				].
+	liveness notNil ifTrue:[
+		composite text
+			title: 'Liveness';
+			display: [ String streamContents: [ :text |
+					text nextPutAll: 'live-in:'; cr.
+					liveness liveIn do:[:id|
+						text nextPutAll: '    '; nextPutAll: id; cr.
+					].
+					text cr.
+					text nextPutAll: 'live-out:'; cr.
+					liveness liveOut do:[:id|
+						text nextPutAll: '    '; nextPutAll: id; cr.
+					].
+					text cr.
+					text nextPutAll: 'gen-set:'; cr.
+					liveness genSet do:[:id|
+						text nextPutAll: '    '; nextPutAll: id; cr.
+					].
 			
-				text cr.
-				text nextPutAll: 'gen-set:'; cr.
-				liveness genSet do:[:id|
-					text nextPutAll: '    '; nextPutAll: id; cr.
-				].
-			
-				text cr.
-				text nextPutAll: 'kill-set'; cr.
-				liveness killSet do:[:id|
-					text nextPutAll: '    '; nextPutAll: id; cr.
-				].
-		]]
+					text cr.
+					text nextPutAll: 'kill-set:'; cr.
+					liveness killSet do:[:id|
+						text nextPutAll: '    '; nextPutAll: id; cr.
+					].
+			]]
+	] ifFalse:[
+		composite pharoScript
+			title: 'Liveness';
+			doItReceiver: self;
+			display: [ String streamContents: [ :text |
+					text nextPutAll: '"Liveness not yet computed. Select and evaluate:"'; cr.
+					text cr.
+					text nextPutAll: '    JibFnBodyBlockLiveness compute: self function'; cr.
+			]]
+	].
+
+
 ]
 
 { #category : #accessing }
