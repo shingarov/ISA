@@ -14,7 +14,7 @@ Instr_Call class >> inducedParser [
 	^ JibLoc asParser trim
 	, $= asParser trim
 	, ($$ asParser optional, JibParser id) flatten trim
-	, JibExp asParser commaList trim
+	, (JibExp asParser commaList trim ==> [ :x|x ifNil:#() ])
 	, JibSourceLoc asParser
 	construct: #(lvalue - f args sourceLoc)
 ]

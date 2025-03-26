@@ -166,6 +166,30 @@ JibParsingTest >> test_UnknownUnique [
 	self assert: (val isKindOf: SourceLoc_UnknownUnique)
 ]
 
+{ #category : #'tests - instructions' }
+JibParsingTest >> test_call_01 [
+	| src ins |
+
+	src := 'zz40 = zf(zz01, zz02)'.
+
+	ins := JibInstr asParser end parse: src.
+	self assert: (ins isKindOf: Instr_Call).
+	self assert: (ins argExprs size = 2).
+
+]
+
+{ #category : #'tests - instructions' }
+JibParsingTest >> test_call_02 [
+	| src ins |
+
+	src := 'zz40 = zf()'.
+
+	ins := JibInstr asParser end parse: src.
+	self assert: (ins isKindOf: Instr_Call).
+	self assert: (ins argExprs isEmpty)
+
+]
+
 { #category : #'tests - expressions' }
 JibParsingTest >> test_field_of_id [
 	| src val |
