@@ -12,6 +12,11 @@ Exp_Bool >> childrenDo: aBlock [
 	"Leaf node, nothing to do."
 ]
 
+{ #category : #printing }
+Exp_Bool >> printOn: aStream [
+	b printOn: aStream
+]
+
 { #category : #accessing }
 Exp_Bool >> value [
 	^b
