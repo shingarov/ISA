@@ -14,6 +14,7 @@ JibDebuggerSession class >> debuggingActionsForPragma: aSymbol for: aDebugger [
 		"RestartDebugAction ."
 		StepIntoDebugAction .
 		StepOverDebugAction .
+		JibDebuggerDebugActionFinish .
 	} inject: OrderedCollection new
 		into: [ :currentActions :aClass |
 			currentActions
@@ -78,6 +79,32 @@ JibDebuggerSession >> cont [
 	] on: JibInterpreterBreakpointHitNotification do: [ :hit |
 		"Stop"
 	].
+]
+
+{ #category : #'debugging actions' }
+JibDebuggerSession >> finish: context [
+	| caller |
+
+	caller := context caller.
+	caller isNil ifTrue:[
+		interpreter todo notEmpty ifTrue:[
+			caller := interpreter todo first.
+		]
+	].
+
+	caller notNil ifTrue:[
+		| instr break |
+
+		instr := caller function instrs at: caller pc.
+		break := JibInterpreterBreakpoint at: instr.
+		break temporary: true.
+
+		interpreter addBreakpoint: break.
+	].
+
+	self cont.
+	self triggerEvent: #finish
+
 ]
 
 { #category : #initialization }

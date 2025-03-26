@@ -314,3 +314,135 @@ fn zmain() {
 	self assert: interpreter context function isFn.
 	self assert: interpreter context function id = 'zmain'.
 ]
+
+{ #category : #tests }
+JibDebuggerSessionTests >> test_05a [
+	| program main interpreter session |
+
+	program := JibParser parse:'
+val zf : (%bv32) ->  %bv32
+
+fn zf(zarg) {
+  zz39 : %bv32 `1;
+  zz39 = 0b00000000000000000000000000101010 `2;
+  return = zz39 `3;
+  end;
+}
+
+val zmain : (%bv32) ->  %bv32
+
+fn zmain(zarg) {
+  zz1 : %bv32 `1;
+  zz1 = zf(zarg) `2;
+  return = zz1 `3;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: { 0 toBitVector: 32 }.
+	session := JibDebuggerSession for: interpreter.
+
+	"
+	JibDebugger openOn: session.
+	"
+	self assert: interpreter context function id = 'zmain'.
+	session stepInto: interpreter context. "zz1 : %bv32 `1;"
+	session stepInto: interpreter context. "zz1 = zf(zarg) `2;"
+
+	self assert: interpreter context function id = 'zf'.
+	self assert: interpreter context pc = 1.
+
+	session finish: interpreter context.
+
+	self assert: interpreter context function id = 'zmain'.
+	self assert: interpreter context pc = 3.
+]
+
+{ #category : #tests }
+JibDebuggerSessionTests >> test_05b [
+	| program main interpreter session |
+
+	program := JibParser parse:'
+val zf : (%bv32) ->  %bv32
+
+fn zf(zarg) {
+  zz39 : %bv32 `1;
+  zz39 = 0b00000000000000000000000000101010 `2;
+  return = zz39 `3;
+  end;
+}
+
+val zmain : (%bv32) ->  %bv32
+
+fn zmain(zarg) {
+  zz1 : %bv32 `1;
+  zz1 = zf(zarg) `2;
+  return = zz1 `3;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: { 0 toBitVector: 32 }.
+	session := JibDebuggerSession for: interpreter.
+
+	"
+	JibDebugger openOn: session.
+	"
+	self assert: interpreter context function id = 'zmain'.
+	session stepInto: interpreter context. "zz1 : %bv32 `1;"
+	session stepInto: interpreter context. "zz1 = zf(zarg) `2;"
+
+	self assert: interpreter context function id = 'zf'.
+	self assert: interpreter context pc = 1.
+
+	session finish: interpreter context caller. "finish zmain"
+
+	self assert: interpreter context isNil.
+]
+
+{ #category : #tests }
+JibDebuggerSessionTests >> test_05c [
+	| program main interpreter session |
+
+	program := JibParser parse:'
+let (zxlen_val: %i64) {
+  zz40 : %i64;
+  zz40 = 64;
+  zxlen_val = zz40;
+}
+
+val zmain : () -> %i64
+
+fn zmain() {
+  return = zxlen_val;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: {  }.
+	session := JibDebuggerSession for: interpreter.
+
+	"
+	JibDebugger openOn: session.
+	"
+	self assert: interpreter context function isLet.
+
+	session finish: interpreter context. "finish let zxlen_val"
+
+	self assert: interpreter context function id = 'zmain'.
+
+	session finish: interpreter context. "finish zmain"
+
+	self assert: interpreter context isNil.
+
+
+]
