@@ -325,10 +325,7 @@ JibInterpreter >> setRegister: id to: value [
 ]
 
 { #category : #'debugging support' }
-JibInterpreter >> stepInto: steppingContext [
-	context == steppingContext ifTrue:[
-		self interpret1.
-	] ifFalse:[
-		self notYetImplemented
-	]
+JibInterpreter >> todo [
+	"Return the 'TODO' list. Private, use with care!"
+	^ todo
 ]

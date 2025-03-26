@@ -137,11 +137,23 @@ JibDebuggerSession >> stepInto: context [
 		"If we're stepping in any other context, 'step-into' means
 		 'step to next instruction in this context'. So we setup a
 		 temporary breakpoint on that instruction and continue until
-		 this (or some other) breakpoint hits."
+		 this (or some other) breakpoint hits.
+		
+		 It may happen that context is for initializer and that current 
+		 instruction in that context is a call *and also* a last instruction
+		 of the initializer. In that case, the 'next' instruction is
+		 is the first instruction of next entry in interpreter's todo
+		 (since initializers do not have `end`, see JibInterpreter >> interpret1).
+		"
 
 		| instr break |
-
-		instr := context function instrs at: context pc.
+		
+		(context function isFn not and:[(context pc) == (context function instrs size + 1)]) ifTrue:[
+			instr := interpreter todo first function instrs at: 1.
+		] ifFalse:[
+			instr := context function instrs at: context pc.
+		].
+		
 		break := JibInterpreterBreakpoint at: instr.
 		break temporary: true.
 
@@ -161,33 +173,63 @@ JibDebuggerSession >> stepOver: context [
 	 sideefect, a PC gets updated to the PC of next instruction.
 	 This is important, see below."
 	
-	context == interpreter context ifTrue:[
+	interpreter context == context ifTrue:[
 		self step.
+
+		"If the instruction we just executed was the very last instruction
+		 of main (i.e, 'end' instruction of `entry` function), then interpreter's
+	 	 context will be `nil` and we're done."
+		interpreter context isNil ifTrue:[
+			self triggerEvent: #stepOver.
+			^self.
+		].
+	
+		"If the instruction we just executed was the last instruction of 
+	 	an initializer (`let` or `register`), then context's PC whould
+	 	be set one beyond the last instruction in initializer (see 
+	 	JibInterpter >> interpret1 for explanation) and  interpreter's
+	 	context would be already be set to next initializer or entry 
+	 	function. Again, in that case we're done."
+	
+		(context pc) == (context function instrs size + 1) ifTrue:[
+			self assert: context function isFn not.
+			self assert: context caller isNil.
+		
+			self triggerEvent: #stepOver.
+			^self.		
+		].
 	].
 	
-	"
-	 Now, if the current (top-most) context is not the context 
+	"Now, if the current (top-most) context is not the context 
 	 in which we should step-over (either never was, or the instruction
 	 stepped above was a call), then we arrange a temporary breakpoint
 	 right after the call instruction and continue until this (or some other)
 	 breakpoint hits.
 	
-	 Also: the `self step` above may have executed entry point's `end` 
-	 instruction in which case interpreter terminates (there's no more 
-	 instructions to execute). Hence the below notNil guard."	
-	interpreter context notNil ifTrue:[
-		context ~~ interpreter context ifTrue:[
-			| instr break |
-				
-			instr := context function instrs at: context pc. 
-			break := JibInterpreterBreakpoint at: instr.
-			break temporary: true.
+	 It may happen that context is for initializer and that current 
+	 instruction in that context is a call *and also* a last instruction
+	 of the initializer. In that case, the 'next' instruction is
+	 is the first instruction of next entry in interpreter's todo
+	 (since initializers do not have `end`, see JibInterpreter >> interpret1).
+	"
 	
-			interpreter addBreakpoint: break.
-		
-			self cont.
+	context ~~ interpreter context ifTrue:[
+		| instr break |
+				
+		(context function isFn not and:[(context pc) == (context function instrs size + 1)]) ifTrue:[
+			instr := interpreter todo first function instrs at: 1.
+		] ifFalse:[
+			instr := context function instrs at: context pc.
 		].
+				
+		break := JibInterpreterBreakpoint at: instr.
+		break temporary: true.
+	
+		interpreter addBreakpoint: break.
+		
+		self cont.
 	].
+	
 	self triggerEvent: #stepOver 
 	
 ]
