@@ -20,6 +20,11 @@ JibProgram >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #analysis }
+JibProgram >> doSemanticAnalysis [
+	"TODO: This remains to be implemented"
+]
+
 { #category : #enumerating }
 JibProgram >> functionSignaturesDo: aBlock [
 	defs do: [ :def | def isVal ifTrue:[ aBlock value: def ] ]
