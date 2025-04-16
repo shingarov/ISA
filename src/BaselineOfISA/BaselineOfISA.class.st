@@ -17,6 +17,13 @@ BaselineOfISA >> baseline: spec [
 			spec repository: 'github://ObjectProfile/Roassal3:v0.9.2'
 		].
 
+		spec baseline: 'LibCompat' with: [
+			spec repository: 'github://janvrany/pharo-hacks'.
+		].
+
+		spec baseline: 'LibUnix' with: [
+			spec repository: 'github://janvrany/pharo-hacks'.
+		].
 
 		spec package: 'Sail-Jib' with:[
 			spec requires: 'Sail-Jib-Parsing';
@@ -25,6 +32,11 @@ BaselineOfISA >> baseline: spec [
 
 		spec package: 'Sail-Jib-Interpreter' with:[
 			spec requires: 'Sail-Jib'
+		].
+
+		spec package: 'Sail-Jib-Interpreter-GTB' with:[
+			spec requires: 'LibGDBs'.
+			spec requires: 'Sail-Jib-Interpreter'
 		].
 
 		spec package: 'Sail-Jib-Interpreter-Tests' with:[
@@ -39,5 +51,6 @@ BaselineOfISA >> baseline: spec [
 			spec requires: 'Sail-Jib-Parsing';
 			     requires: 'Sail-Jib'.
 		].
+
  ]
 ]
