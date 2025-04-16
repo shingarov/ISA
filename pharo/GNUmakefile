@@ -8,12 +8,34 @@ all: build
 -include GNUmakefile.local
 include ../makefiles/pharo.gmk
 include ../makefiles/git.gmk
+include ../makefiles/mercurial.gmk
 
 ifndef MACHINEARITHMETIC_DIR
 MACHINEARITHMETIC_DIR    := ../3rdparty/MachineArithmetic
 MACHINEARITHMETIC_URL    ?= https://github.com/shingarov/MachineArithmetic
 MACHINEARITHMETIC_BRANCH ?= pure-z3
 $(eval $(call git-clone-local,MACHINEARITHMETIC_DIR,$(MACHINEARITHMETIC_URL),$(MACHINEARITHMETIC_BRANCH)))
+endif
+
+ifndef PHARO_HACKS_DIR
+PHARO_HACKS_DIR    := ../3rdparty/pharo-hacks
+PHARO_HACKS_URL    ?= https://github.com/janvrany/pharo-hacks
+PHARO_HACKS_BRANCH ?= master
+$(eval $(call git-clone-local,PHARO_HACKS_DIR,$(PHARO_HACKS_URL),$(PHARO_HACKS_BRANCH)))
+endif
+
+ifndef PTERM_DIR
+PTERM_DIR    := ../3rdparty/PTerm
+PTERM_URL    ?= https://github.com/janvrany/PTerm
+PTERM_BRANCH ?= master
+$(eval $(call git-clone-local,PTERM_DIR,$(PTERM_URL),$(PTERM_BRANCH)))
+endif
+
+ifndef LIBGDBS_DIR
+LIBGDBS_DIR    := ../3rdparty/jv/libgdbs
+LIBGDBS_URL    ?= https://jan.vrany.io/hg/jv-libgdbs
+LIBGDBS_BRANCH ?= default
+$(eval $(call mercurial-clone-local,LIBGDBS_DIR,$(LIBGDBS_URL),$(LIBGDBS_BRANCH)))
 endif
 
 build: prereq $(PROJECT).image
@@ -23,9 +45,17 @@ build: prereq $(PROJECT).image
 	@echo "    make run"
 	@echo ""
 
+prereq::
+	$(MAKE) -C $(LIBGDBS_DIR)/ports/pharo source
+
 $(PROJECT).image: ../src/*/*.st
 	$(call pharo-copy-image, $(PHARO_IMAGE), $@)
 	$(call pharo-load-local, $@, MachineArithmetic,$(MACHINEARITHMETIC_DIR)/src)
+	$(call pharo-load-local, $@, LibUnix,          $(PHARO_HACKS_DIR)/src)
+	$(call pharo-load-local, $@, LibCompat,        $(PHARO_HACKS_DIR)/src)
+	$(call pharo-load-local, $@, SUnitParametrized,$(PHARO_HACKS_DIR)/src)
+	$(call pharo-load-local, $@, PTerm,            $(PTERM_DIR))
+	$(call pharo-load-local, $@, LibGDBs,          $(LIBGDBS_DIR)/ports/pharo/src-generated)
 	$(call pharo-load-local, $@, ISA,            ../src)
 
 run: build
