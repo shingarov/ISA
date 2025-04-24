@@ -8,3 +8,16 @@ Class {
 Instr_Arbitrary class >> inducedParser [
 	^'arbitrary' asParser ==> [:_ | self new ]
 ]
+
+{ #category : #printing }
+Instr_Arbitrary >> unparseOn: aStream [
+	super unparseOn: aStream.
+	"
+	aStream 
+		nextPutAll:'...';
+		nextPutAll:'...'.
+	"
+	
+	sourceLoc unparseOn: aStream.
+
+]

@@ -47,3 +47,13 @@ Def_Val >> isVal [
 Def_Val >> retType [
 	^ ty
 ]
+
+{ #category : #printing }
+Def_Val >> unparseOn: aStream [
+	aStream nextPutAll: 'val '.
+	aStream nextPutAll: id.
+	aStream nextPutAll: ' : ('.
+	tys do: [:e | e unparseOn: aStream] separatedBy: [ aStream nextPutAll: ', ' ].
+	aStream nextPutAll: ') -> '.
+	ty unparseOn: aStream
+]

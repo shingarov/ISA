@@ -13,3 +13,9 @@ Ty_Struct class >> inducedParser [
 	, JibParser id
 	construct: #(- id)
 ]
+
+{ #category : #printing }
+Ty_Struct >> unparseOn: aStream [
+	aStream nextPutAll: '%struct '.
+	aStream nextPutAll: id
+]

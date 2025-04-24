@@ -9,3 +9,8 @@ Ty_Real class >> inducedParser [
 	^'%real' asParser
 	==> [ :_ | self new ]
 ]
+
+{ #category : #printing }
+Ty_Real >> unparseOn: aStream [
+	aStream nextPutAll:'%real'
+]

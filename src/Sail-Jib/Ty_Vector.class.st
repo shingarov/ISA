@@ -19,3 +19,14 @@ Ty_Vector >> childrenDo: aBlock [
 	aBlock value: ty
 	
 ]
+
+{ #category : #printing }
+Ty_Vector >> unparseOn: aStream [
+	super unparseOn: aStream.
+	"
+	aStream 
+		nextPutAll:'...';
+		nextPutAll:'...'.
+	"
+
+]

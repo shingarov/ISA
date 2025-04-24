@@ -24,6 +24,4 @@ Instr_End >> isEnd [
 { #category : #printing }
 Instr_End >> unparseOn: aStream [
 	aStream nextPutAll: 'end'.
-
-	sourceLoc notNil ifTrue:[sourceLoc unparseOn: aStream].
 ]

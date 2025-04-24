@@ -29,3 +29,17 @@ Def_Files >> dict [
 Def_Files >> dict: anObject [
 	dict := anObject
 ]
+
+{ #category : #printing }
+Def_Files >> unparseOn: aStream [
+	aStream nextPutAll: 'files '.
+	0 to: dict size - 1 do:[:i|
+		aStream 
+			nextPut: $";
+			nextPutAll: (dict at: i);
+			nextPut: $";
+			space.
+	]
+
+
+]

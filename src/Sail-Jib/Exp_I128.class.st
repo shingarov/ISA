@@ -11,3 +11,10 @@ Class {
 Exp_I128 >> childrenDo: aBlock [
 	"Leaf node, nothing to do."
 ]
+
+{ #category : #printing }
+Exp_I128 >> unparseOn: aStream [
+	v printOn: aStream.
+	aStream nextPutAll:' : i128'.
+
+]

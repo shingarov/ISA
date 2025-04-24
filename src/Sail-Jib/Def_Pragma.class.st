@@ -18,3 +18,14 @@ Def_Pragma >> childrenDo: aBlock [
 	"Leaf nodes, nothing to do."
 	
 ]
+
+{ #category : #printing }
+Def_Pragma >> unparseOn: aStream [
+	super unparseOn: aStream.
+	"
+	aStream 
+		nextPutAll:'...';
+		nextPutAll:'...'.
+	"
+
+]

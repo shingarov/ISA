@@ -56,3 +56,8 @@ JibOp class >> inducedParser [
 JibOp class >> isAbstract [
 	^self == JibOp
 ]
+
+{ #category : #accessing }
+JibOp >> id [
+	^self class id
+]

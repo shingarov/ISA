@@ -9,3 +9,9 @@ Ty_Unit class >> inducedParser [
 	^'%unit' asParser
 	==> [ :_ | self new ]
 ]
+
+{ #category : #printing }
+Ty_Unit >> unparseOn: aStream [
+	aStream nextPutAll:'%unit'
+
+]

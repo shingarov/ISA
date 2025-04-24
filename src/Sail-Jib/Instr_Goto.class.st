@@ -38,6 +38,4 @@ Instr_Goto >> target [
 Instr_Goto >> unparseOn: aStream [
 	aStream nextPutAll: 'goto '.
 	n printOn: aStream.
-
-	sourceLoc notNil ifTrue:[sourceLoc unparseOn: aStream]
 ]
