@@ -11,6 +11,6 @@ Ty_AnyBits class >> inducedParser [
 ]
 
 { #category : #printing }
-Ty_AnyBits >> printOn: aStream [
+Ty_AnyBits >> unparseOn: aStream [
 	aStream nextPutAll: '%bv'
 ]

@@ -30,15 +30,17 @@ Instr_Jump >> isJump [
 	^true
 ]
 
-{ #category : #printing }
-Instr_Jump >> printOn: aStream [
-	aStream nextPutAll: 'jump '.
-	exp printOn: aStream.
-	aStream nextPutAll: ' goto '.
-	target printOn: aStream
-]
-
 { #category : #accessing }
 Instr_Jump >> target [
 	^ target
+]
+
+{ #category : #printing }
+Instr_Jump >> unparseOn: aStream [
+	aStream nextPutAll: 'jump '.
+	exp unparseOn: aStream.
+	aStream nextPutAll: ' goto '.
+	target printOn: aStream.
+
+	sourceLoc unparseOn: aStream.
 ]

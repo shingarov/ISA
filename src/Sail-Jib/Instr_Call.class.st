@@ -51,11 +51,15 @@ Instr_Call >> location [
 ]
 
 { #category : #printing }
-Instr_Call >> printOn: aStream [
-	lvalue printOn: aStream.
+Instr_Call >> unparseOn: aStream [
+	lvalue unparseOn: aStream.
 	aStream nextPutAll: ' = '.
 	aStream nextPutAll: f.
-	aStream nextPutAll: '(...)'.
+	aStream nextPut: $(.
+	args do:[:arg | arg unparseOn: aStream ] separatedBy:[aStream nextPutAll: ', '].
+	aStream nextPut: $).
+
+	sourceLoc unparseOn: aStream.
 
 ]
 

@@ -34,11 +34,13 @@ Instr_Decl >> id [
 ]
 
 { #category : #printing }
-Instr_Decl >> printOn: aStream [
+Instr_Decl >> unparseOn: aStream [
 	"BOGUS: why id is not Loc_Id?"
 	aStream nextPutAll: id.
 	aStream nextPutAll: ' : '.
-	ty printOn: aStream
+	ty unparseOn: aStream.
+
+	sourceLoc unparseOn: aStream.
 ]
 
 { #category : #accessing }

@@ -20,7 +20,8 @@ SourceLoc_UnknownUnique class >> inducedParser [
 ]
 
 { #category : #printing }
-SourceLoc_UnknownUnique >> printOn: aString [
-	aString nextPut: $`.
-	u printOn: aString
+SourceLoc_UnknownUnique >> unparseOn: aStream [
+	aStream space; space.
+	aStream nextPut: $`.
+	u unparseOn: aStream
 ]

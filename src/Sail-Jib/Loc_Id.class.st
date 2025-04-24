@@ -34,6 +34,6 @@ Loc_Id >> id [
 ]
 
 { #category : #printing }
-Loc_Id >> printOn: aStream [
+Loc_Id >> unparseOn: aStream [
 	aStream nextPutAll: id
 ]

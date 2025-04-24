@@ -19,7 +19,7 @@ Exp_Id >> id [
 ]
 
 { #category : #printing }
-Exp_Id >> printOn: aStream [
+Exp_Id >> unparseOn: aStream [
 	aStream nextPutAll: id
 ]
 

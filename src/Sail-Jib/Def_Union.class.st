@@ -33,7 +33,7 @@ Def_Union >> id [
 ]
 
 { #category : #printing }
-Def_Union >> printOn: aStream [
+Def_Union >> unparseOn: aStream [
 	aStream
 		nextPutAll: 'union ';
 		nextPutAll: id;

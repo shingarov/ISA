@@ -50,16 +50,20 @@ Def_Register >> isRegister [
 	^ true
 ]
 
-{ #category : #printing }
-Def_Register >> printOn: aStream [
-	aStream nextPut: (Character codePoint: 16rAE).
-	aStream nextPutAll: id zdecode.
-	aStream nextPutAll: ' ∷ '.
-	ty printOn: aStream
-]
-
 { #category : #accessing }
 Def_Register >> regType [
 	^ ty
+
+]
+
+{ #category : #printing }
+Def_Register >> unparseOn: aStream [
+	aStream nextPutAll: 'register '.
+	aStream nextPutAll: id.
+	aStream nextPutAll: ' : '.
+	ty unparseOn: aStream.
+	instrs notNil ifTrue:[
+		aStream nextPutAll: ' {…}'
+	]
 
 ]

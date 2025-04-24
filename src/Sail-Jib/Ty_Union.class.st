@@ -15,7 +15,7 @@ Ty_Union class >> inducedParser [
 ]
 
 { #category : #printing }
-Ty_Union >> printOn: aStream [
+Ty_Union >> unparseOn: aStream [
 	aStream nextPutAll: '%union '.
 	aStream nextPutAll: id
 ]

@@ -13,8 +13,8 @@ Exp_Bool >> childrenDo: aBlock [
 ]
 
 { #category : #printing }
-Exp_Bool >> printOn: aStream [
-	b printOn: aStream
+Exp_Bool >> unparseOn: aStream [
+	b unparseOn: aStream
 ]
 
 { #category : #accessing }

@@ -14,7 +14,7 @@ Exp_Bits >> childrenDo: aBlock [
 ]
 
 { #category : #'printing & storing' }
-Exp_Bits >> printOn: aStream [
+Exp_Bits >> unparseOn: aStream [
 	x length == 0 ifTrue:[
 		aStream nextPutAll: 'emptybitvec'
 	] ifFalse: [

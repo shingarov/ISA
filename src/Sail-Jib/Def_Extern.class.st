@@ -35,11 +35,13 @@ Def_Extern >> isExtern [
 ]
 
 { #category : #printing }
-Def_Extern >> printOn: aStream [
-	aStream nextPut: (Character codePoint: 16r2197).
+Def_Extern >> unparseOn: aStream [
+	aStream nextPutAll: 'val '.
+	aStream nextPutAll: id.
+	aStream nextPutAll: ' = "'.
 	aStream nextPutAll: ext.
-	aStream nextPutAll: ' ∷ ('.
-	tys do: (□ printOn: aStream) separatedBy: [ aStream nextPutAll: ', ' ].
+	aStream nextPutAll: '" : ('.
+	tys do: [:e | e unparseOn: aStream] separatedBy: [ aStream nextPutAll: ', ' ].
 	aStream nextPutAll: ') -> '.
-	ty printOn: aStream
+	ty unparseOn: aStream
 ]

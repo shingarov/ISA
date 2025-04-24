@@ -11,6 +11,6 @@ Ty_Bool class >> inducedParser [
 ]
 
 { #category : #printing }
-Ty_Bool >> printOn: aStream [
+Ty_Bool >> unparseOn: aStream [
 	aStream nextPutAll: '%bool'
 ]

@@ -33,7 +33,7 @@ JibExitCause >> isMatchFailure [
 ]
 
 { #category : #printing }
-JibExitCause >> printOn: aStream [
+JibExitCause >> unparseOn: aStream [
 	self isExplicit ifTrue: [ ^aStream nextPutAll: 'explicit' ].
 	self isMatchFailure ifTrue: [ ^aStream nextPutAll: 'match failure' ].
 	self error:'Should not be reached'
