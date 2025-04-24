@@ -32,7 +32,7 @@ Def_Struct >> id [
 ]
 
 { #category : #printing }
-Def_Struct >> printOn: aStream [
+Def_Struct >> unparseOn: aStream [
 	aStream
 		nextPutAll: 'struct ';
 		nextPutAll: id;

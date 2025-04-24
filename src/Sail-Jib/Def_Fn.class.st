@@ -101,13 +101,6 @@ Def_Fn >> isFn [
 	^true
 ]
 
-{ #category : #printing }
-Def_Fn >> printOn: aStream [
-	aStream
-		nextPutAll: 'fn ';
-		nextPutAll: id zdecode
-]
-
 { #category : #accessing }
 Def_Fn >> retName [
 	^ 'return'
@@ -123,4 +116,11 @@ Def_Fn >> signature [
 
 
 
+]
+
+{ #category : #printing }
+Def_Fn >> unparseOn: aStream [
+	aStream
+		nextPutAll: 'fn ';
+		nextPutAll: id zdecode
 ]

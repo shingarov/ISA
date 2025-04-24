@@ -11,6 +11,6 @@ Ty_I128 class >> inducedParser [
 ]
 
 { #category : #printing }
-Ty_I128 >> printOn: aStream [
+Ty_I128 >> unparseOn: aStream [
 	aStream nextPutAll: '%i128'
 ]

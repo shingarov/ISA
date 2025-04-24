@@ -96,6 +96,14 @@ JibProgramNode >> parent [
 	^ parent
 ]
 
+{ #category : #printing }
+JibProgramNode >> printOn:  aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	aStream nextPutAll: (self unparsedString).
+	aStream nextPut: $).
+]
+
 { #category : #accessing }
 JibProgramNode >> program [
 	parent notNil ifTrue:[
@@ -111,4 +119,18 @@ JibProgramNode >> setParent: aJibProgramNode [
 	
 	parent := aJibProgramNode 
 	
+]
+
+{ #category : #printing }
+JibProgramNode >> unparseOn: aStream [
+	"Print the receiver on given stream as Jib source fragment."
+
+	^aStream nextPutAll: 'please define ', self class name , '>> #unparseOn:'
+]
+
+{ #category : #printing }
+JibProgramNode >> unparsedString [
+	"Return the string representing the receiver as Jib source fragment."
+
+	^String streamContents:[:s|self unparseOn: s].
 ]

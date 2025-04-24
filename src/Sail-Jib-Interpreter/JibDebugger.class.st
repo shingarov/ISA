@@ -7,9 +7,9 @@ Class {
 { #category : #formatting }
 JibDebugger >> formatInstruction: insn forContext: context [
 	(context function instrs indexOf: insn) == context pc ifTrue:[
-		^ '>> ' , insn displayString
+		^ '>> ' , insn unparsedString
 	] ifFalse:[
-		^ '   ' , insn displayString
+		^ '   ' , insn unparsedString
 	]
 
 ]

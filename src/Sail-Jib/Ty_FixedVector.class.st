@@ -32,11 +32,11 @@ Ty_FixedVector >> newUndefined [
 ]
 
 { #category : #printing }
-Ty_FixedVector >> printOn: aStream [
+Ty_FixedVector >> unparseOn: aStream [
 	aStream nextPutAll: '%fvec ('.
 	length printOn: aStream.
 	aStream nextPutAll: ', '.
-	ty printOn: aStream.
+	ty unparseOn: aStream.
 	aStream nextPut: $)
 	
 ]

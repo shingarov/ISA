@@ -28,7 +28,7 @@ Def_Enum >> id [
 ]
 
 { #category : #printing }
-Def_Enum >> printOn: aStream [
+Def_Enum >> unparseOn: aStream [
 	aStream
 		nextPutAll: 'enum ';
 		nextPutAll: id;

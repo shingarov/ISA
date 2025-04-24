@@ -29,13 +29,15 @@ Instr_Goto >> isGoto [
 	^true
 ]
 
-{ #category : #printing }
-Instr_Goto >> printOn: aStream [
-	aStream nextPutAll: 'goto '.
-	n printOn: aStream
-]
-
 { #category : #accessing }
 Instr_Goto >> target [
 	^n
+]
+
+{ #category : #printing }
+Instr_Goto >> unparseOn: aStream [
+	aStream nextPutAll: 'goto '.
+	n printOn: aStream.
+
+	sourceLoc notNil ifTrue:[sourceLoc unparseOn: aStream]
 ]

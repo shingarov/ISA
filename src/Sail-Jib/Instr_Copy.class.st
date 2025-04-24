@@ -42,10 +42,12 @@ Instr_Copy >> location [
 ]
 
 { #category : #printing }
-Instr_Copy >> printOn: aStream [
-	l printOn: aStream.
+Instr_Copy >> unparseOn: aStream [
+	l unparseOn: aStream.
 	aStream nextPutAll: ' = '.
-	e printOn: aStream
+	e unparseOn: aStream.
+
+	sourceLoc unparseOn: aStream.
 ]
 
 { #category : #enumerating }

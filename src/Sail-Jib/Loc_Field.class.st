@@ -69,8 +69,8 @@ Loc_Field >> loc: anObject [
 ]
 
 { #category : #printing }
-Loc_Field >> printOn: aStream [
-	loc printOn: aStream.
+Loc_Field >> unparseOn: aStream [
+	loc unparseOn: aStream.
 	aStream nextPut:$..
 	aStream nextPutAll:field
 

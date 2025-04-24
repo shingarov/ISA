@@ -11,6 +11,6 @@ Ty_I64 class >> inducedParser [
 ]
 
 { #category : #printing }
-Ty_I64 >> printOn: aStream [
+Ty_I64 >> unparseOn: aStream [
 	aStream nextPutAll: '%i64'
 ]
