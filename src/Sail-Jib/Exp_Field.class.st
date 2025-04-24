@@ -12,3 +12,12 @@ Class {
 Exp_Field >> childrenDo: aBlock [
 	aBlock value: exp
 ]
+
+{ #category : #printing }
+Exp_Field >> unparseOn: aStream [
+	exp unparseOn: aStream.
+	aStream 
+		nextPut: $.;
+		nextPutAll: id.
+
+]

@@ -10,3 +10,14 @@ Def_TupleStruct class >> inducedParser [
 	, (#blank asParser plus, JibParser id) plus
 	==> [ :x | self new "BOGUS" ]
 ]
+
+{ #category : #printing }
+Def_TupleStruct >> unparseOn: aStream [
+	super unparseOn: aStream.
+	"
+	aStream 
+		nextPutAll:'...';
+		nextPutAll:'...'.
+	"
+
+]

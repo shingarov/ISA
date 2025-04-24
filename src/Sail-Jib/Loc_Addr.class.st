@@ -45,3 +45,11 @@ Loc_Addr >> childrenDo: aBlock [
 	aBlock value: address 
 	
 ]
+
+{ #category : #printing }
+Loc_Addr >> unparseOn: aStream [
+	address unparseOn: aStream.
+	aStream nextPut:$*.
+
+
+]

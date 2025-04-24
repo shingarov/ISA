@@ -33,3 +33,13 @@ Instr_Exit >> childrenDo: aBlock [
 Instr_Exit >> isExit [
 	^true
 ]
+
+{ #category : #printing }
+Instr_Exit >> unparseOn: aStream [
+	aStream 
+		nextPutAll:'exit ';
+		nextPutAll:(cause == Explicit ifTrue:['explicit'] ifFalse:['match']).
+
+	sourceLoc unparseOn: aStream.
+
+]

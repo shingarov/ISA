@@ -65,3 +65,14 @@ JibProgram >> registersDo: aBlock [
 	defs do: [ :def | def isRegister ifTrue:[ aBlock value: def ] ]
 
 ]
+
+{ #category : #printing }
+JibProgram >> unparseOn: aStream [
+	super unparseOn: aStream.
+	"
+	aStream 
+		nextPutAll:'...';
+		nextPutAll:'...'.
+	"
+
+]

@@ -12,3 +12,14 @@ Exp_String >> childrenDo: aBlock [
 	"Leaf node, nothing to do."
 	
 ]
+
+{ #category : #printing }
+Exp_String >> unparseOn: aStream [
+	super unparseOn: aStream.
+	"
+	aStream 
+		nextPutAll:'...';
+		nextPutAll:'...'.
+	"
+
+]

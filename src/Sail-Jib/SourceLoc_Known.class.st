@@ -99,3 +99,16 @@ SourceLoc_Known >> textWithHilights [
 		toLine: line2
 		char: char2
 ]
+
+{ #category : #printing }
+SourceLoc_Known >> unparseOn: aStream [	
+	aStream space; space.
+	aStream nextPut:$`.
+	file printOn: aStream.
+	aStream space.
+	line1 printOn: aStream. aStream nextPut: $:. char1 printOn: aStream.
+	aStream nextPut:$-.	
+	line2 printOn: aStream. aStream nextPut: $:. char2 printOn: aStream
+
+
+]

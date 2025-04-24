@@ -8,3 +8,15 @@ Class {
 Instr_Monomorphize class >> inducedParser [
 ^'MONO' asParser
 ]
+
+{ #category : #printing }
+Instr_Monomorphize >> unparseOn: aStream [
+	super unparseOn: aStream.
+	"
+	aStream 
+		nextPutAll:'...';
+		nextPutAll:'...'.
+	"
+	sourceLoc unparseOn: aStream.
+
+]

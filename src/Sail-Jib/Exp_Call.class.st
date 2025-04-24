@@ -24,6 +24,15 @@ Exp_Call >> op [
 	^ op
 ]
 
+{ #category : #printing }
+Exp_Call >> unparseOn: aStream [
+	aStream nextPutAll: op id.
+	aStream nextPut: $(.
+	args do:[:arg | arg unparseOn: aStream ] separatedBy:[aStream nextPutAll: ', '].
+	aStream nextPut: $).
+
+]
+
 { #category : #enumerating }
 Exp_Call >> usedIdsDo: aBlock [
 	args do:[:e|e usedIdsDo: aBlock]

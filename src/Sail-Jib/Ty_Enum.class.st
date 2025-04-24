@@ -13,3 +13,11 @@ Ty_Enum class >> inducedParser [
 	, JibParser id
 	construct: #(- id)
 ]
+
+{ #category : #printing }
+Ty_Enum >> unparseOn: aStream [	
+	aStream 
+		nextPutAll:'%enum ';
+		nextPutAll:id.
+
+]

@@ -11,3 +11,9 @@ Class {
 SourceLoc_Unknown class >> inducedParser [
 	^ nil asParser ==> [ :_ | self new ]
 ]
+
+{ #category : #printing }
+SourceLoc_Unknown >> unparseOn: aStream [
+	"Nothing"
+
+]

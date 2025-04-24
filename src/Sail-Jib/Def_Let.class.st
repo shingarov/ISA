@@ -47,6 +47,17 @@ Def_Let >> isLet [
 	^ true
 ]
 
+{ #category : #printing }
+Def_Let >> unparseOn: aStream [
+	aStream nextPutAll: 'let ('.
+	ids do:[:arg | aStream nextPutAll: arg key; nextPutAll: ' : '. arg value unparseOn: aStream] separatedBy:[aStream nextPutAll:', '].
+	aStream nextPutAll: ')'.
+	instrs notNil ifTrue:[
+		aStream nextPutAll: ' {…}'
+	]
+
+]
+
 { #category : #accessing }
 Def_Let >> variables [
 	^ ids

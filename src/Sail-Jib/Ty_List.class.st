@@ -18,3 +18,11 @@ Ty_List class >> inducedParser [
 Ty_List >> childrenDo: aBlock [
 	aBlock value: ty
 ]
+
+{ #category : #printing }
+Ty_List >> unparseOn: aStream [
+	aStream nextPutAll:'%list('.
+	ty unparseOn: aStream.
+	aStream nextPutAll:')'.
+
+]

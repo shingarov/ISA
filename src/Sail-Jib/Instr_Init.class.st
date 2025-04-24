@@ -32,3 +32,15 @@ Instr_Init >> childrenDo: aBlock [
 	aBlock value: s 
 	
 ]
+
+{ #category : #printing }
+Instr_Init >> unparseOn: aStream [
+	super unparseOn: aStream.
+	"
+	aStream 
+		nextPutAll:'...';
+		nextPutAll:'...'.
+	"
+	sourceLoc unparseOn: aStream.
+
+]

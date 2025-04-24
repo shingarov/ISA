@@ -20,3 +20,14 @@ Def_Mangled asParser parse: '#mangled zSome zSomezIUastzIzKzK'
 JibDef asParser parse: '#mangled zSome zSomezIUastzIzKzK'
 "
 ]
+
+{ #category : #printing }
+Def_Mangled >> unparseOn: aStream [
+	super unparseOn: aStream.
+	"
+	aStream 
+		nextPutAll:'...';
+		nextPutAll:'...'.
+	"
+
+]

@@ -18,3 +18,14 @@ Ty_Ref class >> inducedParser [
 Ty_Ref >> childrenDo: aBlock [
 	aBlock value: ty
 ]
+
+{ #category : #printing }
+Ty_Ref >> unparseOn: aStream [
+	super unparseOn: aStream.
+	"
+	aStream 
+		nextPutAll:'...';
+		nextPutAll:'...'.
+	"
+
+]
