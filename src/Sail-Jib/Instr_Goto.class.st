@@ -24,6 +24,14 @@ Instr_Goto >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #initialization }
+Instr_Goto >> initializeFrom: values accordingTo: spec [
+	self assert: (spec includes: #sourceLoc) not.
+
+	super initializeFrom: values accordingTo: spec.
+	sourceLoc := SourceLoc_Unknown new.
+]
+
 { #category : #testing }
 Instr_Goto >> isGoto [
 	^true

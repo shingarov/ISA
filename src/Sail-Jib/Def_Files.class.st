@@ -30,6 +30,11 @@ Def_Files >> dict: anObject [
 	dict := anObject
 ]
 
+{ #category : #queries }
+Def_Files >> isFiles [
+	^true
+]
+
 { #category : #printing }
 Def_Files >> unparseOn: aStream [
 	aStream nextPutAll: 'files '.
