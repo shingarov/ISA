@@ -46,11 +46,9 @@ SourceLoc_Known >> char2: anObject [
 	char2 := anObject
 ]
 
-{ #category : #'accessing - text' }
-SourceLoc_Known >> completeSourceFileContents [
-	| f content |
-	f := '/home/boris/work/REMS/sail/doc/examples/riscv_duopod.sail'.
-	^(SourceFileContent readFile: f) fileIndex: file
+{ #category : #accessing }
+SourceLoc_Known >> file [
+	^ self program lookupFile: file
 ]
 
 { #category : #accessing }
@@ -63,12 +61,19 @@ SourceLoc_Known >> fileIndex: anObject [
 	file := anObject
 ]
 
-{ #category : #GT }
+{ #category : #inspecting }
 SourceLoc_Known >> gtInspectorSourceIn: composite [
+	<gtInspectorPresentationOrder: 20>
 	composite text
 			title: 'Source';
-			format: #asText;
-			display: [ self textWithHilights ]
+			display: [ self sourceTextWithHighlights ];
+			format: #asText
+]
+
+{ #category : #testing }
+SourceLoc_Known >> isKnown [
+	^ true
+
 ]
 
 { #category : #accessing }
@@ -91,13 +96,53 @@ SourceLoc_Known >> line2: anObject [
 	line2 := anObject
 ]
 
-{ #category : #'accessing - text' }
-SourceLoc_Known >> textWithHilights [
-	^self completeSourceFileContents
-		textHilightedFromLine: line1
-		char: char1
-		toLine: line2
-		char: char2
+{ #category : #accessing }
+SourceLoc_Known >> source [
+	"Return the (Sail) source as String or nil if source file is not available."
+
+	| f |
+
+	f := self file.
+	f exists ifTrue:[
+		^f contents.
+	].
+	^ nil
+]
+
+{ #category : #accessing }
+SourceLoc_Known >> sourceText [
+	| source |
+
+	source := self source.
+	source notNil ifTrue:[
+		^source asText.
+	].
+	^ nil
+]
+
+{ #category : #accessing }
+SourceLoc_Known >> sourceTextWithHighlights [
+	| source |
+
+	source := self sourceText.
+	source notNil ifTrue:[
+		| start end line |
+
+		line := 1.
+		source string lineIndicesDo: [:lineStart :lineEnd :lineEndIncludingNl |
+			line == line1 ifTrue:[
+				start := lineStart + char1.
+			].
+			line == line2 ifTrue:[
+				end := lineStart + char2 - 1.
+				source addAttribute: TextBackgroundColor yellow from: start to: end.
+				source addAttribute: TextColor black from: start to: end.
+				^ source.
+			].
+			line := line + 1.
+		].
+	].
+	^ source.
 ]
 
 { #category : #printing }

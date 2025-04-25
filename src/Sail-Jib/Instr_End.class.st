@@ -16,6 +16,17 @@ Instr_End >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #initialization }
+Instr_End >> initialize [
+	super initialize.
+	sourceLoc := SourceLoc_Unknown new.
+]
+
+{ #category : #initialization }
+Instr_End >> initializeFrom: values accordingTo: spec [
+	self shouldNotImplement.
+]
+
 { #category : #testing }
 Instr_End >> isEnd [
 	^true

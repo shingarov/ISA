@@ -38,6 +38,11 @@ JibDef >> isExtern [
 ]
 
 { #category : #testing }
+JibDef >> isFiles [
+	^false
+]
+
+{ #category : #testing }
 JibDef >> isFn [
 	^false
 ]

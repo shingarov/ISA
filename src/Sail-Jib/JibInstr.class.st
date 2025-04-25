@@ -39,6 +39,18 @@ JibInstr >> genSet [
 	^s
 ]
 
+{ #category : #inspecting }
+JibInstr >> gtInspectorSourceIn: composite [
+	<gtInspectorPresentationOrder: 20>
+
+	| loc |
+
+	loc := self sourceLoc.
+	loc isKnown ifTrue:[
+		loc gtInspectorSourceIn: composite
+	].
+]
+
 { #category : #testing }
 JibInstr >> isBranch [
 	^self isJump or:[self isGoto]
@@ -70,6 +82,11 @@ JibInstr >> killSet [
 	s := Set new.
 	self defdIdsDo: [ :e|s add:e ].
 	^s
+]
+
+{ #category : #accessing }
+JibInstr >> sourceLoc [
+	^ sourceLoc
 ]
 
 { #category : #enumerating }

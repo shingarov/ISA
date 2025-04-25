@@ -21,3 +21,9 @@ JibSourceLoc >> childrenDo: aBlock [
 	"Leaf nodes, nothing to do."
 
 ]
+
+{ #category : #testing }
+JibSourceLoc >> isKnown [
+	^ false
+
+]
