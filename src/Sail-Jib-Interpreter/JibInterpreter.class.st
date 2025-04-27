@@ -104,7 +104,7 @@ JibInterpreter >> initializeWithFunction: fn arguments: args [
 JibInterpreter >> interpret [
 	"Interpret until the initial context returns."
 
-	^self interpretUntil: [ context notNil ].
+	^self interpretWhileTrue: [ context notNil ].
 ]
 
 { #category : #interpreting }
@@ -276,8 +276,17 @@ JibInterpreter >> interpretMonomorphize: insn [
 ]
 
 { #category : #interpreting }
-JibInterpreter >> interpretUntil: condition [
-	"Interpret until condition holds"
+JibInterpreter >> interpretWhileFalse: condition [
+	"Interpret instruction by instruction as long as `condition` evaluates to `false`"
+
+	condition whileFalse:[
+		self interpret1.
+	]
+]
+
+{ #category : #interpreting }
+JibInterpreter >> interpretWhileTrue: condition [
+	"Interpret instruction by instruction as long as `condition` evaluates to `true`"
 
 	condition whileTrue:[
 		self interpret1.
