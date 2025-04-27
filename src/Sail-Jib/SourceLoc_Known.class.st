@@ -26,6 +26,15 @@ SourceLoc_Known class >> inducedParser [
 
 ]
 
+{ #category : #comparing }
+SourceLoc_Known >> = another [
+	^ self class = another class
+		and:[line1 = another line1
+		and:[char1 = another char1
+		and:[line2 = another line2
+		and:[char2 = another char2]]]]
+]
+
 { #category : #accessing }
 SourceLoc_Known >> char1 [
 	^ char1
@@ -68,6 +77,16 @@ SourceLoc_Known >> gtInspectorSourceIn: composite [
 			title: 'Source';
 			display: [ self sourceTextWithHighlights ];
 			format: #asText
+]
+
+{ #category : #comparing }
+SourceLoc_Known >> hash [
+	^ (((((self class hash
+		+ file hash) hashMultiply
+		+ 	line1 hash) hashMultiply
+		+ 	char1 hash) hashMultiply
+		+ 	line2 hash) hashMultiply
+		+ 	char2 hash) hashMultiply
 ]
 
 { #category : #testing }
