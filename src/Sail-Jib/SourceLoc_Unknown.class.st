@@ -12,6 +12,16 @@ SourceLoc_Unknown class >> inducedParser [
 	^ nil asParser ==> [ :_ | self new ]
 ]
 
+{ #category : #comparing }
+SourceLoc_Unknown >> = another [
+	^ self == another
+]
+
+{ #category : #comparing }
+SourceLoc_Unknown >> hash [
+	^ self identityHash
+]
+
 { #category : #printing }
 SourceLoc_Unknown >> unparseOn: aStream [
 	"Nothing"

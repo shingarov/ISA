@@ -16,10 +16,20 @@ JibSourceLoc class >> isAbstract [
 	^self == JibSourceLoc
 ]
 
+{ #category : #comparing }
+JibSourceLoc >> = another [
+	^ self subclassResponsibility
+]
+
 { #category : #enumerating }
 JibSourceLoc >> childrenDo: aBlock [
 	"Leaf nodes, nothing to do."
 
+]
+
+{ #category : #comparing }
+JibSourceLoc >> hash [
+	^ self subclassResponsibility
 ]
 
 { #category : #testing }
