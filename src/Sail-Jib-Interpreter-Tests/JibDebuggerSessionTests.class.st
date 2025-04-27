@@ -27,8 +27,8 @@ fn zf(zarg) {
 	JibDebugger openOn: session.
 	"
 
-	session stepInto: interpreter context. "zz39 : %bv32 `1;"
-	session stepInto: interpreter context. "zz39 = 0b00000000000000000000000000101010 `2;"
+	session stepIntoI: interpreter context. "zz39 : %bv32 `1;"
+	session stepIntoI: interpreter context. "zz39 = 0b00000000000000000000000000101010 `2;"
 	self assert: (interpreter context get: 'zz39') = 42.
 ]
 
@@ -66,24 +66,24 @@ fn zmain(zarg) {
 	JibDebugger openOn: session.
 	"
 	self assert: interpreter context function id = 'zmain'.
-	session stepInto: interpreter context. "zz1 : %bv32 `1;"
-	session stepInto: interpreter context. "zz1 = zf(zarg) `2;"
+	session stepIntoI: interpreter context. "zz1 : %bv32 `1;"
+	session stepIntoI: interpreter context. "zz1 = zf(zarg) `2;"
 
 	self assert: interpreter context function id = 'zf'.
 	self assert: interpreter context caller function id = 'zmain'.
 
-	session stepInto: interpreter context. "zz39 : %bv32 `1;"
-	session stepInto: interpreter context. "zz39 = 0b00000000000000000000000000101010 `2;"
-	session stepInto: interpreter context. "return = zz39 `3;"
-	session stepInto: interpreter context. "end;"
+	session stepIntoI: interpreter context. "zz39 : %bv32 `1;"
+	session stepIntoI: interpreter context. "zz39 = 0b00000000000000000000000000101010 `2;"
+	session stepIntoI: interpreter context. "return = zz39 `3;"
+	session stepIntoI: interpreter context. "end;"
 
 	self assert: interpreter context function id = 'zmain'.
 	self assert: (interpreter context get: 'zz1') = 42.
 
-	session stepInto: interpreter context. "return = zz1 `3"
+	session stepIntoI: interpreter context. "return = zz1 `3"
 	self assert: (interpreter context get: 'return') = 42.
 
-	session stepInto: interpreter context. "end"
+	session stepIntoI: interpreter context. "end"
 	self assert: (interpreter context isNil).
 ]
 
@@ -121,9 +121,9 @@ fn zmain() {
 	JibDebugger openOn: session.
 	"
 	self assert: interpreter context function isRegister.
-	session stepInto: interpreter context. "zz40 : %i64;"
-	session stepInto: interpreter context. "zz40 = 64;"
-	session stepInto: interpreter context. "zxlen_val = zz40;"
+	session stepIntoI: interpreter context. "zz40 : %i64;"
+	session stepIntoI: interpreter context. "zz40 = 64;"
+	session stepIntoI: interpreter context. "zxlen_val = zz40;"
 
 	self assert: interpreter context function isLet.
 ]
@@ -163,13 +163,13 @@ fn zmain() {
 	JibDebugger openOn: session.
 	"
 	self assert: interpreter context function isLet.
-	session stepInto: interpreter context. " zxlen_val = zf();"
+	session stepIntoI: interpreter context. " zxlen_val = zf();"
 
 	self assert: interpreter context function isFn.
 	self assert: interpreter context function id = 'zf'.
 	self assert: interpreter context caller function isLet.
 
-	session stepInto: interpreter context caller.
+	session stepIntoI: interpreter context caller.
 
 	self assert: interpreter context function isFn.
 	self assert: interpreter context function id = 'zmain'.
@@ -209,16 +209,16 @@ fn zmain(zarg) {
 	JibDebugger openOn: session.
 	"
 	self assert: interpreter context function id = 'zmain'.
-	session stepOver: interpreter context. "zz1 : %bv32 `1;"
-	session stepOver: interpreter context. "zz1 = zf(zarg) `2;"
+	session stepOverI: interpreter context. "zz1 : %bv32 `1;"
+	session stepOverI: interpreter context. "zz1 = zf(zarg) `2;"
 
 	self assert: interpreter context function id = 'zmain'.
 	self assert: interpreter context pc = 3.
 
-	session stepOver: interpreter context. "return = zz1 `3"
+	session stepOverI: interpreter context. "return = zz1 `3"
 	self assert: (interpreter context get: 'return') = 42.
 
-	session stepOver: interpreter context. "end"
+	session stepOverI: interpreter context. "end"
 	self assert: (interpreter context isNil).
 ]
 
@@ -256,13 +256,13 @@ fn zmain(zarg) {
 	JibDebugger openOn: session.
 	"
 	self assert: interpreter context function id = 'zmain'.
-	session stepInto: interpreter context. "zz1 : %bv32 `1;"
-	session stepInto: interpreter context. "zz1 = zf(zarg) `2;"
+	session stepIntoI: interpreter context. "zz1 : %bv32 `1;"
+	session stepIntoI: interpreter context. "zz1 = zf(zarg) `2;"
 
 	self assert: interpreter context function id = 'zf'.
 	self assert: interpreter context pc = 1.
 
-	session stepOver: interpreter context caller. "return = zz1 `3;"
+	session stepOverI: interpreter context caller. "return = zz1 `3;"
 
 	self assert: interpreter context function id = 'zmain'.
 	self assert: interpreter context pc = 3.
@@ -303,13 +303,13 @@ fn zmain() {
 	JibDebugger openOn: session.
 	"
 	self assert: interpreter context function isLet.
-	session stepInto: interpreter context. " zxlen_val = zf();"
+	session stepIntoI: interpreter context. " zxlen_val = zf();"
 
 	self assert: interpreter context function isFn.
 	self assert: interpreter context function id = 'zf'.
 	self assert: interpreter context caller function isLet.
 
-	session stepOver: interpreter context caller.
+	session stepOverI: interpreter context caller.
 
 	self assert: interpreter context function isFn.
 	self assert: interpreter context function id = 'zmain'.
@@ -349,8 +349,8 @@ fn zmain(zarg) {
 	JibDebugger openOn: session.
 	"
 	self assert: interpreter context function id = 'zmain'.
-	session stepInto: interpreter context. "zz1 : %bv32 `1;"
-	session stepInto: interpreter context. "zz1 = zf(zarg) `2;"
+	session stepIntoI: interpreter context. "zz1 : %bv32 `1;"
+	session stepIntoI: interpreter context. "zz1 = zf(zarg) `2;"
 
 	self assert: interpreter context function id = 'zf'.
 	self assert: interpreter context pc = 1.
@@ -395,8 +395,8 @@ fn zmain(zarg) {
 	JibDebugger openOn: session.
 	"
 	self assert: interpreter context function id = 'zmain'.
-	session stepInto: interpreter context. "zz1 : %bv32 `1;"
-	session stepInto: interpreter context. "zz1 = zf(zarg) `2;"
+	session stepIntoI: interpreter context. "zz1 : %bv32 `1;"
+	session stepIntoI: interpreter context. "zz1 = zf(zarg) `2;"
 
 	self assert: interpreter context function id = 'zf'.
 	self assert: interpreter context pc = 1.

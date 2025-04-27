@@ -61,10 +61,15 @@ JibInterpreterContext >> getRetVal [
 ]
 
 { #category : #inspecting }
+JibInterpreterContext >> gtConstructDebuggerInspectorIn: composite for: debugger [
+	^ self gtLocalsIn: composite
+]
+
+{ #category : #inspecting }
 JibInterpreterContext >> gtLocalsIn: composite [
 	<gtInspectorPresentationOrder: 40>
 
-	composite fastTable
+	^ composite fastTable
 		title: 'Locals';
 		display: [ :ctx | values associations ];
 		column: 'Name' evaluated: [ :nameAndValue | nameAndValue key ];

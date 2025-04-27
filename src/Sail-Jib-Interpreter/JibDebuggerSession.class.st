@@ -8,14 +8,15 @@ Class {
 }
 
 { #category : #'actions registration' }
+JibDebuggerSession class >> debuggingActions [
+	"Return static list of debugging actions supported by this debug session."
+	
+	^ JibDebugAction allSubclasses 
+]
+
+{ #category : #'actions registration' }
 JibDebuggerSession class >> debuggingActionsForPragma: aSymbol for: aDebugger [
-	^ {
-		"ResumeDebugAction ."
-		"RestartDebugAction ."
-		StepIntoDebugAction .
-		StepOverDebugAction .
-		JibDebuggerDebugActionFinish .
-	} inject: OrderedCollection new
+	^ self debuggingActions inject: OrderedCollection new
 		into: [ :currentActions :aClass |
 			currentActions
 				addAll: (self debuggingActionsFromClass: aClass forPragma: aSymbol forDebugger: aDebugger);
@@ -155,7 +156,7 @@ JibDebuggerSession >> step [
 ]
 
 { #category : #'debugging actions' }
-JibDebuggerSession >> stepInto: context [
+JibDebuggerSession >> stepIntoI: context [
 	context == interpreter context ifTrue:[
 		"If we're stepping in top-most context, just
 		 execute one instruction and stop."
@@ -193,7 +194,7 @@ JibDebuggerSession >> stepInto: context [
 ]
 
 { #category : #'debugging actions' }
-JibDebuggerSession >> stepOver: context [
+JibDebuggerSession >> stepOverI: context [
 	"If we're step-over in current (top-most) context, first
 	 execute a single instruction. This instruction must be executed
 	 anyway (step-over executes at least one instruction) and as a
