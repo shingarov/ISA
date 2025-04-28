@@ -446,3 +446,138 @@ fn zmain() {
 
 
 ]
+
+{ #category : #tests }
+JibDebuggerSessionTests >> test_06a [
+	| program main interpreter session |
+	
+	program := JibParser parse:'
+val ze : (%i) -> %i
+val zf : (%i) -> %i
+val zg : (%i) -> %i
+
+fn ze(zarg) {
+  zz1 : %i `1;
+  zz1 = 42 `1;
+  return = zz1 `2;
+  end;
+}
+
+fn zf(zarg) {
+  zz2 : %i `3;
+  zz2 = ze(zarg) `3;
+  return = zz2 `4;
+  end;
+}
+
+fn zg(zarg) {
+  zz3 : %i `5;
+  zz3 = zf(zarg) `5;
+  return = zz3 `6;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zg'.
+
+	interpreter := JibInterpreter for: main arguments: { 1 }.
+	session := JibDebuggerSession for: interpreter.
+
+	"
+	JibDebugger openOn: session.
+	"
+
+	session stepInto: interpreter context. "zz3 : %i `5; zz3 = zf(zarg) `3"	
+	self assert: (interpreter context function id = 'zf'). 
+	
+	session stepInto: interpreter context. "zz2 : %i `5; zz2 = ze(zarg) `3"	
+	self assert: (interpreter context function id = 'ze'). 
+	
+	session stepInto: interpreter context. "zz1 : %i `1; 42 `1"	
+	self assert: (interpreter context function id = 'ze'). 
+	self assert: (interpreter context pc = 3). 
+	
+	session stepInto: interpreter context. "return = zz1 `2"	
+	self assert: (interpreter context function id = 'ze'). 
+	self assert: (interpreter context pc = 4). 
+	
+	session stepInto: interpreter context. "return = zz2 `4"	
+	self assert: (interpreter context function id = 'zf'). 
+	self assert: (interpreter context pc = 3). 
+	
+	self assert: (interpreter context caller function id = 'zg'). 
+	self assert: (interpreter context caller pc = 3). 
+	
+	"
+	JibDebugger openOn: session.
+	"
+	session stepInto: interpreter context caller. "	return = zz3 `6;"
+	self assert: (interpreter context function id = 'zg'). 
+	self assert: (interpreter context pc = 4). 
+	
+	session cont.
+	self assert: (interpreter context isNil). 
+	self assert: (interpreter retVal = 42). 
+	
+
+]
+
+{ #category : #tests }
+JibDebuggerSessionTests >> test_07a [
+	| program main interpreter session |
+	
+	program := JibParser parse:'
+val ze : (%i) -> %i
+val zf : (%i) -> %i
+val zg : (%i) -> %i
+
+fn ze(zarg) {
+  zz1 : %i `1;
+  zz1 = 42 `1;
+  return = zz1 `2;
+  end;
+}
+
+fn zf(zarg) {
+  zz2 : %i `3;
+  zz2 = ze(zarg) `3;
+  return = zz2 `4;
+  end;
+}
+
+fn zg(zarg) {
+  zz3 : %i `5;
+  zz3 = zf(zarg) `5;
+  return = zz3 `6;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zg'.
+
+	interpreter := JibInterpreter for: main arguments: { 1 }.
+	session := JibDebuggerSession for: interpreter.
+
+	"
+	JibDebugger openOn: session.
+	"
+
+	session stepInto: interpreter context. "zz3 : %i `5; zz3 = zf(zarg) `3"	
+	self assert: (interpreter context function id = 'zf'). 
+	
+	session stepOver: interpreter context. "zz2 : %i `5; zz2 = ze(zarg) `3"	
+	self assert: (interpreter context function id = 'zf'). 
+	self assert: (interpreter context pc = 3). 
+	
+	session stepOver: interpreter context caller. "	return = zz3 `6;"
+	self assert: (interpreter context function id = 'zg'). 
+	self assert: (interpreter context pc = 4). 
+	
+	session stepOver: interpreter context.
+	self assert: (interpreter context isNil). 
+	self assert: (interpreter retVal = 42). 
+	
+
+]
