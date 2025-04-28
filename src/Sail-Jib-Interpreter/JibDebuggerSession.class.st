@@ -76,7 +76,31 @@ JibDebuggerSession >> cont [
 	"Continue until a breakpoint is hit or intepreter terminates."
 
 	[
-		interpreter interpret
+		interpreter interpret.
+	] on: JibInterpreterBreakpointHitNotification do: [ :hit |
+		"Stop"
+	].
+]
+
+{ #category : #private }
+JibDebuggerSession >> contWhileFalse: condition [
+	"Continue as long as `condition` evaluates to `false` or 
+	 a breakpoint is hit or intepreter terminates."
+
+	[
+		interpreter interpretWhileFalse: condition.
+	] on: JibInterpreterBreakpointHitNotification do: [ :hit |
+		"Stop"
+	].
+]
+
+{ #category : #private }
+JibDebuggerSession >> contWhileTrue: condition [
+	"Continue as long as `condition` evaluates to `true` or 
+	 a breakpoint is hit or intepreter terminates."
+
+	[
+		interpreter interpretWhileTrue: condition.
 	] on: JibInterpreterBreakpointHitNotification do: [ :hit |
 		"Stop"
 	].
@@ -156,6 +180,33 @@ JibDebuggerSession >> step [
 ]
 
 { #category : #'debugging actions' }
+JibDebuggerSession >> stepInto: context [	
+	| loc |
+		
+	loc := context sourceLoc.
+	
+	context == interpreter context ifTrue:[
+		"If we're stepping in top-most context, continue until we
+		 reach another location, in this or any other context."
+		
+		self contWhileTrue:[				
+			interpreter context notNil and:[loc = interpreter context sourceLoc]
+		].
+	] ifFalse:[
+		"If we're stepping in any other context, 'step-into' means
+		 'step to next location in this context'."
+		self contWhileFalse:[
+			"Stop when..."
+			((interpreter context isNil)
+				or:[interpreter context = context caller
+				or:[interpreter context = context and:[context sourceLoc ~= loc]]])
+		]
+	].
+
+	self triggerEvent: #stepInto
+]
+
+{ #category : #'debugging actions' }
 JibDebuggerSession >> stepIntoI: context [
 	context == interpreter context ifTrue:[
 		"If we're stepping in top-most context, just
@@ -191,6 +242,23 @@ JibDebuggerSession >> stepIntoI: context [
 	].
 
 	self triggerEvent: #stepInto
+]
+
+{ #category : #'debugging actions' }
+JibDebuggerSession >> stepOver: context [
+	"Stepping-over in a given context means 'keep executing until we reach
+	 next location in that very context or context returns or interpreter 
+	 terminates.'"
+
+	| loc |
+	
+	loc := context sourceLoc.
+	self contWhileFalse:[
+		"Stop when..."
+		((interpreter context isNil)
+			or:[interpreter context = context caller
+			or:[interpreter context = context and:[context sourceLoc ~= loc]]])
+	]
 ]
 
 { #category : #'debugging actions' }

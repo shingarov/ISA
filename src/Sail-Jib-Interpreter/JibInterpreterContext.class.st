@@ -139,3 +139,17 @@ JibInterpreterContext >> set: id to: value [
 	
 	values at: id put: value
 ]
+
+{ #category : #accessing }
+JibInterpreterContext >> sourceLoc [
+	"Return a source location for instruction currently being executed."
+	
+	"Note that pc can be set to one beyond the size of an instruction
+	 sequence (see JibInterpreter >> interpret1 for reason). Hence the
+	 test."
+
+	(pc between: 1 and: function instrs size) ifTrue:[
+		^ (function instrs at: pc) sourceLoc
+	].
+	^ SourceLoc_Unknown new
+]

@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 JibDebugActionIntoI class >> actionFor: aGTBDebugger [
-	<gtStackDebuggingAction>
+	<gtInstructionDebuggingAction>
 	
 	<gtContextStackDebuggingAction>
 	<gtContextInstructionDebuggingAction>
