@@ -140,6 +140,11 @@ JibDebuggerSession >> initializeWithInterpreter: aJibInterpreter [
 ]
 
 { #category : #accessing }
+JibDebuggerSession >> interpreter [
+	^ interpreter
+]
+
+{ #category : #accessing }
 JibDebuggerSession >> interruptedContext [
 	^ interpreter context
 ]
@@ -333,4 +338,9 @@ JibDebuggerSession >> stepOverI: context [
 { #category : #'debugging actions' }
 JibDebuggerSession >> terminate [
 	"Do nothing for now."
+]
+
+{ #category : #context }
+JibDebuggerSession >> updateContextTo: context [
+	"What is this meant to do?"
 ]
