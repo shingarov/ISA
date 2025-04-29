@@ -4,6 +4,7 @@ GNUmakefile.local
 # Build by-products 
 pdl
 MachineArithmetic
+3rdparty
 
 # Pharo 
 pharo/pharo*
