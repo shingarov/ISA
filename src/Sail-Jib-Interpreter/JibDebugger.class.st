@@ -17,7 +17,7 @@ JibDebugger class >> isAbstract [
 { #category : #openning }
 JibDebugger class >> openOn: anObject [
 	self == JibDebugger ifTrue:[
-		^ JibInstructionDebugger openOn: anObject 
+		^ JibSourceDebugger openOn: anObject 
 	] ifFalse:[
 		^ super openOn: anObject.
 	]
@@ -79,6 +79,15 @@ JibDebugger >> instructionsIn: composite forContext: context [
 { #category : #opening }
 JibDebugger >> setDebuggerToFirstNonFilteredContext [
 	"Nothing to do"
+]
+
+{ #category : #'building presentations' }
+JibDebugger >> sourceIn: composite forContext: context [
+	composite text
+			with: [ :text | self installActionsForRootPragmas: #( sourceDebuggingAction ) in: text ];
+			title: 'Source';
+			display: [ context sourceLoc sourceTextWithHighlights ];
+			format: #asText
 ]
 
 { #category : #'building presentations' }
