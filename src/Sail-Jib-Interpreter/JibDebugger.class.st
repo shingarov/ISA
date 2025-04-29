@@ -28,6 +28,23 @@ JibDebugger class >> sessionClass [
 	^JibDebuggerSession 
 ]
 
+{ #category : #private }
+JibDebugger class >> spanNewSessionForContext: aContext fromProcess: aProcess [
+	self shouldNotImplement 
+]
+
+{ #category : #accessing }
+JibDebugger class >> spanNewSessionFrom: anotherSession [
+	self assert: anotherSession class == self sessionClass.
+	
+	^anotherSession copy
+]
+
+{ #category : #private }
+JibDebugger class >> spanNewSessionLabeled: aString forContext: aContext fromProcess: aProcess [
+	self shouldNotImplement 
+]
+
 { #category : #'building presentations' }
 JibDebugger >> codeIn: composite forContext: frame [
 	self subclassResponsibility 
