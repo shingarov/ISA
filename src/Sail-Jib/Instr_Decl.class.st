@@ -28,6 +28,13 @@ Instr_Decl >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #enumerating }
+Instr_Decl >> defdIdsDo: aBlock [
+	"Evaluate `aBlock` for each id defined (assigned) by this instruction"
+
+	aBlock value: id
+]
+
 { #category : #accessing }
 Instr_Decl >> id [
 	^ id
