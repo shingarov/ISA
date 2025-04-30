@@ -2,8 +2,7 @@ Class {
 	#name : #'Instr_Exit',
 	#superclass : #JibInstr,
 	#instVars : [
-		'cause',
-		'src'
+		'cause'
 	],
 	#pools : [
 		'JibExitCause'
@@ -16,7 +15,7 @@ Instr_Exit class >> inducedParser [
 	^ 'exit' asParser trim
 	, ('match' asParser ==> [ :_ | MatchFailure ] / 'explicit' asParser ==> [ :_ | Explicit ])
 	, JibSourceLoc asParser
-	construct: #(- cause src)
+	construct: #(- cause sourceLoc)
 	
 "
 Instr_Exit inducedParser parse: 'exit match `6 131:25-134:1'
@@ -26,7 +25,7 @@ Instr_Exit inducedParser parse: 'exit match `6 131:25-134:1'
 
 { #category : #enumerating }
 Instr_Exit >> childrenDo: aBlock [
-	aBlock value: src
+	aBlock value: sourceLoc
 
 ]
 
