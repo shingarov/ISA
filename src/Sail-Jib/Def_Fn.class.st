@@ -124,3 +124,16 @@ Def_Fn >> signature [
 
 
 ]
+
+{ #category : #'as yet unclassified' }
+Def_Fn >> toSpriteDecl [
+	self blocks halt
+	"| ann env |
+	env := JibEnvironment new.
+	ann := (self program lookupFunctionSignature: id) toSpriteAnn.
+	^SpriteDecl
+		bind: (SpriteBind id: id)
+		expr: (EAnn
+			expr: ((instrs as: JibInsnArray) toSpriteExpr: env)
+			ann: ann)"
+]

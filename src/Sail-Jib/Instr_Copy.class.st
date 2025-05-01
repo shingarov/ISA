@@ -48,6 +48,15 @@ Instr_Copy >> printOn: aStream [
 	e printOn: aStream
 ]
 
+{ #category : #'as yet unclassified' }
+Instr_Copy >> toSpriteExpr: Γ andThen: k [
+	^(ELet
+		decl: (SpriteDecl
+			bind: (SpriteBind id: l id)
+			expr: (e toSpriteExpr: Γ))
+		expr: (k toSpriteExpr: Γ)) normalizeLetOnLet
+]
+
 { #category : #enumerating }
 Instr_Copy >> usedIdsDo: aBlock [
 	"BOGUS: look at what is in `e` and `args` instvars, looks like some garbage to me."	

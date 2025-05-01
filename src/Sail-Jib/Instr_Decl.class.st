@@ -41,6 +41,13 @@ Instr_Decl >> printOn: aStream [
 	ty printOn: aStream
 ]
 
+{ #category : #'as yet unclassified' }
+Instr_Decl >> toSpriteExpr: Γ andThen: k [
+	| Γ′ |
+	Γ′ := Γ "amended by myself".
+	^k toSpriteExpr: Γ′
+]
+
 { #category : #accessing }
 Instr_Decl >> varType [
 	^ ty

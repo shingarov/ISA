@@ -23,17 +23,27 @@ JibProgram >> childrenDo: aBlock [
 { #category : #analysis }
 JibProgram >> doSemanticAnalysis [
 	"TODO: This remains to be implemented"
+	self toSpriteProg
 ]
 
 { #category : #enumerating }
-JibProgram >> functionSignaturesDo: aBlock [
-	defs do: [ :def | def isVal ifTrue:[ aBlock value: def ] ]
-	
+JibProgram >> functionDefs [
+	^defs select: #isFn
+]
+
+{ #category : #enumerating }
+JibProgram >> functionSignatures [
+	^defs select: #isVal
 ]
 
 { #category : #enumerating }
 JibProgram >> functionsDo: aBlock [
 	defs do: [ :def | (def isFn or:[def isExtern]) ifTrue:[ aBlock value: def ] ]
+]
+
+{ #category : #enumerating }
+JibProgram >> letDefs [
+	^defs select: #isLet
 ]
 
 { #category : #enumerating }
@@ -50,9 +60,9 @@ JibProgram >> lookupFunction: id [
 
 { #category : #lookup }
 JibProgram >> lookupFunctionSignature: id [
-	self functionSignaturesDo: [ :fn | fn id = id ifTrue:[ ^fn ] ].
-	self error:'No ''val'' named ''' , id , ''''.
-
+	^self functionSignatures
+		detect: [ :x | x id = id ]
+		ifNone: [ self error:'No ''val'' named ''' , id , '''' ]
 ]
 
 { #category : #accessing }
@@ -61,7 +71,30 @@ JibProgram >> program [
 ]
 
 { #category : #enumerating }
+JibProgram >> registerDefs [
+	^defs select: #isRegister
+]
+
+{ #category : #enumerating }
 JibProgram >> registersDo: aBlock [
 	defs do: [ :def | def isRegister ifTrue:[ aBlock value: def ] ]
 
+]
+
+{ #category : #'as yet unclassified' }
+JibProgram >> terminalInt [
+	^EImm imm: (ECon prim: (PInt integer: 0))
+]
+
+{ #category : #'as yet unclassified' }
+JibProgram >> toSpriteProg [
+	| fns expr |
+	fns := self functionDefs.
+	expr := fns reversed
+		inject: self terminalInt
+		into: [ :soFar :thisTime |
+			ELet
+				decl: thisTime toSpriteDecl
+				expr: soFar
+		]
 ]

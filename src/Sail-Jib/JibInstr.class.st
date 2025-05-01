@@ -72,6 +72,11 @@ JibInstr >> killSet [
 	^s
 ]
 
+{ #category : #'as yet unclassified' }
+JibInstr >> toSpriteExpr: aJibEnvironment andThen: aCollection [ 
+	self subclassResponsibility
+]
+
 { #category : #enumerating }
 JibInstr >> usedIdsDo: aBlock [
 	"Evaluate `aBlock` for each id used (read, accessed) by this instruction"

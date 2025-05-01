@@ -47,3 +47,9 @@ Def_Val >> isVal [
 Def_Val >> retType [
 	^ ty
 ]
+
+{ #category : #'as yet unclassified' }
+Def_Val >> toSpriteAnn [
+	^Refl
+		symbol: 1 rtype: 2 metric: 3
+]

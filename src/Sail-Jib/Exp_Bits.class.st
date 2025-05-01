@@ -28,6 +28,12 @@ Exp_Bits >> printOn: aStream [
 	]
 ]
 
+{ #category : #'as yet unclassified' }
+Exp_Bits >> toSpriteExpr: _ [ 
+	^ΛEApp
+		expr: (ΛEApp expr: (EImm imm: (EVar of: 'bv')) imm: (ECon prim: (PInt integer: x length))) imm: (ECon prim: (PInt integer: x value))
+]
+
 { #category : #accessing }
 Exp_Bits >> value [
 	^ x

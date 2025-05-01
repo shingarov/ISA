@@ -32,6 +32,35 @@ JibParsingTest >> testParseReturn42 [
 	self assert: (p isKindOf: JibProgram)
 ]
 
+{ #category : #'tests - instructions' }
+JibParsingTest >> testParseReturn42_TuesdayHacking [
+	| src jibProgram |
+
+	src := '
+val zf : (%i) ->  %bv32
+fn zf(zx) {
+  zz39 : %bv32 `1;
+  zz39 = 0b00000000000000000000000000101010 `2;
+  return = zz39 `3;
+  end;
+}
+
+val zg : (%i) ->  %bv32
+fn zg(zx) {
+  zz40 : %bv32 `1;
+  zz40 = 0b00000000000000000000000000101010 `2;
+  return = zz40 `3;
+  end;
+}
+
+register zPC : %bv64
+	'.
+
+	jibProgram := JibParser parse: src.
+	jibProgram halt doSemanticAnalysis 	
+
+]
+
 { #category : #'tests - program' }
 JibParsingTest >> testParseUnify1_n [
 	| p |
