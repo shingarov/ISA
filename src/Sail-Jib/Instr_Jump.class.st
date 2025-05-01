@@ -25,6 +25,11 @@ Instr_Jump >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #accessing }
+Instr_Jump >> condition [ 
+	^ exp 
+]
+
 { #category : #testing }
 Instr_Jump >> isJump [
 	^true
