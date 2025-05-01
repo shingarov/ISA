@@ -4,12 +4,11 @@ Class {
 	#instVars : [
 		'program',
 		'context',
-		'lets',
-		'registers',
 		'entry',
 		'retval',
 		'todo',
-		'breakpoints'
+		'breakpoints',
+		'globals'
 	],
 	#category : #'Sail-Jib-Interpreter-Interpreter'
 }
@@ -43,33 +42,30 @@ JibInterpreter >> context [
 
 { #category : #'accessing - variables' }
 JibInterpreter >> get: id [
-	(lets includesKey: id) ifTrue:[
-		^ lets at: id
-	] ifFalse:[(registers includesKey: id) ifTrue:[
-		^ registers at: id
+	(globals includesKey: id) ifTrue:[
+		^ globals at: id
 	] ifFalse:[
 		^ context get: id
-	]]
+	]
 ]
 
 { #category : #'accessing - globals' }
 JibInterpreter >> getRegister: id [
-	self assert:(registers includesKey: id).
+	self assert:(globals includesKey: id).
 
-	^ registers at: id
+	^ globals at: id
 ]
 
 { #category : #initialization }
 JibInterpreter >> initializeWithFunction: fn arguments: args [
 	entry := fn.
 	program := fn program.
-	registers := OrderedDictionary new.
-	lets := OrderedDictionary new.
+	globals := OrderedDictionary new.
 	todo := OrderedCollection new.
 	breakpoints := IdentityDictionary new.
 
 	program registersDo: [ :register |
-		registers at: register id put: register regType newUndefined.
+		globals at: register id put: register regType newUndefined.
 
 		register hasInitializer ifTrue:[
 			todo add: (JibInterpreterContext for: register arguments: #())
@@ -78,7 +74,7 @@ JibInterpreter >> initializeWithFunction: fn arguments: args [
 
 	program letsDo: [ :let |
 		let variables do: [ :nameAndType |
-			lets at: nameAndType key put: nameAndType value newUndefined.
+			globals at: nameAndType key put: nameAndType value newUndefined.
 		].
 
 		let hasInitializer ifTrue:[
@@ -303,20 +299,18 @@ JibInterpreter >> retVal [
 
 { #category : #'accessing - variables' }
 JibInterpreter >> set: id to: value [
-	(lets includesKey: id) ifTrue:[
-		lets at: id put: value.
-	] ifFalse:[(registers includesKey: id) ifTrue:[
-		registers at: id put: value.
+	(globals includesKey: id) ifTrue:[
+		globals at: id put: value.	
 	] ifFalse:[
 		context set: id to: value
-	]]
+	]
 ]
 
 { #category : #'accessing - globals' }
 JibInterpreter >> setRegister: id to: value [
-	self assert:(registers includesKey: id).
+	self assert:(globals includesKey: id).
 
-	registers at: id put: value
+	globals at: id put: value
 ]
 
 { #category : #'debugging support' }
