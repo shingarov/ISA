@@ -244,7 +244,9 @@ JibInterpreter >> interpretExit: insn [
 
 { #category : #'interpreting - insns' }
 JibInterpreter >> interpretGoto: insn [
-	self notYetImplemented
+	self assert:(insn target between: 1 and: context function instrs size).
+	
+	context pc: insn target + 1.
 
 
 ]
@@ -264,6 +266,20 @@ JibInterpreter >> interpretId: expr [
 { #category : #'interpreting - insns' }
 JibInterpreter >> interpretInit: insn [
 	self notYetImplemented
+
+
+]
+
+{ #category : #'interpreting - insns' }
+JibInterpreter >> interpretJump: insn [
+	| value |
+	
+	self assert:(insn target between: 1 and: context function instrs size).
+	
+	(insn condition interpretIn: self) value ifTrue:[
+		context pc: insn target + 1.
+	].
+
 
 
 ]
