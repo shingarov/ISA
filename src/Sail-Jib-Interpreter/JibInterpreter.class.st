@@ -53,13 +53,6 @@ JibInterpreter >> get: id [
 ]
 
 { #category : #'accessing - globals' }
-JibInterpreter >> getGlobal: id [
-	self assert:(lets includesKey: id).
-
-	^ lets at: id
-]
-
-{ #category : #'accessing - globals' }
 JibInterpreter >> getRegister: id [
 	self assert:(registers includesKey: id).
 
@@ -317,13 +310,6 @@ JibInterpreter >> set: id to: value [
 	] ifFalse:[
 		context set: id to: value
 	]]
-]
-
-{ #category : #'accessing - globals' }
-JibInterpreter >> setGlobal: id to: value [
-	self assert:(lets includesKey: id).
-
-	lets at: id put: value
 ]
 
 { #category : #'accessing - globals' }
