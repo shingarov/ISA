@@ -1,9 +1,8 @@
 Class {
 	#name : #'Def_Let',
-	#superclass : #JibDef,
+	#superclass : #JibDefWithCode,
 	#instVars : [
-		'ids',
-		'instrs'
+		'ids'
 	],
 	#category : #'Sail-Jib'
 }
@@ -35,11 +34,6 @@ Def_Let >> displayStringOn: aStream [
 	aStream nextPutAll: 'let '.
 	ids do:[:nameAndType | aStream nextPutAll: nameAndType key zdecode ]
 		  separatedBy:[aStream nextPutAll: ', ']
-]
-
-{ #category : #accessing }
-Def_Let >> instrs [
-	^instrs
 ]
 
 { #category : #testing }
