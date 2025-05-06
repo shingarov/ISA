@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'defs',
 		'sourceSearchPath',
-		'sourceSubstitutePath'
+		'sourceSubstitutePath',
+		'environment'
 	],
 	#classVars : [
 		'SourceSearchPath',
@@ -44,7 +45,23 @@ JibProgram >> childrenDo: aBlock [
 
 { #category : #analysis }
 JibProgram >> doSemanticAnalysis [
-	"TODO: This remains to be implemented"
+	"Performs analysis of a program. Once done, program's 
+	 environment is valid. See class JibEnvironment."
+	
+	self semanticAnalyzerClass new analyze: self.
+]
+
+{ #category : #accessing }
+JibProgram >> environment [
+	"Return program's environment. Note that environment is only
+	 valid after invoking `#doSemanticAnalysis`."
+	
+	environment isNil ifTrue:[
+		self error:'Program''s environment is not initialized. Invoke `#doSemanticAnalysis` first.'.
+		^nil.
+	].
+	
+	^ environment 
 ]
 
 { #category : #accessing }
@@ -134,6 +151,25 @@ JibProgram >> program [
 JibProgram >> registersDo: aBlock [
 	defs do: [ :def | def isRegister ifTrue:[ aBlock value: def ] ]
 
+]
+
+{ #category : #analysis }
+JibProgram >> semanticAnalyzerClass [
+	"Return default semantic analyzer class"
+
+	"TODO: This should be changed to 'real' Sprite-based analyzer
+	 once implemented."
+	^ JibProgramNaiveAnalyzer
+]
+
+{ #category : #initialization }
+JibProgram >> setEnvironment: aJibEnvironment [
+	"Sets the program's environment. This is only to be called during
+	 semantic analysis to set top-level environment for the program."
+
+	self assert: environment isNil description: 'Trying to set environment twice.'.
+	
+	environment := aJibEnvironment
 ]
 
 { #category : #accessing }
