@@ -75,6 +75,13 @@ JibProgramNode >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #accessing }
+JibProgramNode >> environment [
+	"Return the JibEnvironment for this node."
+
+	^parent environment
+]
+
 { #category : #initialization }
 JibProgramNode >> initializeFrom: values accordingTo: spec [
 	| instvars |

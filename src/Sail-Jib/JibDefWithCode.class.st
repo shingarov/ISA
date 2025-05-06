@@ -3,7 +3,8 @@ Class {
 	#superclass : #JibDef,
 	#instVars : [
 		'instrs',
-		'blocks'
+		'blocks',
+		'environment'
 	],
 	#category : #'Sail-Jib'
 }
@@ -14,6 +15,19 @@ JibDefWithCode >> blocks [
 		blocks := JibFnBodyBlock analyze: self.
 	].
 	^ blocks
+]
+
+{ #category : #accessing }
+JibDefWithCode >> environment [
+	"Return function's environment. Note that environment is only
+	 valid after invoking `#doSemanticAnalysis`."
+
+	environment isNil ifTrue:[
+		self error:'Program''s environment is not initialized. Invoke `#doSemanticAnalysis` first.'.
+		^nil.
+	].
+
+	^ environment
 ]
 
 { #category : #inspecting }
@@ -73,4 +87,14 @@ JibDefWithCode >> gtInstructionsIn: composite [
 { #category : #accessing }
 JibDefWithCode >> instrs [
 	^ instrs
+]
+
+{ #category : #initialization }
+JibDefWithCode >> setEnvironment: aJibEnvironment [
+	"Sets the code's environment. This is only to be called during
+	 semantic analysis to set the environment for the code (function)."
+
+	self assert: environment isNil description: 'Trying to set environment twice.'.
+
+	environment := aJibEnvironment
 ]
