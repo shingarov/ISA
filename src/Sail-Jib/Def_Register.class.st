@@ -1,10 +1,9 @@
 Class {
 	#name : #'Def_Register',
-	#superclass : #JibDef,
+	#superclass : #JibDefWithCode,
 	#instVars : [
 		'id',
-		'ty',
-		'instrs'
+		'ty'
 	],
 	#category : #'Sail-Jib'
 }
@@ -38,11 +37,6 @@ Def_Register >> displayStringOn: aStream [
 { #category : #accessing }
 Def_Register >> id [
 	^ id
-]
-
-{ #category : #accessing }
-Def_Register >> instrs [
-	^ instrs
 ]
 
 { #category : #testing }

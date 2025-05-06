@@ -1,11 +1,9 @@
 Class {
 	#name : #'Def_Fn',
-	#superclass : #JibDef,
+	#superclass : #JibDefWithCode,
 	#instVars : [
 		'id',
-		'ids',
-		'instrs',
-		'blocks'
+		'ids'
 	],
 	#category : #'Sail-Jib'
 }
@@ -24,76 +22,15 @@ Def_Fn >> argNames [
 	^ ids
 ]
 
-{ #category : #accessing }
-Def_Fn >> blocks [
-	blocks isNil ifTrue:[
-		blocks := JibFnBodyBlock analyze: self.
-	].
-	^ blocks
-]
-
 { #category : #enumerating }
 Def_Fn >> childrenDo: aBlock [
 	instrs do: aBlock
 	
 ]
 
-{ #category : #inspecting }
-Def_Fn >> gtCFGIn: composite [
-	<gtInspectorPresentationOrder: 50>
-	composite roassal3 title: 'CFG'; initializeCanvas: [
-		| canvas blocksG edges |
-
-		canvas := RSCanvas new.
-		blocksG := RSGroup new.
-		self blocks do:[:block |
-			| box label node |
-
-			label := RSLabel new text: block displayString.
-			box := RSShapeFactory box
-							border: (RSBorder new width: 2; color: Color black);
-							cornerRadius: 5;
-							color: (Color gray: 0.9);
-							width: label encompassingRectangle width + 16;
-							height: label encompassingRectangle height + 16.
-			RSLocation new center; outer; stick: label on: box.
-			node := (RSComposite new model: block; shapes: { box . label }) @ RSDraggable.
-
-			blocksG add: node.
-			canvas add: node
-		].
-
-		edges := RSEdgeBuilder arrowedLine
-							attachPoint: RSBorderAttachPoint new;
-							yourself.
-
-		edges
-			canvas: canvas; "moveBehind;" width: 2;
-			shapes: blocksG; connectToAll: #successors.
-
-		RSVerticalLineLayout on: blocksG.
-		canvas @ RSCanvasController
-	]
-]
-
-{ #category : #inspecting }
-Def_Fn >> gtInstrsIn: composite [
-	<gtInspectorPresentationOrder: 20>
-
-	^ composite fastList
-		title: 'Instructions';
-		display: [ instrs ];
-		format: [ :insn | insn ]
-]
-
 { #category : #accessing }
 Def_Fn >> id [
 	^ id
-]
-
-{ #category : #accessing }
-Def_Fn >> instrs [
-	^ instrs
 ]
 
 { #category : #testing }
