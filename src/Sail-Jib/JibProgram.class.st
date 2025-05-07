@@ -46,7 +46,13 @@ JibProgram >> childrenDo: aBlock [
 { #category : #analysis }
 JibProgram >> doSemanticAnalysis [
 	"Performs analysis of a program. Once done, program's 
-	 environment is valid. See class JibEnvironment."
+	 environment is valid. See class JibEnvironment.
+	
+	 This method is idempotent - if environment is already
+	 set, we assume semantic analysys was already run and we
+	 do not run it again.
+	"
+	environment notNil ifTrue:[ ^ self ].
 	
 	self semanticAnalyzerClass new analyze: self.
 ]
