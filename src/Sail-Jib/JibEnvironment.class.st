@@ -14,6 +14,11 @@ JibEnvironment class >> of: aJibProgram [
 		yourself
 ]
 
+{ #category : #accessing }
+JibEnvironment >> context [
+	^self parent context
+]
+
 { #category : #initialization }
 JibEnvironment >> initializeWithNode: aJibProgramNode [
 	node := aJibProgramNode.
@@ -24,4 +29,9 @@ JibEnvironment >> node [
 	"Return the Jib program node this environment is associated with."
 
 	^ node
+]
+
+{ #category : #accessing }
+JibEnvironment >> parent [
+	^node parent environment 
 ]

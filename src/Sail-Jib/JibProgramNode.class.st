@@ -64,6 +64,11 @@ JibProgramNode class >> isAbstract [
 	^self == JibProgramNode
 ]
 
+{ #category : #analysis }
+JibProgramNode >> analyzeUsing: analyzer [
+	analyzer analyzeChildrenOf: self.
+]
+
 { #category : #accessing }
 JibProgramNode >> children [
 	^ OrderedCollection streamContents:[ :children | self childrenDo:[ :child | children nextPut: child ] ].
