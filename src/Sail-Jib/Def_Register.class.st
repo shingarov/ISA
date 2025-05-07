@@ -18,6 +18,11 @@ Def_Register class >> inducedParser [
 	construct: #(- id - ty instrs)
 ]
 
+{ #category : #analysis }
+Def_Register >> analyzeUsing: analyzer [
+	analyzer analyzeRegister: self
+]
+
 { #category : #enumerating }
 Def_Register >> childrenDo: aBlock [
 	aBlock value: ty.

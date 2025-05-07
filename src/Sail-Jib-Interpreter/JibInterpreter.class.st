@@ -63,6 +63,7 @@ JibInterpreter >> initializeWithFunction: fn arguments: args [
 	globals := OrderedDictionary new.
 	todo := OrderedCollection new.
 	breakpoints := IdentityDictionary new.
+	program doSemanticAnalysis. 
 
 	program registersDo: [ :register |
 		globals at: register id put: register regType newUndefined.
@@ -115,7 +116,9 @@ JibInterpreter >> interpret1 [
 	 does not need to do 'pc := pc + 1' at the end of most
 	 instructions. Maybe not a great idea, will see."
 	context pc: context pc + 1.
-	instr interpretIn: self.
+	Z3ContextQuery answer: program environment context do:[
+		instr interpretIn: self.
+	].
 
 	(context notNil and:[context function isFn not]) ifTrue:[
 		"For some unknown reason, let and register initializers do not
@@ -124,7 +127,9 @@ JibInterpreter >> interpret1 [
 		 its execution by interpreting fabricated Instr_End (this is
 		 merely a trick to have function return logic at one place)."
 		(context pc) == (context function instrs size + 1) ifTrue:[
-			self interpretEnd: Instr_End new.
+			Z3ContextQuery answer: program environment context do:[
+				self interpretEnd: Instr_End new.
+			].			
 		].
 	].
 ]

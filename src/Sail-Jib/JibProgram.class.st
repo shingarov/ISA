@@ -37,6 +37,11 @@ JibProgram class >> sourceSubstitutePath [
 	^ SourceSubstitutePath
 ]
 
+{ #category : #analysis }
+JibProgram >> analyzeUsing: analyzer [
+	analyzer analyzeProgram: self
+]
+
 { #category : #enumerating }
 JibProgram >> childrenDo: aBlock [
 	defs do: aBlock
