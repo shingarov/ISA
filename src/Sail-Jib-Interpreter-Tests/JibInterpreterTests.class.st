@@ -285,3 +285,83 @@ fn zmain(zarg) {
 
 
 ]
+
+{ #category : #tests }
+JibInterpreterTests >> test_09a [
+	| program main interpreter |
+	program := JibParser parse:'
+
+val zmain : () -> %unit
+fn  zmain() {	
+  return = ();
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: {  }.
+
+	interpreter interpret.
+
+	self assert: interpreter retVal isDatatype.
+	self assert: interpreter retVal sort name asString = '%unit'.
+	self assert: interpreter retVal printString = '|()|'.
+	
+
+]
+
+{ #category : #tests }
+JibInterpreterTests >> test_09b [
+	| program main interpreter |
+	program := JibParser parse:'
+
+val zmain : () -> %unit
+fn  zmain() {	
+	zz1 : %unit;
+	zz1 = ();
+  return = zz1;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: {  }.
+
+	interpreter interpret.
+
+	self assert: interpreter retVal isDatatype.
+	self assert: interpreter retVal sort name asString = '%unit'.
+	self assert: interpreter retVal printString = '|()|'.
+	
+
+]
+
+{ #category : #tests }
+JibInterpreterTests >> test_09c [
+	| program main interpreter |
+	program := JibParser parse:'
+
+val zmain : () -> %unit
+fn  zmain() {	
+	zz1 : %unit;
+  return = zz1;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: {  }.
+
+	interpreter interpret.
+
+	self assert: interpreter retVal isDatatype.
+	self assert: interpreter retVal sort name asString = '%unit'.
+	
+
+]

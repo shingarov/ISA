@@ -2,7 +2,8 @@ Class {
 	#name : #JibProgramEnvironment,
 	#superclass : #JibEnvironment,
 	#instVars : [
-		'context'
+		'context',
+		'unitSort'
 	],
 	#category : #'Sail-Jib-Environment'
 }
@@ -16,6 +17,15 @@ JibProgramEnvironment >> context [
 JibProgramEnvironment >> initializeWithNode: aJibProgramNode [
 	node := aJibProgramNode.
 	context := Z3Context fromDefault.
+	unitSort := context mkEnumerationSort: '%unit' 
+	                             elements: { '()' }
+	                               consts: Cell new
+	                              testers: Cell new.	
+]
+
+{ #category : #lookup }
+JibProgramEnvironment >> lookupSortForUnit [
+	^ unitSort 
 ]
 
 { #category : #accessing }

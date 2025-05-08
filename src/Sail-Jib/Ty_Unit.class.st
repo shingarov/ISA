@@ -10,6 +10,11 @@ Ty_Unit class >> inducedParser [
 	==> [ :_ | self new ]
 ]
 
+{ #category : #accessing }
+Ty_Unit >> sort [
+	^ self environment lookupSortForUnit.
+]
+
 { #category : #printing }
 Ty_Unit >> unparseOn: aStream [
 	aStream nextPutAll:'%unit'
