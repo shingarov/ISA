@@ -10,6 +10,11 @@ Ty_Bool class >> inducedParser [
 	==> [ :_ | self new ]
 ]
 
+{ #category : #accessing }
+Ty_Bool >> sort [
+	^ self environment context mkBoolSort 
+]
+
 { #category : #printing }
 Ty_Bool >> unparseOn: aStream [
 	aStream nextPutAll: '%bool'

@@ -10,6 +10,11 @@ Ty_AnyBits class >> inducedParser [
 	==> [ :_ | self new ]
 ]
 
+{ #category : #accessing }
+Ty_AnyBits >> sort [
+	^ self shouldNotImplement 
+]
+
 { #category : #printing }
 Ty_AnyBits >> unparseOn: aStream [
 	aStream nextPutAll: '%bv'

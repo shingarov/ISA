@@ -14,6 +14,11 @@ Ty_Bits class >> inducedParser [
 	construct: #(- length)
 ]
 
+{ #category : #accessing }
+Ty_Bits >> sort [
+	^ self environment context mkBvSort: length 
+]
+
 { #category : #printing }
 Ty_Bits >> unparseOn: aStream [
 	aStream nextPutAll: '%bv'.

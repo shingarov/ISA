@@ -46,6 +46,12 @@ Ty >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #accessing }
+Ty >> sort [
+	"Return the Z3 sort representing this (Jib) type."
+	^ self subclassResponsibility 
+]
+
 { #category : #'instance creation' }
 Ty >> newUndefined [
 	"Return 'undefined' value of this type. This will be the initial
