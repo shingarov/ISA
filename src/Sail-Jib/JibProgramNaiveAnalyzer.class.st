@@ -15,6 +15,20 @@ JibProgramNaiveAnalyzer >> analyzeChildrenOf: node [
 ]
 
 { #category : #'analysis - defs' }
+JibProgramNaiveAnalyzer >> analyzeEnum: enum [
+	| enumSort |
+	
+	enumSort := Z3DatatypeSort mkEnumerationSort: enum id 
+	                                    elements: enum ids
+	                                      consts: Cell new
+	                                     testers: Cell new.
+	
+	enum program environment 
+		registerSort: enumSort forTypename: enum id.
+
+]
+
+{ #category : #'analysis - defs' }
 JibProgramNaiveAnalyzer >> analyzeFn: fn [
 	fn setEnvironment: (JibEnvironment of: fn)
 ]

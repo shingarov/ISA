@@ -287,6 +287,111 @@ fn zmain(zarg) {
 ]
 
 { #category : #tests }
+JibInterpreterTests >> test_08a [
+	| program main interpreter |
+	program := JibParser parse:'
+
+enum ziop {
+  zRISCV_ADDI,
+  zRISCV_SLTI,
+  zRISCV_SLTIU,
+  zRISCV_XORI,
+  zRISCV_ORI,
+  zRISCV_ANDI
+}
+
+val zmain : () -> %enum ziop
+fn  zmain() {
+  return = zRISCV_ADDI;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: {  }.
+
+	interpreter interpret.
+
+	self assert: interpreter retVal isDatatype.
+	self assert: interpreter retVal printString = 'zRISCV_ADDI'
+
+
+]
+
+{ #category : #tests }
+JibInterpreterTests >> test_08b [
+	| program main interpreter |
+	program := JibParser parse:'
+
+enum ziop {
+  zRISCV_ADDI,
+  zRISCV_SLTI,
+  zRISCV_SLTIU,
+  zRISCV_XORI,
+  zRISCV_ORI,
+  zRISCV_ANDI
+}
+
+val zmain : () -> %enum ziop
+fn  zmain() {
+	zz1 : %enum ziop;
+	zz1 = zRISCV_ANDI;
+  return = zz1;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: {  }.
+
+	interpreter interpret.
+
+	self assert: interpreter retVal isDatatype.
+	self assert: interpreter retVal printString = 'zRISCV_ANDI'
+
+
+]
+
+{ #category : #tests }
+JibInterpreterTests >> test_08c [
+	| program main interpreter |
+	program := JibParser parse:'
+
+enum ziop {
+  zRISCV_ADDI,
+  zRISCV_SLTI,
+  zRISCV_SLTIU,
+  zRISCV_XORI,
+  zRISCV_ORI,
+  zRISCV_ANDI
+}
+
+val zmain : () -> %enum ziop
+fn  zmain() {
+	zz1 : %enum ziop;
+  return = zz1;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: {  }.
+
+	interpreter interpret.
+
+	self assert: interpreter retVal isDatatype.
+	self assert: interpreter retVal printString = 'undefined!1'
+
+
+]
+
+{ #category : #tests }
 JibInterpreterTests >> test_09a [
 	| program main interpreter |
 	program := JibParser parse:'

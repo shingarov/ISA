@@ -33,6 +33,11 @@ JibDef class >> isAbstract [
 ]
 
 { #category : #testing }
+JibDef >> isEnum [
+	^ false
+]
+
+{ #category : #testing }
 JibDef >> isExtern [
 	^false
 ]
