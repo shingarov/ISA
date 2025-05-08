@@ -25,6 +25,11 @@ JibEnvironment >> initializeWithNode: aJibProgramNode [
 ]
 
 { #category : #lookup }
+JibEnvironment >> lookupSortForTypename: id [
+	^ self parent lookupSortForTypename: id
+]
+
+{ #category : #lookup }
 JibEnvironment >> lookupSortForUnit [
 	^self parent lookupSortForUnit
 ]
