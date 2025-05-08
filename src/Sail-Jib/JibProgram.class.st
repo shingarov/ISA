@@ -60,6 +60,13 @@ JibProgram >> doSemanticAnalysis [
 	environment notNil ifTrue:[ ^ self ].
 	
 	self semanticAnalyzerClass new analyze: self.
+
+]
+
+{ #category : #enumerating }
+JibProgram >> enumsDo: aBlock [
+	defs do: [ :def | def isEnum ifTrue:[ aBlock value: def ] ]
+
 ]
 
 { #category : #accessing }

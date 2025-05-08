@@ -83,6 +83,15 @@ JibInterpreter >> initializeWithFunction: fn arguments: args [
 		]
 	].
 
+	program enumsDo: [ :enum |
+		| enumSort |
+		
+		enumSort := program environment lookupSortForTypename: enum id.
+		enumSort constructors do: [ :enumCtor |
+			globals at: enumCtor name put: enumCtor value.
+		]
+	].
+
 	todo add: (JibInterpreterContext for: fn arguments: args).
 
 	context := todo removeFirst.

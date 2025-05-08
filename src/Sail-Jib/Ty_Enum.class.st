@@ -14,6 +14,11 @@ Ty_Enum class >> inducedParser [
 	construct: #(- id)
 ]
 
+{ #category : #accessing }
+Ty_Enum >> sort [
+	^ self environment lookupSortForTypename: id
+]
+
 { #category : #printing }
 Ty_Enum >> unparseOn: aStream [	
 	aStream 

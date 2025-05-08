@@ -16,6 +16,11 @@ Def_Enum class >> inducedParser [
 	construct: #(- id ids)
 ]
 
+{ #category : #analysis }
+Def_Enum >> analyzeUsing: analyzer [
+	analyzer analyzeEnum: self
+]
+
 { #category : #enumerating }
 Def_Enum >> childrenDo: aBlock [
 	"Enum has no children, it contains just a list of names."
@@ -25,6 +30,16 @@ Def_Enum >> childrenDo: aBlock [
 { #category : #accessing }
 Def_Enum >> id [
 	^ id
+]
+
+{ #category : #accessing }
+Def_Enum >> ids [
+	^ ids
+]
+
+{ #category : #testing }
+Def_Enum >> isEnum [
+	^ true
 ]
 
 { #category : #printing }
