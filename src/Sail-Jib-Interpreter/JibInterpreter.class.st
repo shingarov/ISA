@@ -285,6 +285,17 @@ JibInterpreter >> interpretMonomorphize: insn [
 
 ]
 
+{ #category : #'interpreting - insns' }
+JibInterpreter >> interpretUnit: insn [
+	| sort unit |
+	
+	sort := insn environment lookupSortForUnit.
+	unit := (sort constructor: 0) value.
+	^unit
+
+
+]
+
 { #category : #interpreting }
 JibInterpreter >> interpretWhileFalse: condition [
 	"Interpret instruction by instruction as long as `condition` evaluates to `false`"

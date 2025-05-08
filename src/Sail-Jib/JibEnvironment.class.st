@@ -24,6 +24,11 @@ JibEnvironment >> initializeWithNode: aJibProgramNode [
 	node := aJibProgramNode.
 ]
 
+{ #category : #lookup }
+JibEnvironment >> lookupSortForUnit [
+	^self parent lookupSortForUnit
+]
+
 { #category : #accessing }
 JibEnvironment >> node [
 	"Return the Jib program node this environment is associated with."
