@@ -10,6 +10,11 @@ Ty_I64 class >> inducedParser [
 	==> [ :_ | self new ]
 ]
 
+{ #category : #accessing }
+Ty_I64 >> sort [
+	^ self environment context mkIntSort 
+]
+
 { #category : #printing }
 Ty_I64 >> unparseOn: aStream [
 	aStream nextPutAll: '%i64'

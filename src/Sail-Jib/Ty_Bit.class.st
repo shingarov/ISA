@@ -10,6 +10,11 @@ Ty_Bit class >> inducedParser [
 	==> [ :_ | self new ]
 ]
 
+{ #category : #accessing }
+Ty_Bit >> sort [
+	^ self environment context mkBvSort: 1
+]
+
 { #category : #printing }
 Ty_Bit >> unparseOn: aStream [
 	aStream nextPutAll:'%bit'
