@@ -1,6 +1,6 @@
 Class {
 	#name : #JibTest,
-	#superclass : #TestCase,
+	#superclass : #TestCaseWithZ3Context,
 	#category : #'Sail-Jib-Tests'
 }
 
