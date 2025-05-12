@@ -17,7 +17,7 @@ JibProgramEnvironment >> context [
 { #category : #initialization }
 JibProgramEnvironment >> initializeWithNode: aJibProgramNode [
 	node := aJibProgramNode.
-	context := Z3Context fromDefault.
+	context := Z3Context current.
 	unitSort := context mkEnumerationSort: '%unit' 
 	                             elements: { '()' }
 	                               consts: Cell new
