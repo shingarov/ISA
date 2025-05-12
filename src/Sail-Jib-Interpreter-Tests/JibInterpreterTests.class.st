@@ -300,8 +300,8 @@ enum ziop {
   zRISCV_ANDI
 }
 
-val zmain : () -> %enum ziop
-fn  zmain() {
+val zmain : (%i) -> %enum ziop
+fn  zmain(x) {
   return = zRISCV_ADDI;
   end;
 }
@@ -310,7 +310,7 @@ fn  zmain() {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: {  }.
+	interpreter := JibInterpreter for: main arguments: { 42 toInt }.
 
 	interpreter interpret.
 
