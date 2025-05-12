@@ -19,6 +19,12 @@ Def_Files class >> inducedParser [
 	]
 ]
 
+{ #category : #enumerating }
+Def_Files >> childrenDo: aBlock [
+	"Nothing"
+
+]
+
 { #category : #accessing }
 Def_Files >> dict [
 	dict isNil ifTrue: [ dict := Dictionary new ].
