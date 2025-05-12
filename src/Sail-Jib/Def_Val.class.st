@@ -48,6 +48,24 @@ Def_Val >> retType [
 	^ ty
 ]
 
+{ #category : #semantics }
+Def_Val >> spriteRType [
+	^tys
+		inject: ty
+		into: [ :soFar :thisTime | TFun
+				x: String junkSymbol
+				s: thisTime spriteRType
+				t: soFar spriteRType ]
+]
+
+{ #category : #semantics }
+Def_Val >> spriteVal [
+	^Val
+		symbol: id
+		rtype: self spriteRType
+		metric: nil
+]
+
 { #category : #printing }
 Def_Val >> unparseOn: aStream [
 	aStream nextPutAll: 'val '.

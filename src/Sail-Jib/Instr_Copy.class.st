@@ -41,6 +41,16 @@ Instr_Copy >> location [
 	^l
 ]
 
+{ #category : #semantics }
+Instr_Copy >> spriteExprContWith: k [
+self assert: (l isKindOf: Loc_Id).
+	^ELet
+		decl: (SpriteDecl
+			bind: (SpriteBind id: l id)
+			expr: e spriteExpr)
+		expr: k
+]
+
 { #category : #printing }
 Instr_Copy >> unparseOn: aStream [
 	l unparseOn: aStream.

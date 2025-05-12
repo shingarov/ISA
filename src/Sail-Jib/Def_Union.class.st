@@ -37,6 +37,23 @@ Def_Union >> isDataDef [
 	^true
 ]
 
+{ #category : #semantics }
+Def_Union >> spriteData [
+	| ctors |
+	ctors := ids collectAssociations: [ :ctorName :ctorJibType |
+		Ctor
+			bind: (SpriteBind id: ctorName)
+			funArgs: { ctorJibType spriteRType funArgAssoc: nil }
+			reft: nil
+		].
+	^Data
+		name: id
+		vars: #()
+		rvars: #()
+		ctors: (ctors collect: [ :eachCtor | eachCtor mkCtor: id tvs: {} rvs: {} ])
+		inv: Reft new known
+]
+
 { #category : #printing }
 Def_Union >> unparseOn: aStream [
 	aStream

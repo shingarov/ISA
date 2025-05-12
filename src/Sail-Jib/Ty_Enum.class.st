@@ -19,6 +19,15 @@ Ty_Enum >> sort [
 	^ self environment lookupSortForTypename: id
 ]
 
+{ #category : #semantics }
+Ty_Enum >> spriteRType [
+	^TCon
+		c: id
+		ts: {}
+		ars: {}
+		r: Reft new known
+]
+
 { #category : #printing }
 Ty_Enum >> unparseOn: aStream [	
 	aStream 
