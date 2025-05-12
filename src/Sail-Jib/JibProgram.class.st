@@ -37,11 +37,6 @@ JibProgram class >> sourceSubstitutePath [
 	^ SourceSubstitutePath
 ]
 
-{ #category : #analysis }
-JibProgram >> analyzeUsing: analyzer [
-	analyzer analyzeProgram: self
-]
-
 { #category : #enumerating }
 JibProgram >> childrenDo: aBlock [
 	defs do: aBlock
@@ -62,9 +57,17 @@ JibProgram >> doSemanticAnalysis [
 	 set, we assume semantic analysys was already run and we
 	 do not run it again.
 	"
+	| res |
 	environment notNil ifTrue:[ ^ self ].
-	
-	self semanticAnalyzerClass new analyze: self.
+	res := [ self spriteProg solve ] runReader: #bvLengthInference initialState: BvLengthInference new.
+	self assert: res isSafe.
+	self setEnvironment: (JibProgramEnvironment of: self).
+	self dataDefs do: [ :eachDataDef | 
+		| name z3sort |
+		name := eachDataDef id.
+		z3sort := self environment context mkDatatypeSort: name.
+		self environment registerSort: z3sort forTypename: name
+ ].
 
 ]
 
@@ -184,15 +187,6 @@ JibProgram >> program [
 JibProgram >> registersDo: aBlock [
 	defs do: [ :def | def isRegister ifTrue:[ aBlock value: def ] ]
 
-]
-
-{ #category : #analysis }
-JibProgram >> semanticAnalyzerClass [
-	"Return default semantic analyzer class"
-
-	"TODO: This should be changed to 'real' Sprite-based analyzer
-	 once implemented."
-	^ JibProgramNaiveAnalyzer
 ]
 
 { #category : #initialization }

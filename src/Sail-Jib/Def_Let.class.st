@@ -23,11 +23,6 @@ Def_Let class >> inducedParser [
 	construct: #(- ids instrs)
 ]
 
-{ #category : #analysis }
-Def_Let >> analyzeUsing: analyzer [
-	analyzer analyzeLet: self
-]
-
 { #category : #enumerating }
 Def_Let >> childrenDo: aBlock [
 	ids do:[:arg | aBlock value: arg value].
