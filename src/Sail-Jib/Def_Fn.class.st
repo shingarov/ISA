@@ -17,11 +17,6 @@ Def_Fn class >> inducedParser [
 	construct: #(- id ids instrs)
 ]
 
-{ #category : #analysis }
-Def_Fn >> analyzeUsing: analyzer [
-	analyzer analyzeFn: self
-]
-
 { #category : #accessing }
 Def_Fn >> argNames [
 	^ ids
