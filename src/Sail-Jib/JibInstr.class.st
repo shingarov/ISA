@@ -89,6 +89,11 @@ JibInstr >> sourceLoc [
 	^ sourceLoc
 ]
 
+{ #category : #semantics }
+JibInstr >> spriteExprContWith: k [
+	^self subclassResponsibility
+]
+
 { #category : #enumerating }
 JibInstr >> usedIdsDo: aBlock [
 	"Evaluate `aBlock` for each id used (read, accessed) by this instruction"

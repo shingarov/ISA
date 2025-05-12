@@ -16,3 +16,8 @@ Exp_I >> childrenDo: aBlock [
 Exp_I >> integerValue [
 	^ v
 ]
+
+{ #category : #semantics }
+Exp_I >> spriteExpr [
+	^EImm imm: (ECon prim: (PInt integer: v))
+]

@@ -14,6 +14,15 @@ Ty_Union class >> inducedParser [
 	construct: #(- id)
 ]
 
+{ #category : #semantics }
+Ty_Union >> spriteRType [
+	^TCon
+		c: id
+		ts: {}
+		ars: {}
+		r: Reft new known
+]
+
 { #category : #printing }
 Ty_Union >> unparseOn: aStream [
 	aStream nextPutAll: '%union '.

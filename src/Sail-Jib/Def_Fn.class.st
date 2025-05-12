@@ -60,6 +60,35 @@ Def_Fn >> signature [
 
 ]
 
+{ #category : #semantics }
+Def_Fn >> spriteDecl [
+	| sig |
+	sig := self signature spriteVal.
+	^SpriteDecl
+		bind: (SpriteBind id: id)
+		expr: (EAnn
+			expr: self spriteEFun
+			ann: sig)
+]
+
+{ #category : #semantics }
+Def_Fn >> spriteEFun [
+ids size = 1 ifFalse: [ self shouldBeImplemented "curry" ].
+
+	^EFun
+		bind: (SpriteBind id: ids first)
+		expr: self spriteExpr
+]
+
+{ #category : #semantics }
+Def_Fn >> spriteExpr [
+self blocks size = 1 ifFalse: [ self shouldBeImplemented ].
+
+	^instrs reversed
+		inject: nil
+		into: [ :soFar :thisTime | thisTime spriteExprContWith: soFar ]
+]
+
 { #category : #printing }
 Def_Fn >> unparseOn: aStream [
 	aStream

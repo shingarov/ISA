@@ -47,6 +47,23 @@ Def_Enum >> isEnum [
 	^ true
 ]
 
+{ #category : #semantics }
+Def_Enum >> spriteData [
+	| ctors |
+	ctors := ids collect: [ :ctorName |
+		Ctor
+			bind: (SpriteBind id: ctorName)
+			funArgs: {}
+			reft: nil
+		].
+	^Data
+		name: id
+		vars: #()
+		rvars: #()
+		ctors: (ctors collect: [ :eachCtor | eachCtor mkCtor: id tvs: {} rvs: {} ])
+		inv: Reft new known
+]
+
 { #category : #printing }
 Def_Enum >> unparseOn: aStream [
 	aStream

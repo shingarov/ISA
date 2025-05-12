@@ -14,6 +14,15 @@ Ty_Struct class >> inducedParser [
 	construct: #(- id)
 ]
 
+{ #category : #semantics }
+Ty_Struct >> spriteRType [
+	^TCon
+		c: id
+		ts: {}
+		ars: {}
+		r: Reft new known
+]
+
 { #category : #printing }
 Ty_Struct >> unparseOn: aStream [
 	aStream nextPutAll: '%struct '.

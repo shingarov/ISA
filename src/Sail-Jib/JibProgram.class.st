@@ -215,6 +215,29 @@ JibProgram >> sourceSubstitutePath [
 	^ sourceSubstitutePath
 ]
 
+{ #category : #semantics }
+JibProgram >> spriteExpr [
+	^self functionDefs reversed
+		inject: (ΛExpression int: 0)
+		into: [ :soFar :thisTime |
+			ELet
+				decl: thisTime spriteDecl
+				expr: soFar
+		]
+]
+
+{ #category : #semantics }
+JibProgram >> spriteProg [
+	| data |
+	data := self dataDefs collect: #spriteData.
+	^Prog
+				quals: {  }
+				meas: {  }
+				expr: self spriteExpr
+				data: data
+				options: {  }
+]
+
 { #category : #printing }
 JibProgram >> unparseOn: aStream [
 	super unparseOn: aStream.

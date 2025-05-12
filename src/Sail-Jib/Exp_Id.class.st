@@ -18,6 +18,11 @@ Exp_Id >> id [
 	^ id
 ]
 
+{ #category : #semantics }
+Exp_Id >> spriteExpr [
+	^EImm imm: (EVar of: id)
+]
+
 { #category : #printing }
 Exp_Id >> unparseOn: aStream [
 	aStream nextPutAll: id

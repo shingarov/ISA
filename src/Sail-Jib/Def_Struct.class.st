@@ -36,6 +36,21 @@ Def_Struct >> isDataDef [
 	^true
 ]
 
+{ #category : #semantics }
+Def_Struct >> spriteData [
+	| ctor |
+	ctor := Ctor
+			bind: (SpriteBind id: id, '__constructor')
+			funArgs: (ids collectAssociations: [ :name :ty | ty spriteRType funArgAssoc: name ])
+			reft: nil.
+	^Data
+		name: id
+		vars: #()
+		rvars: #()
+		ctors: {ctor mkCtor: id tvs: {} rvs: {}}
+		inv: Reft new known
+]
+
 { #category : #printing }
 Def_Struct >> unparseOn: aStream [
 	aStream

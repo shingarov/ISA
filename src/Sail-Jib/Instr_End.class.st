@@ -32,6 +32,12 @@ Instr_End >> isEnd [
 	^true
 ]
 
+{ #category : #semantics }
+Instr_End >> spriteExprContWith: mustBeNil [
+	self assert: mustBeNil isNil.
+	^EImm imm: (EVar of: 'return')
+]
+
 { #category : #printing }
 Instr_End >> unparseOn: aStream [
 	aStream nextPutAll: 'end'.
