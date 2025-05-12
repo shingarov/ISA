@@ -48,6 +48,11 @@ JibProgram >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #accessing }
+JibProgram >> dataDefs [
+	^defs select: #isDataDef
+]
+
 { #category : #analysis }
 JibProgram >> doSemanticAnalysis [
 	"Performs analysis of a program. Once done, program's 
@@ -93,6 +98,16 @@ JibProgram >> files [
 	].
 	^SmallDictionary new.
 
+]
+
+{ #category : #accessing }
+JibProgram >> functionDefs [
+	^defs select: #isFn
+]
+
+{ #category : #accessing }
+JibProgram >> functionSignatures [
+	^defs select: #isVal
 ]
 
 { #category : #enumerating }
