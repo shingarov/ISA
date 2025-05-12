@@ -32,6 +32,11 @@ Def_Union >> id [
 	^ id
 ]
 
+{ #category : #testing }
+Def_Union >> isDataDef [
+	^true
+]
+
 { #category : #printing }
 Def_Union >> unparseOn: aStream [
 	aStream

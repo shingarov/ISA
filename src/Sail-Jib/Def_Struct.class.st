@@ -31,6 +31,11 @@ Def_Struct >> id [
 	^ id
 ]
 
+{ #category : #testing }
+Def_Struct >> isDataDef [
+	^true
+]
+
 { #category : #printing }
 Def_Struct >> unparseOn: aStream [
 	aStream

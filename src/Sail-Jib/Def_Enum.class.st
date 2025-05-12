@@ -38,6 +38,11 @@ Def_Enum >> ids [
 ]
 
 { #category : #testing }
+Def_Enum >> isDataDef [
+	^true
+]
+
+{ #category : #testing }
 Def_Enum >> isEnum [
 	^ true
 ]
