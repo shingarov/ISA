@@ -103,9 +103,9 @@ register zPC : %bv64 {
 	zPC = 0xCAFE0000CAFE0000;
 }
 
-val zmain : () -> %i64
+val zmain : (%i) -> %i64
 
-fn zmain() {
+fn zmain(_) {
   return = zxlen_val;
   end;
 }
@@ -114,7 +114,7 @@ fn zmain() {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: #().
+	interpreter := JibInterpreter for: main arguments: #(1).
 	session := JibDebuggerSession for: interpreter.
 
 	"
@@ -135,19 +135,19 @@ JibDebuggerSessionTests >> test_03c [
 	program := JibParser parse:'
 
 let (zxlen_val: %i64) {
-  zxlen_val = zf();
+  zxlen_val = zf(());
 }
 
-val zf : () -> %i64
+val zf : (%unit) -> %i64
 
-fn zf() {
+fn zf(_) {
   return = 64;
   end;
 }
 
-val zmain : () -> %i64
+val zmain : (%i) -> %i64
 
-fn zmain() {
+fn zmain(_) {
   return = zxlen_val;
   end;
 }
@@ -156,7 +156,7 @@ fn zmain() {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: #().
+	interpreter := JibInterpreter for: main arguments: #(1).
 	session := JibDebuggerSession for: interpreter.
 
 	"
@@ -275,19 +275,19 @@ JibDebuggerSessionTests >> test_04c [
 	program := JibParser parse:'
 
 let (zxlen_val: %i64) {
-  zxlen_val = zf();
+  zxlen_val = zf(());
 }
 
-val zf : () -> %i64
+val zf : (%unit) -> %i64
 
-fn zf() {
+fn zf(_) {
   return = 64;
   end;
 }
 
-val zmain : () -> %i64
+val zmain : (%i) -> %i64
 
-fn zmain() {
+fn zmain(_) {
   return = zxlen_val;
   end;
 }
@@ -296,7 +296,7 @@ fn zmain() {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: #().
+	interpreter := JibInterpreter for: main arguments: #(1).
 	session := JibDebuggerSession for: interpreter.
 
 	"
@@ -417,9 +417,9 @@ let (zxlen_val: %i64) {
   zxlen_val = zz40;
 }
 
-val zmain : () -> %i64
+val zmain : (%i) -> %i64
 
-fn zmain() {
+fn zmain(_) {
   return = zxlen_val;
   end;
 }
@@ -428,7 +428,7 @@ fn zmain() {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: {  }.
+	interpreter := JibInterpreter for: main arguments: { 1 }.
 	session := JibDebuggerSession for: interpreter.
 
 	"
