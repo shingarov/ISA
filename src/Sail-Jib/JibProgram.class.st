@@ -57,7 +57,7 @@ JibProgram >> doSemanticAnalysis [
 	 set, we assume semantic analysys was already run and we
 	 do not run it again.
 	"
-	| res |
+	| res unitSort |
 	environment notNil ifTrue:[ ^ self ].
 	res := [ self spriteProg solve ] runReader: #bvLengthInference initialState: BvLengthInference new.
 	self assert: res isSafe.
@@ -67,7 +67,9 @@ JibProgram >> doSemanticAnalysis [
 		name := eachDataDef id.
 		z3sort := self environment context mkDatatypeSort: name.
 		self environment registerSort: z3sort forTypename: name
- ].
+	].
+	unitSort := self environment context mkDatatypeSort: '__unit__'.
+	self environment registerSort: unitSort forTypename: '__unit__'
 
 ]
 
@@ -221,14 +223,36 @@ JibProgram >> spriteExpr [
 ]
 
 { #category : #semantics }
+JibProgram >> spritePrelude [
+	| unit |
+
+	unit := Data
+		name: '__unit__'
+		vars: #()
+		rvars: #()
+		ctors: { (Ctor bind: (SpriteBind id: '__unit__') funArgs: {} reft: nil) mkCtor: '__unit__' tvs: {} rvs: {} }
+		inv: Reft new known.
+
+	^Prog
+				quals: {  }
+				meas: {  }
+				expr: (ΛExpression int: 0)
+				data: { unit }
+				options: {  }
+]
+
+{ #category : #semantics }
 JibProgram >> spriteProg [
-	| data |
+	| prelude data |
+
+	prelude := self spritePrelude.
+
 	data := self dataDefs collect: #spriteData.
 	^Prog
 				quals: {  }
 				meas: {  }
 				expr: self spriteExpr
-				data: data
+				data: prelude data , data
 				options: {  }
 ]
 

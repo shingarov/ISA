@@ -15,6 +15,15 @@ Ty_Unit >> sort [
 	^ self environment lookupSortForUnit.
 ]
 
+{ #category : #semantics }
+Ty_Unit >> spriteRType [
+	^TCon
+		c: '__unit__'
+		ts: {}
+		ars: {}
+		r: Reft new known
+]
+
 { #category : #printing }
 Ty_Unit >> unparseOn: aStream [
 	aStream nextPutAll:'%unit'

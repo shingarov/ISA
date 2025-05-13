@@ -409,8 +409,8 @@ fn  zmain(_) {
 	interpreter interpret.
 
 	self assert: interpreter retVal isDatatype.
-	self assert: interpreter retVal sort name asString = '%unit'.
-	self assert: interpreter retVal printString = '|()|'.
+	self assert: interpreter retVal sort name asString = '__unit__'.
+	self assert: interpreter retVal printString = '__unit__'.
 	
 
 ]
@@ -437,8 +437,8 @@ fn  zmain(_) {
 	interpreter interpret.
 
 	self assert: interpreter retVal isDatatype.
-	self assert: interpreter retVal sort name asString = '%unit'.
-	self assert: interpreter retVal printString = '|()|'.
+	self assert: interpreter retVal sort name asString = 'unit__'.
+	self assert: interpreter retVal printString = 'unit__'.
 	
 
 ]
@@ -464,7 +464,7 @@ fn  zmain(_) {
 	interpreter interpret.
 
 	self assert: interpreter retVal isDatatype.
-	self assert: interpreter retVal sort name asString = '%unit'.
+	self assert: interpreter retVal sort name asString = '__unit__'.
 	
 
 ]
