@@ -50,6 +50,44 @@ Instr_Call >> location [
 	^lvalue
 ]
 
+{ #category : #semantics }
+Instr_Call >> spriteExprContWith: k [
+	| head tail |
+
+	"For
+
+	...
+	zz2 = func(zz1)
+	...
+
+	create
+
+	...
+	let _tmp1 = zz1;
+	let zz2 = func(_tmp1)
+	"
+
+	self assert: (lvalue isKindOf: Loc_Id).
+	self assert: (args size == 1). "currying"
+
+	tail := ELet
+		decl: (SpriteDecl
+			bind: (SpriteBind id: lvalue id)
+			expr: (ΛEApp
+							expr: (EImm imm: (EVar of: f))
+							imm: (EVar of: '_tmp1')))
+		expr: k.
+
+	head := ELet
+		decl: (SpriteDecl
+			bind: (SpriteBind id: '_tmp1')
+			expr: args first spriteExpr)
+		expr: tail.
+
+	^head
+
+]
+
 { #category : #printing }
 Instr_Call >> unparseOn: aStream [
 	lvalue unparseOn: aStream.
