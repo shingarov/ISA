@@ -15,7 +15,7 @@ Def_Extern class >> inducedParser [
 	    '=' asParser trim,
 	    PPParser doubleQuoted trim,
 	    $: asParser trim
-	    , Ty asParser trim commaSeparated parens trim
+	    , (Ty asParser trim commaSeparated parens trim ==> [ :tys | tys ifNotNil:[tys] ifNil: [ PPFailure message:'Argument type list cannot be empty!' ] ])
 	    , '->' asParser trim
 	    , Ty asParser trim
 	    construct: #(- id - ext - tys - ty)
