@@ -102,9 +102,9 @@ JibInterpreterTests >> test_03 [
 	program := JibParser parse:'
 register zPC : %bv32
 
-val zmain : () ->  %bv32
+val zmain : (%i) ->  %bv32
 
-fn zmain() {
+fn zmain(_) {
   zz39 : %bv32;
   zz39 = 0x0000002A;
   zPC = zz39;
@@ -113,13 +113,11 @@ fn zmain() {
   return = zz40;
   end;
 }
-
-
 '.
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: { }.
+	interpreter := JibInterpreter for: main arguments: { 1 }.
 
 	interpreter interpret.
 
@@ -196,9 +194,9 @@ let (zxlen_val: %i64) {
   zxlen_val = zz40;
 }
 
-val zmain : () -> %i64
+val zmain : (%i) -> %i64
 
-fn zmain(zarg) {
+fn zmain(_) {
   return = zxlen_val;
   end;
 }
@@ -207,7 +205,7 @@ fn zmain(zarg) {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: { -1 toBitVector: 16 }.
+	interpreter := JibInterpreter for: main arguments: { 1 }.
 
 	interpreter interpret.
 
@@ -228,9 +226,9 @@ register zxlen_val : %i64 {
   zxlen_val = zz40;
 }
 
-val zmain : () -> %i64
+val zmain : (%i) -> %i64
 
-fn zmain(zarg) {
+fn zmain(_) {
   return = zxlen_val;
   end;
 }
@@ -255,19 +253,19 @@ JibInterpreterTests >> test_07 [
 	program := JibParser parse:'
 
 let (zxlen_val: %i64) {
-  zxlen_val = zf();
+  zxlen_val = zf(());
 }
 
-val zf : () -> %i64
+val zf : (%unit) -> %i64
 
-fn zf() { 
+fn zf(_) {
   return = 64;
   end;
 }
 
-val zmain : () -> %i64
+val zmain : (%i) -> %i64
 
-fn zmain(zarg) {
+fn zmain(_) {
   return = zxlen_val;
   end;
 }
@@ -276,7 +274,7 @@ fn zmain(zarg) {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: { -1 toBitVector: 16 }.
+	interpreter := JibInterpreter for: main arguments: { 1 }.
 
 	interpreter interpret.
 
@@ -300,8 +298,8 @@ enum ziop {
   zRISCV_ANDI
 }
 
-val zmain : () -> %enum ziop
-fn  zmain() {
+val zmain : (%i) -> %enum ziop
+fn  zmain(_) {
   return = zRISCV_ADDI;
   end;
 }
@@ -310,7 +308,7 @@ fn  zmain() {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: {  }.
+	interpreter := JibInterpreter for: main arguments: { 1 }.
 
 	interpreter interpret.
 
@@ -334,8 +332,8 @@ enum ziop {
   zRISCV_ANDI
 }
 
-val zmain : () -> %enum ziop
-fn  zmain() {
+val zmain : (%i) -> %enum ziop
+fn  zmain(_) {
 	zz1 : %enum ziop;
 	zz1 = zRISCV_ANDI;
   return = zz1;
@@ -346,7 +344,7 @@ fn  zmain() {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: {  }.
+	interpreter := JibInterpreter for: main arguments: { 1 }.
 
 	interpreter interpret.
 
@@ -370,8 +368,8 @@ enum ziop {
   zRISCV_ANDI
 }
 
-val zmain : () -> %enum ziop
-fn  zmain() {
+val zmain : (%i) -> %enum ziop
+fn  zmain(_) {
 	zz1 : %enum ziop;
   return = zz1;
   end;
@@ -381,7 +379,7 @@ fn  zmain() {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: {  }.
+	interpreter := JibInterpreter for: main arguments: { 1 }.
 
 	interpreter interpret.
 
@@ -396,8 +394,8 @@ JibInterpreterTests >> test_09a [
 	| program main interpreter |
 	program := JibParser parse:'
 
-val zmain : () -> %unit
-fn  zmain() {	
+val zmain : (%i) -> %unit
+fn  zmain(_) {
   return = ();
   end;
 }
@@ -406,7 +404,7 @@ fn  zmain() {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: {  }.
+	interpreter := JibInterpreter for: main arguments: { 1 }.
 
 	interpreter interpret.
 
@@ -422,8 +420,8 @@ JibInterpreterTests >> test_09b [
 	| program main interpreter |
 	program := JibParser parse:'
 
-val zmain : () -> %unit
-fn  zmain() {	
+val zmain : (%i) -> %unit
+fn  zmain(_) {
 	zz1 : %unit;
 	zz1 = ();
   return = zz1;
@@ -434,7 +432,7 @@ fn  zmain() {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: {  }.
+	interpreter := JibInterpreter for: main arguments: { 1 }.
 
 	interpreter interpret.
 
@@ -450,8 +448,8 @@ JibInterpreterTests >> test_09c [
 	| program main interpreter |
 	program := JibParser parse:'
 
-val zmain : () -> %unit
-fn  zmain() {	
+val zmain : (%i) -> %unit
+fn  zmain(_) {
 	zz1 : %unit;
   return = zz1;
   end;
@@ -461,7 +459,7 @@ fn  zmain() {
 
 	main := program lookupFunction: 'zmain'.
 
-	interpreter := JibInterpreter for: main arguments: {  }.
+	interpreter := JibInterpreter for: main arguments: { 1 }.
 
 	interpreter interpret.
 
