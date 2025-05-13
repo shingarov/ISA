@@ -18,10 +18,6 @@ JibProgramEnvironment >> context [
 JibProgramEnvironment >> initializeWithNode: aJibProgramNode [
 	node := aJibProgramNode.
 	context := Z3Context current.
-	unitSort := context mkEnumerationSort: '%unit' 
-	                             elements: { '()' }
-	                               consts: Cell new
-	                              testers: Cell new.	
 	typename2SortMap := Dictionary new.
 ]
 
@@ -32,7 +28,7 @@ JibProgramEnvironment >> lookupSortForTypename: id [
 
 { #category : #lookup }
 JibProgramEnvironment >> lookupSortForUnit [
-	^ unitSort 
+	^ self lookupSortForTypename: '__unit__'
 ]
 
 { #category : #accessing }

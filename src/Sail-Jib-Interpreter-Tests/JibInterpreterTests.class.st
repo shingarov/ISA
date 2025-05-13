@@ -437,8 +437,8 @@ fn  zmain(_) {
 	interpreter interpret.
 
 	self assert: interpreter retVal isDatatype.
-	self assert: interpreter retVal sort name asString = 'unit__'.
-	self assert: interpreter retVal printString = 'unit__'.
+	self assert: interpreter retVal sort name asString = '__unit__'.
+	self assert: interpreter retVal printString = '__unit__'.
 	
 
 ]
