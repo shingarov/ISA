@@ -46,6 +46,11 @@ JibExp class >> isAbstract [
 	^self == JibExp
 ]
 
+{ #category : #semantics }
+JibExp >> spriteExpr [
+	^ self subclassResponsibility
+]
+
 { #category : #enumerating }
 JibExp >> usedIdsDo: aBlock [
 	"Evaluate `aBlock` for each id used (read, accessed) by this expression"
