@@ -23,8 +23,7 @@ JibDefWithCode >> environment [
 	 valid after invoking `#doSemanticAnalysis`."
 
 	environment isNil ifTrue:[
-		self error:'Program''s environment is not initialized. Invoke `#doSemanticAnalysis` first.'.
-		^nil.
+		^parent environment
 	].
 
 	^ environment
