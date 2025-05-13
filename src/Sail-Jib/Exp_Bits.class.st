@@ -13,6 +13,13 @@ Exp_Bits >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #semantics }
+Exp_Bits >> spriteExpr [
+	^ ΛEApp
+			expr: (EImm imm: (EVar of: 'toBitVector'))
+			imm: (ECon prim: (PInt integer: x signedValue))
+]
+
 { #category : #'printing & storing' }
 Exp_Bits >> unparseOn: aStream [
 	x length == 0 ifTrue:[

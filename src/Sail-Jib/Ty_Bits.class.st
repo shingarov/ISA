@@ -19,6 +19,15 @@ Ty_Bits >> sort [
 	^ self environment context mkBvSort: length 
 ]
 
+{ #category : #semantics }
+Ty_Bits >> spriteRType [
+	^TCon
+		c: 'BitVec'
+		ts: { TBvSize c: 'Size', length printString ts: #() ars: #() r: Reft new known }
+		ars: {}
+		r: Reft new known
+]
+
 { #category : #printing }
 Ty_Bits >> unparseOn: aStream [
 	aStream nextPutAll: '%bv'.
