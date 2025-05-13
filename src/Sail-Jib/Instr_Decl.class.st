@@ -40,6 +40,15 @@ Instr_Decl >> id [
 	^ id
 ]
 
+{ #category : #semantics }
+Instr_Decl >> spriteExprContWith: k [
+	^ELet
+		decl: (SpriteDecl
+			bind: (SpriteBind id: id)
+			expr: ΛExpression unknown)
+		expr: k
+]
+
 { #category : #printing }
 Instr_Decl >> unparseOn: aStream [
 	"BOGUS: why id is not Loc_Id?"
