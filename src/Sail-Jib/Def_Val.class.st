@@ -50,12 +50,12 @@ Def_Val >> retType [
 
 { #category : #semantics }
 Def_Val >> spriteRType [
-	^tys
-		inject: ty
+	^tys reversed
+		inject: ty spriteRType
 		into: [ :soFar :thisTime | TFun
 				x: String junkSymbol
 				s: thisTime spriteRType
-				t: soFar spriteRType ]
+				t: soFar ]
 ]
 
 { #category : #semantics }
