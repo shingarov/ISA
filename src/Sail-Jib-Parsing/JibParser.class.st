@@ -27,7 +27,7 @@ Class {
 
 { #category : #accessing }
 JibParser class >> id [
-	^(#letter asParser, (#word asParser / $_ asParser) star) flatten
+	^((#letter asParser / $_ asParser), (#word asParser / $_ asParser) star) flatten
 ]
 
 { #category : #'rules - exp' }
