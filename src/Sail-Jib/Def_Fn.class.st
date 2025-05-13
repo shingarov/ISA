@@ -12,7 +12,7 @@ Class {
 Def_Fn class >> inducedParser [
 	^ 'fn' asParser trim
 	, JibParser id trim
-	, (JibParser id trim commaList ==> [ :x|x ifNil:#() ])
+	, (JibParser id trim commaList ==> [ :ids | ids ifNotNil:[ids] ifNil: [ PPFailure message:'Argument name list cannot be empty!' ] ])
 	, (JibInstr asParser, $; asParser trim ==> #first) star braces
 	construct: #(- id ids instrs)
 ]

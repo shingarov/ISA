@@ -262,6 +262,24 @@ JibParsingTest >> test_field_of_unwrap_of_field_of_struct [
 	"
 ]
 
+{ #category : #'tests - individual defs' }
+JibParsingTest >> test_fn_empty_args [
+	| val |
+
+	val := defParser parse: 'fn zf () {
+	return = 1;
+	end;
+}'.
+	self assert: val isPetitFailure.
+
+	val := defParser parse: 'fn zf ( ) {
+	return = 1;
+	end;
+}'.
+
+	self assert: val isPetitFailure.
+]
+
 { #category : #'tests - expressions' }
 JibParsingTest >> test_id [
 	| src val |
@@ -451,4 +469,15 @@ JibParsingTest >> test_val [
 	| val |
 	val := defParser parse: 'val zundefined_bitvector = "undefined_bitvector" : (%i) ->  %bv'.
 	self assert: (val isKindOf: Def_Val)
+]
+
+{ #category : #'tests - individual defs' }
+JibParsingTest >> test_val_empty_args [
+	| val |
+
+	val := defParser parse: 'val zf : () -> %bv'.
+	self assert: val isPetitFailure.
+
+	val := defParser parse: 'val zf : ( ) -> %bv'.
+	self assert: val isPetitFailure.
 ]

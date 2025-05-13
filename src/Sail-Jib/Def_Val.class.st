@@ -14,7 +14,7 @@ Def_Val class >> inducedParser [
 	^'val' asParser trim
 	, JibParser id trim
 	, $: asParser trim
-	, (Ty asParser trim commaSeparated parens ==> [ :x | x ifNil:#() ])
+	, (Ty asParser trim commaSeparated parens ==> [ :tys | tys ifNotNil:[tys] ifNil: [ PPFailure message:'Argument type list cannot be empty!' ] ])
 	, '->' asParser trim
 	, Ty asParser trim
 	construct: #(- id - tys - ty)
