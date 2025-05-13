@@ -48,3 +48,8 @@ Ty >> sort [
 	"Return the Z3 sort representing this (Jib) type."
 	^ self subclassResponsibility 
 ]
+
+{ #category : #semantics }
+Ty >> spriteRType [
+	self subclassResponsibility
+]
