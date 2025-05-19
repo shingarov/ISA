@@ -8,6 +8,10 @@ Class {
 JibDebugActionFinish class >> actionFor: aDebugger [
 	<gtStackDebuggingAction>
 
+	<gtContextStackDebuggingAction>
+	<gtContextSourceDebuggingAction>
+	<gtContextInstructionDebuggingAction>
+
 	^ self forDebugger: aDebugger
 ]
 
