@@ -40,6 +40,18 @@ JibInterpreter >> context [
 	^ context
 ]
 
+{ #category : #'debugging support' }
+JibInterpreter >> drop [
+	"Drop most recent context. Dropping least recent (initial) context is not supported.
+
+	 Use with caution!"
+
+	self assert: context notNil.
+	self assert: context caller notNil.
+
+	context := context caller.
+]
+
 { #category : #'accessing - variables' }
 JibInterpreter >> get: id [
 	(globals includesKey: id) ifTrue:[

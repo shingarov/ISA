@@ -156,7 +156,16 @@ JibDebuggerSession >> name [
 
 { #category : #'debugging actions' }
 JibDebuggerSession >> restart: context [
-	self notYetImplemented
+	| function args caller  |
+
+	[ interpreter context ~~ context ] whileTrue:[
+		interpreter drop.
+	].
+
+	function := context function.
+	args := context function argNames collect:[:argName | context get: argName ].
+	caller := context caller.
+	context initializeWith: function arguments: args caller: caller.
 ]
 
 { #category : #'debugging actions' }
