@@ -161,7 +161,7 @@ JibDebuggerSession >> restart: context [
 
 { #category : #'debugging actions' }
 JibDebuggerSession >> resume [
-	self notYetImplemented
+	interpreter interpret.
 ]
 
 { #category : #accessing }
