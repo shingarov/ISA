@@ -103,7 +103,7 @@ JibDebugger >> sourceIn: composite forContext: context [
 	composite text
 			with: [ :text | self installActionsForRootPragmas: #( sourceDebuggingAction ) in: text ];
 			title: 'Source';
-			display: [ context sourceLoc sourceTextWithHighlights ];
+			display: [ context sourceLoc sourceTextWithHighlights ifNil:[ 'Source not available' ] ];
 			format: #asText
 ]
 
