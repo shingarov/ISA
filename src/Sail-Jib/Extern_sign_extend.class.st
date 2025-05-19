@@ -11,5 +11,5 @@ Extern_sign_extend class >> id [
 
 { #category : #evaluating }
 Extern_sign_extend >> evaluateWithArguments: args [
-	^ args first signExtend: args second
+	^ args first signExtend: args second value - args first length
 ]

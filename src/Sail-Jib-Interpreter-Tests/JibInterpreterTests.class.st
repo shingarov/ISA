@@ -164,7 +164,7 @@ val zmain : (%bv16) ->  %bv32
 
 fn zmain(zarg) {
   zz1 : %bv32;
-  zz1 = zsign_extend(zarg, 16);
+  zz1 = zsign_extend(zarg, 32);
   return = zz1;
   end;
 }
