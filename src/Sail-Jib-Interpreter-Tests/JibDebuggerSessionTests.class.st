@@ -662,3 +662,90 @@ fn zmain(zarg) {
 	self assert: interpreter context isNil.
 	self assert: interpreter retVal = 2r00000000000000000000000000101010.
 ]
+
+{ #category : #tests }
+JibDebuggerSessionTests >> test_09a_restart [
+	| program main interpreter session |
+	program := JibParser parse:'
+val zf : (%bv32) ->  %bv32
+
+fn zf(zarg) {
+  zz39 : %bv32 `1;
+  zz39 = 0b00000000000000000000000000101010 `2;
+  return = zz39 `3;
+  end;
+}
+'.
+
+	main := program lookupFunction: 'zf'.
+
+	interpreter := JibInterpreter for: main arguments: { 0 toBitVector: 32 }.
+	session := JibDebuggerSession for: interpreter.
+
+	"
+	JibDebugger openOn: session.
+	"
+
+	self assert: interpreter context pc equals: 1.
+	self should: [interpreter context get: 'zz39' ] raise: AssertionFailure.
+
+	session stepIntoI: interpreter context. "zz39 : %bv32 `1;"
+	session stepIntoI: interpreter context. "zz39 = 0b00000000000000000000000000101010 `2;"
+
+	self assert: (interpreter context get: 'zz39') = 42.
+	self assert: interpreter context pc equals: 3.
+
+	session restart: interpreter context.
+
+	self assert: interpreter context pc equals: 1.
+	self should: [interpreter context get: 'zz39' ] raise: AssertionFailure.
+]
+
+{ #category : #tests }
+JibDebuggerSessionTests >> test_09b_restart [
+	| program main interpreter session |
+
+	program := JibParser parse:'
+val zf : (%bv32) ->  %bv32
+
+fn zf(zarg) {
+  zz39 : %bv32 `1;
+  zz39 = 0b00000000000000000000000000101010 `2;
+  return = zz39 `3;
+  end;
+}
+
+val zmain : (%bv32) ->  %bv32
+
+fn zmain(zarg) {
+  zz1 : %bv32 `1;
+  zz1 = zf(zarg) `2;
+  return = zz1 `3;
+  end;
+}
+
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: { 0 toBitVector: 32 }.
+	session := JibDebuggerSession for: interpreter.
+
+	"
+	JibDebugger openOn: session.
+	"
+	self assert: interpreter context function id = 'zmain'.
+	session stepIntoI: interpreter context. "zz1 : %bv32 `1;"
+	session stepIntoI: interpreter context. "zz1 = zf(zarg) `2;"
+
+	self assert: interpreter context function id = 'zf'.
+	self assert: interpreter context caller function id = 'zmain'.
+
+	session stepIntoI: interpreter context. "zz39 : %bv32 `1;"
+
+	session restart: interpreter context caller.
+
+	self assert: interpreter context function id equals: 'zmain'.
+	self assert: interpreter context pc equals: 1.
+	self should: [interpreter context get: 'zz1' ] raise: AssertionFailure.
+]
