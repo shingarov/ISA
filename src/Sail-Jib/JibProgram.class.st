@@ -93,6 +93,11 @@ JibProgram >> environment [
 ]
 
 { #category : #accessing }
+JibProgram >> externDefs [
+	^defs select: #isExtern
+]
+
+{ #category : #accessing }
 JibProgram >> files [
 	"Return a dictionary mapping (Sail) source file index to source file path."
 
@@ -213,7 +218,7 @@ JibProgram >> sourceSubstitutePath [
 
 { #category : #semantics }
 JibProgram >> spriteExpr [
-	^self functionDefs reversed
+	^(self externDefs, self functionDefs) reversed
 		inject: (ΛExpression int: 0)
 		into: [ :soFar :thisTime |
 			ELet

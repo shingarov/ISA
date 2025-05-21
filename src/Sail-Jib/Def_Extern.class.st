@@ -34,6 +34,18 @@ Def_Extern >> isExtern [
 	^true
 ]
 
+{ #category : #semantics }
+Def_Extern >> spriteDecl [
+	| extern |
+
+	extern := self extern.
+	^SpriteDecl
+		bind: (SpriteBind id: self id)
+		expr: (EAnn
+			expr: extern spriteEFun
+			ann:  extern spriteVal)
+]
+
 { #category : #printing }
 Def_Extern >> unparseOn: aStream [
 	aStream nextPutAll: 'val '.

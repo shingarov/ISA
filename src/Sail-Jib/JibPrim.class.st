@@ -48,6 +48,11 @@ JibPrim >> isExtern [
 ]
 
 { #category : #accessing }
+JibPrim >> numArgs [
+	^self subclassResponsibility
+]
+
+{ #category : #accessing }
 JibPrim >> signature [
 	"Return this prim's signature (as fabricated instance of `Def_Val`).
 
@@ -57,4 +62,24 @@ JibPrim >> signature [
 		signature := self class signature
 	].
 	^signature
+]
+
+{ #category : #semantics }
+JibPrim >> spriteEFun [
+		^ (self numArgs to: 1 by: -1)
+			inject: ΛExpression unknown
+			into: [ :expr :argIdx | EFun bind: (SpriteBind id: 'a' , argIdx printString) expr: expr ]
+]
+
+{ #category : #semantics }
+JibPrim >> spriteRType [
+	^ self subclassResponsibility
+]
+
+{ #category : #semantics }
+JibPrim >> spriteVal [
+	^Val
+		symbol: self id
+		rtype: self spriteRType
+		metric: nil
 ]

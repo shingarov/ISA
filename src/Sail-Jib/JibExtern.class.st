@@ -27,3 +27,13 @@ JibExtern class >> named: id [
 JibExtern >> isExtern [
 	^ true
 ]
+
+{ #category : #accessing }
+JibExtern >> numArgs [
+	^self signature numArgs
+]
+
+{ #category : #semantics }
+JibExtern >> spriteRType [
+	^self signature spriteRType
+]
