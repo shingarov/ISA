@@ -12,6 +12,11 @@ Exp_Bool >> childrenDo: aBlock [
 	"Leaf node, nothing to do."
 ]
 
+{ #category : #semantics }
+Exp_Bool >> spriteExpr [
+	^EImm imm: (ECon prim: (PBool bool: b))
+]
+
 { #category : #printing }
 Exp_Bool >> unparseOn: aStream [
 	b unparseOn: aStream

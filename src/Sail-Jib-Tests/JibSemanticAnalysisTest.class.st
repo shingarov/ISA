@@ -55,6 +55,22 @@ fn  zmain(mainArg) {
 ]
 
 { #category : #tests }
+JibSemanticAnalysisTest >> test_return_true [
+
+	| jib |
+	jib := JibParser parse:'
+
+val zmain : (%i) -> %bool
+fn  zmain(mainArg) {
+  return = true;
+  end;
+}
+'.
+
+	jib doSemanticAnalysis 
+]
+
+{ #category : #tests }
 JibSemanticAnalysisTest >> test_twoData [
 	| program |
 	program := JibParser parse:'
