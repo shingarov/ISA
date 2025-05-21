@@ -24,6 +24,11 @@ Exp_Call >> op [
 	^ op
 ]
 
+{ #category : #semantics }
+Exp_Call >> spriteExpr [
+	^ΛEApp mkEApp: op spriteEImm args: (args collect:#spriteExpr)
+]
+
 { #category : #printing }
 Exp_Call >> unparseOn: aStream [
 	aStream nextPutAll: op id.

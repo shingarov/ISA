@@ -68,11 +68,9 @@ Def_Fn >> spriteDecl [
 
 { #category : #semantics }
 Def_Fn >> spriteEFun [
-ids size = 1 ifFalse: [ self shouldBeImplemented "curry" ].
-
-	^EFun
-		bind: (SpriteBind id: ids first)
-		expr: self spriteExpr
+	^ids reversed
+		inject: self spriteExpr
+		into: [ :expr :argName | EFun bind: (SpriteBind id: argName) expr: expr ]
 ]
 
 { #category : #semantics }
