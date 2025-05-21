@@ -26,7 +26,9 @@ Exp_Call >> op [
 
 { #category : #semantics }
 Exp_Call >> spriteExpr [
-	^ΛEApp mkEApp: op spriteEImm args: (args collect:#spriteExpr)
+	^ ELet
+				decl: op spriteDecl
+				expr: (ΛEApp mkEApp: op spriteEImm args: (args collect:#spriteExpr))
 ]
 
 { #category : #printing }
