@@ -274,7 +274,7 @@ JibInterpreter >> interpretI128: expr [
 
 { #category : #'interpreting - exprs' }
 JibInterpreter >> interpretI64: expr [
-	^ expr value toInt
+	^ expr integerValue toInt
 
 ]
 
