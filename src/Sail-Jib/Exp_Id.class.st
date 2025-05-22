@@ -23,6 +23,11 @@ Exp_Id >> spriteExpr [
 	^EImm imm: (EVar of: id)
 ]
 
+{ #category : #accessing }
+Exp_Id >> type [ 
+	^self function varTypeOf: id
+]
+
 { #category : #printing }
 Exp_Id >> unparseOn: aStream [
 	aStream nextPutAll: id

@@ -46,9 +46,23 @@ JibExp class >> isAbstract [
 	^self == JibExp
 ]
 
+{ #category : #accessing }
+JibExp >> function [
+	"Return the function containing this expression."
+	
+	^parent function
+]
+
 { #category : #semantics }
 JibExp >> spriteExpr [
 	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+JibExp >> type [ 
+	"Return the Jib type of the resulting value."
+	
+	^self subclassResponsibility 
 ]
 
 { #category : #enumerating }

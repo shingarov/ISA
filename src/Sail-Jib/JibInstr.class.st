@@ -32,6 +32,13 @@ JibInstr >> defdIdsDo: aBlock [
 ]
 
 { #category : #accessing }
+JibInstr >> function [
+	"Return the function containing this instruction."
+	
+	^ parent
+]
+
+{ #category : #accessing }
 JibInstr >> genSet [
 	| s |
 	s := Set new.

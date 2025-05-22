@@ -13,6 +13,11 @@ Exp_Unwrap >> childrenDo: aBlock [
 	aBlock value: exp
 ]
 
+{ #category : #accessing }
+Exp_Unwrap >> type [
+	^ exp type def memberTypeOf: id
+]
+
 { #category : #printing }
 Exp_Unwrap >> unparseOn: aStream [
 	exp unparseOn: aStream.
