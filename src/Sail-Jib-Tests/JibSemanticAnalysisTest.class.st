@@ -223,6 +223,38 @@ fn  zmain(mainArg) {
 ]
 
 { #category : #tests }
+JibSemanticAnalysisTest >> test_return42_bv32 [
+
+	| jib  |
+	jib := JibParser parse:'
+
+val zmain : (%i) -> %bv32
+fn  zmain(mainArg) {
+  return = #x00112233;
+  end;
+}
+'.
+
+	jib doSemanticAnalysis 
+]
+
+{ #category : #tests }
+JibSemanticAnalysisTest >> test_return42_i [
+
+	| jib |
+	jib := JibParser parse:'
+
+val zmain : (%i) -> %i
+fn  zmain(mainArg) {
+  return = 42;
+  end;
+}
+'.
+
+	jib doSemanticAnalysis 
+]
+
+{ #category : #tests }
 JibSemanticAnalysisTest >> test_return_true [
 
 	| jib |
