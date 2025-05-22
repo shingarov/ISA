@@ -14,6 +14,16 @@ Ty_Struct class >> inducedParser [
 	construct: #(- id)
 ]
 
+{ #category : #accessing }
+Ty_Struct >> def [
+	^self program lookupStruct: id
+]
+
+{ #category : #accessing }
+Ty_Struct >> id [
+	^ id
+]
+
 { #category : #semantics }
 Ty_Struct >> spriteRType [
 	^TCon

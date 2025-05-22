@@ -30,6 +30,28 @@ fn  zmain(mainArg) {
 ]
 
 { #category : #'tests - exp' }
+JibSemanticAnalysisTest >> test_exp_field [
+	| program |
+	program := JibParser parse:'
+
+struct i {
+  g: %i
+}
+
+val zmain : (%struct i) -> %i
+fn  zmain(x) {
+	zz1 : %i;
+	zz1 = x.g;
+  return = zz1;
+  end;
+}
+
+'.
+
+	program doSemanticAnalysis.
+]
+
+{ #category : #'tests - exp' }
 JibSemanticAnalysisTest >> test_exp_kind [
 	| program |
 	program := JibParser parse:'

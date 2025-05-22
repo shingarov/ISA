@@ -186,6 +186,12 @@ JibProgram >> lookupFunctionSignature: id [
 ]
 
 { #category : #lookup }
+JibProgram >> lookupStruct: id [
+	self structDefs do: [ :def | def id = id ifTrue:[ ^def ] ].
+	self error:'No ''struct'' named ''' , id , ''''.
+]
+
+{ #category : #lookup }
 JibProgram >> lookupUnion: id [
 	self unionDefs do: [ :def | def id = id ifTrue:[ ^def ] ].
 	self error:'No ''union'' named ''' , id , ''''.
@@ -265,6 +271,11 @@ JibProgram >> spriteProg [
 				expr: self spriteExpr
 				data: prelude data , data
 				options: {  }
+]
+
+{ #category : #accessing }
+JibProgram >> structDefs [
+	^defs select: #isStruct
 ]
 
 { #category : #accessing }

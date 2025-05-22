@@ -27,6 +27,16 @@ Def_Struct >> childrenDo: aBlock [
 ]
 
 { #category : #accessing }
+Def_Struct >> fieldTypeOf: name [
+	^(self fields detect:[:nmAndTy | nmAndTy key = name ]) value
+]
+
+{ #category : #accessing }
+Def_Struct >> fields [ 
+	^ids
+]
+
+{ #category : #accessing }
 Def_Struct >> id [
 	^ id
 ]
@@ -34,6 +44,11 @@ Def_Struct >> id [
 { #category : #testing }
 Def_Struct >> isDataDef [
 	^true
+]
+
+{ #category : #testing }
+Def_Struct >> isStruct [
+	^ true
 ]
 
 { #category : #semantics }
