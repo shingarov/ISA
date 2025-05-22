@@ -60,6 +60,58 @@ fn  zmain(mainArg) {
 	program doSemanticAnalysis.
 ]
 
+{ #category : #'tests - exp' }
+JibSemanticAnalysisTest >> test_exp_unwrap [
+	| program |
+	program := JibParser parse:'
+
+union u {
+  I: %struct i,
+  B: %struct b
+}
+
+struct i {
+  i: %i
+}
+
+struct b {
+  b: %bool
+}
+
+val zmain : (%union u) -> %struct i
+fn  zmain(mainArg) {
+	zz1 : %struct i;
+	zz1 = mainArg as I;
+  return = zz1;
+  end;
+}
+
+'.
+
+	program doSemanticAnalysis.
+]
+
+{ #category : #'tests - instr' }
+JibSemanticAnalysisTest >> test_instr_call_multiple_args [
+
+	| jib |
+	jib := JibParser parse:'
+val zfoo : (%i, %i) -> %bool
+fn  zfoo(a,b) {
+	return = true;
+	end;
+}
+
+val zmain : (%i) -> %bool
+fn  zmain(mainArg) {
+  return = zfoo(1, mainArg);
+  end;
+}
+'.
+
+	jib doSemanticAnalysis 
+]
+
 { #category : #tests }
 JibSemanticAnalysisTest >> test_mutRecData [
 	| program main interpreter |

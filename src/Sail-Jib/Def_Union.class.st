@@ -42,6 +42,16 @@ Def_Union >> isUnion [
 	^ true
 ]
 
+{ #category : #accessing }
+Def_Union >> memberTypeOf: name [
+	^(self members detect:[:nmAndTy | nmAndTy key = name ]) value
+]
+
+{ #category : #accessing }
+Def_Union >> members [ 
+	^ids
+]
+
 { #category : #semantics }
 Def_Union >> spriteData [
 	| ctors |
