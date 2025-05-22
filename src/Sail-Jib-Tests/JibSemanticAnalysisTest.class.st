@@ -266,7 +266,7 @@ fn  zmain(mainArg) {
 { #category : #tests }
 JibSemanticAnalysisTest >> test_return_true [
 
-	| jib |
+	| jib prog |
 	jib := JibParser parse:'
 
 val zmain : (%i) -> %bool
@@ -276,7 +276,12 @@ fn  zmain(mainArg) {
 }
 '.
 
-	jib doSemanticAnalysis 
+	jib doSemanticAnalysis.
+	prog := jib spriteProg.
+
+
+
+
 ]
 
 { #category : #tests }

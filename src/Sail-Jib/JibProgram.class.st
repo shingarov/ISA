@@ -5,7 +5,8 @@ Class {
 		'defs',
 		'sourceSearchPath',
 		'sourceSubstitutePath',
-		'environment'
+		'environment',
+		'prog'
 	],
 	#classVars : [
 		'SourceSearchPath',
@@ -262,15 +263,20 @@ JibProgram >> spritePrelude [
 JibProgram >> spriteProg [
 	| prelude data |
 
+	prog notNil ifTrue:[^prog].
+
 	prelude := self spritePrelude.
 
 	data := self dataDefs collect: #spriteData.
-	^Prog
+
+	prog := Prog
 				quals: {  }
 				meas: {  }
 				expr: self spriteExpr
 				data: prelude data , data
-				options: {  }
+				options: {  }.
+
+	^ prog
 ]
 
 { #category : #accessing }
