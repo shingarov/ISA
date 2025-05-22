@@ -135,6 +135,33 @@ fn  zmain(mainArg) {
 ]
 
 { #category : #tests }
+JibSemanticAnalysisTest >> test_jump_goto_01 [
+	| program |
+	program := JibParser parse:'
+
+    val zmain : (%i) -> %i
+
+    fn zmain(zx) {
+        zz1 : %i      			    `0;
+        jump @neq(zx, 0) goto 4 `1;       
+        zz1 = 1                 `2;
+        goto 5;
+        zz1 = 42                `4;
+        return = zz1            `5;
+        end;
+    }
+
+    register zPC : %bv64
+'.
+'
+			
+        
+'.
+
+	program doSemanticAnalysis.
+]
+
+{ #category : #tests }
 JibSemanticAnalysisTest >> test_mutRecData [
 	| program main interpreter |
 	program := JibParser parse:'
