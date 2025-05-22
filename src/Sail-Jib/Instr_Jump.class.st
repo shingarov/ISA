@@ -35,6 +35,16 @@ Instr_Jump >> isJump [
 	^true
 ]
 
+{ #category : #semantics }
+Instr_Jump >> spriteExprContWith: pass [
+	| jump |
+	
+	jump := parent blocks detect:[:block | block range first = target ].
+	
+	^EIf cond: exp spriteExpr 
+	    trueE: jump spriteΛEApp 
+	   falseE: pass 
+]
 { #category : #accessing }
 Instr_Jump >> target [
 	^ target

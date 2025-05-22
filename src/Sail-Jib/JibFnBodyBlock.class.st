@@ -309,6 +309,102 @@ JibFnBodyBlock >> splitAt: target [
 	^ { bb1 . bb2 }.
 ]
 
+{ #category : #semantics }
+JibFnBodyBlock >> spriteArgNames [
+	"Return the list of argument names of function
+	 representing this basic block.
+	
+	 This list consist of arguments of the original Jib function
+	 plus all live-in variables. 
+	 Note that arguments (of the original Jib) are *always* included
+	 even if they're not live-in. This is a simple little trick - 
+	 Just like Jib, Sprite does not allow no-argument functions.
+	 So always adding arguments ensures there's always at least 
+	 one argument to (new) Sprite function.
+	"
+
+
+	| funcArgs |
+	
+	funcArgs := function argNames.	
+	^ funcArgs, (liveness liveIn reject:[:v | funcArgs includes: v])
+	
+	
+]
+
+{ #category : #semantics }
+JibFnBodyBlock >> spriteDecl [
+	^SpriteDecl
+		bind: (SpriteBind id: self spriteFunName)
+		expr: (EAnn
+			expr: self spriteEFun
+			 ann: self spriteVal )
+]
+
+{ #category : #semantics }
+JibFnBodyBlock >> spriteEFun [
+	^self spriteArgNames reversed
+		inject: self spriteExpr
+		into: [ :expr :argName | EFun bind: (SpriteBind id: argName) expr: expr ]
+]
+
+{ #category : #semantics }
+JibFnBodyBlock >> spriteExpr [
+	| pass |
+
+	pass := successor1 notNil 
+				ifTrue:[successor1 spriteΛEApp]
+				ifFalse:[ΛExpression diverge].
+
+	^self instrs reversed
+		inject: pass
+		into: [ :soFar :thisTime | thisTime spriteExprContWith: soFar ]
+]
+
+{ #category : #semantics }
+JibFnBodyBlock >> spriteFunName [
+	^'B_' , range first printString
+]
+
+{ #category : #semantics }
+JibFnBodyBlock >> spriteRType [
+	| argTys retTy |
+	
+	self assert: liveness notNil.
+	
+	argTys := self spriteArgNames collect: [ :var | function varTypeOf: var ].
+	retTy := function retType.
+
+	^argTys reversed
+		inject: retTy spriteRType
+		into: [ :soFar :thisTime | TFun
+				x: String junkSymbol
+				s: thisTime spriteRType
+				t: soFar ]
+	
+]
+
+{ #category : #semantics }
+JibFnBodyBlock >> spriteVal [
+	^Val
+		symbol: self spriteFunName
+		rtype: self spriteRType
+		metric: nil
+]
+
+{ #category : #semantics }
+JibFnBodyBlock >> spriteΛEApp [
+	"Return the 'call' to this block. Used to implement
+	 transitions from one block to another."
+	
+	self assert: liveness notNil.
+	
+	^ ΛEApp mkEApp: (EImm imm: (EVar of: self spriteFunName)) 
+	          args: (self spriteArgNames collect:[:arg |EVar of: arg])
+	
+	
+]
+
 { #category : #accessing }
 JibFnBodyBlock >> successor1 [
 	^ successor1

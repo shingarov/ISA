@@ -40,6 +40,11 @@ Instr_Decl >> id [
 	^ id
 ]
 
+{ #category : #testing }
+Instr_Decl >> isDecl [
+	^ true
+]
+
 { #category : #semantics }
 Instr_Decl >> spriteExprContWith: k [
 	^ELet

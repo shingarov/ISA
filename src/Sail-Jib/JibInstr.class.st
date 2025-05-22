@@ -57,6 +57,11 @@ JibInstr >> isBranch [
 ]
 
 { #category : #testing }
+JibInstr >> isDecl [
+	^false
+]
+
+{ #category : #testing }
 JibInstr >> isEnd [
 	^false
 ]

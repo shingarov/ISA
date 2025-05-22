@@ -37,6 +37,16 @@ Instr_Goto >> isGoto [
 	^true
 ]
 
+{ #category : #semantics }
+Instr_Goto >> spriteExprContWith: mustBeDiverge [
+	| target |
+	
+	self assert: (mustBeDiverge printString = ΛExpression diverge printString). "FIXME: Horrible!."
+	
+	target := parent blocks detect:[:block | block range first = n ].
+	^target spriteΛEApp
+]
+
 { #category : #accessing }
 Instr_Goto >> target [
 	^n
