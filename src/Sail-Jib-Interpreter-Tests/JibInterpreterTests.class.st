@@ -468,3 +468,40 @@ fn  zmain(_) {
 	
 
 ]
+
+{ #category : #tests }
+JibInterpreterTests >> test_jump_goto_01 [
+	| program main interpreter |
+	program := JibParser parse:'
+
+    val zmain : (%i) -> %i
+
+    fn zmain(zx) {
+        zz1 : $i               `0;
+        jump @eq(zx, 0) goto 4 `1;
+        zz1 = 42               `2;
+        goto 5                   ;
+        zz1 = 1                `4;
+        return = zz1           `5;
+        end;
+    }
+
+    register zPC : %bv64
+'.
+
+	main := program lookupFunction: 'zmain'.
+
+	interpreter := JibInterpreter for: main arguments: { 0 }.
+
+	interpreter interpret.
+
+	self assert: interpreter retVal equals: 1.
+
+
+	interpreter := JibInterpreter for: main arguments: { 1 }.
+
+	interpreter interpret.
+
+	self assert: interpreter retVal equals: 42.
+
+]
