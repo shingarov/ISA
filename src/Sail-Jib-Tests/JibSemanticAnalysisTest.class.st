@@ -5,6 +5,15 @@ Class {
 }
 
 { #category : #tests }
+JibSemanticAnalysisTest >> test_duopod [
+	| program |
+
+	program := self parseFileNamed: JibExamples / 'Jib' / 'duopod.ir'.
+	program doSemanticAnalysis.
+
+]
+
+{ #category : #tests }
 JibSemanticAnalysisTest >> test_enum [
 	| program |
 	program := JibParser parse:'
