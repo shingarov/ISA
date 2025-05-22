@@ -68,6 +68,11 @@ JibDef >> isRegister [
 ]
 
 { #category : #testing }
+JibDef >> isUnion [
+	^ false
+]
+
+{ #category : #testing }
 JibDef >> isVal [
 	^false
 ]

@@ -37,6 +37,11 @@ Def_Union >> isDataDef [
 	^true
 ]
 
+{ #category : #testing }
+Def_Union >> isUnion [
+	^ true
+]
+
 { #category : #semantics }
 Def_Union >> spriteData [
 	| ctors |

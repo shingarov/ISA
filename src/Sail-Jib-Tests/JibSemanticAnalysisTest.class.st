@@ -29,6 +29,37 @@ fn  zmain(mainArg) {
 	self assert: (program environment lookupSortForTypename: 'ziop') numConstructors equals: 6
 ]
 
+{ #category : #'tests - exp' }
+JibSemanticAnalysisTest >> test_exp_kind [
+	| program |
+	program := JibParser parse:'
+
+union u {
+  I: %struct i,
+  B: %struct b
+}
+
+struct i {
+  i: %i
+}
+
+struct b {
+  b: %bool
+}
+
+val zmain : (%union u) -> %bool
+fn  zmain(mainArg) {
+	zz1 : %bool;
+	zz1 = mainArg is I;
+  return = zz1;
+  end;
+}
+
+'.
+
+	program doSemanticAnalysis.
+]
+
 { #category : #tests }
 JibSemanticAnalysisTest >> test_mutRecData [
 	| program main interpreter |

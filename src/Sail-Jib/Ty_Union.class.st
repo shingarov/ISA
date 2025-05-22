@@ -14,6 +14,16 @@ Ty_Union class >> inducedParser [
 	construct: #(- id)
 ]
 
+{ #category : #accessing }
+Ty_Union >> def [
+	^self program lookupUnion: id
+]
+
+{ #category : #accessing }
+Ty_Union >> id [
+	^ id
+]
+
 { #category : #semantics }
 Ty_Union >> spriteRType [
 	^TCon

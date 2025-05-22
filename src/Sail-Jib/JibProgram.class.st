@@ -185,6 +185,12 @@ JibProgram >> lookupFunctionSignature: id [
 
 ]
 
+{ #category : #lookup }
+JibProgram >> lookupUnion: id [
+	self unionDefs do: [ :def | def id = id ifTrue:[ ^def ] ].
+	self error:'No ''union'' named ''' , id , ''''.
+]
+
 { #category : #accessing }
 JibProgram >> program [
 	^ self
@@ -259,6 +265,11 @@ JibProgram >> spriteProg [
 				expr: self spriteExpr
 				data: prelude data , data
 				options: {  }
+]
+
+{ #category : #accessing }
+JibProgram >> unionDefs [
+	^defs select: #isUnion
 ]
 
 { #category : #printing }
