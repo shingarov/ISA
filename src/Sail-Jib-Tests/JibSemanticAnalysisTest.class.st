@@ -30,6 +30,22 @@ fn  zmain(mainArg) {
 ]
 
 { #category : #'tests - exp' }
+JibSemanticAnalysisTest >> test_exp_call [
+
+	| jib prog |
+	jib := JibParser parse:'
+
+val zmain : (%i) -> %bool
+fn  zmain(mainArg) {
+  return = @neq(mainArg, 0);
+  end;
+}
+'.
+
+	jib doSemanticAnalysis 
+]
+
+{ #category : #'tests - exp' }
 JibSemanticAnalysisTest >> test_exp_field [
 	| program |
 	program := JibParser parse:'
