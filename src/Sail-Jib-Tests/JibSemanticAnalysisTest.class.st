@@ -150,6 +150,26 @@ fn  zmain(mainArg) {
 	jib doSemanticAnalysis 
 ]
 
+{ #category : #'tests - instr' }
+JibSemanticAnalysisTest >> test_instr_call_onearg [
+
+	| jib prog |
+	jib := JibParser parse:'
+val zfoo : (%i) -> %bool
+fn  zfoo(a) {
+	return = true;
+	end;
+}
+val zmain : (%i) -> %bool
+fn  zmain(mainArg) {
+  return = zfoo(1);
+  end;
+}
+'.
+
+	jib doSemanticAnalysis 
+]
+
 { #category : #tests }
 JibSemanticAnalysisTest >> test_jump_goto_01 [
 	| program |
