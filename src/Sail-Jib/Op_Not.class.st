@@ -25,5 +25,5 @@ Op_Not >> spriteRType [
 
 	bool := TBase b: TBool instance r: Reft new known.
 
-	^bool => bool
+	^bool ==> bool
 ]

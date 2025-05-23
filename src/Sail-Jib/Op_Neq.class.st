@@ -28,5 +28,5 @@ Op_Neq >> spriteRType [
 
 	^TAll
 		var: 't'
-		type: (t => t => bool)
+		type: (t ==> (t ==> bool))
 ]
