@@ -26,11 +26,11 @@ Exp_Unwrap >> spriteExpr [
 			nameAndType key = id ifTrue:[
 				Alt daCon: nameAndType key 
 				    binds: { SpriteBind id: 'f' } 
-				     expr: (ΛExpression variable: 'f')
+				     expr: ( EImm imm: (EVar of:'f') )
 			] ifFalse:[
 				Alt daCon: nameAndType key 
-				    binds: { SpriteBind junk } 				
-				     expr: (ΛExpression unknown)			
+				    binds: { SpriteBind id: String junkSymbol }
+				     expr: ( EImm imm: (ECon prim: PUnknown new) )
 			]
 		]
 	).
@@ -40,7 +40,7 @@ Exp_Unwrap >> spriteExpr [
 			bind: (SpriteBind id: 'unwrap_' , id)
 			expr: (EAnn
 				expr: (EFun mkEFun: { SpriteBind id: 'v' } expr: match)
-				ann:  (Val symbol: 'unwrap_' , id rtype: (ty spriteRType) => ((ty def memberTypeOf: id) spriteRType) metric: nil)).
+				ann:  (Val symbol: 'unwrap_' , id rtype: (ty spriteRType) ==> ((ty def memberTypeOf: id) spriteRType) metric: nil)).
 		
 	^ ELet
 				decl: unwrapper 
