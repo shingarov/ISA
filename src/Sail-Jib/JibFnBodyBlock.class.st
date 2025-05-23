@@ -354,7 +354,7 @@ JibFnBodyBlock >> spriteExpr [
 
 	pass := successor1 notNil 
 				ifTrue:[successor1 spriteΛEApp]
-				ifFalse:[ΛExpression diverge].
+				ifFalse:['no-successor-1'].
 
 	^self instrs reversed
 		inject: pass

@@ -33,8 +33,8 @@ Instr_End >> isEnd [
 ]
 
 { #category : #semantics }
-Instr_End >> spriteExprContWith: mustBeDiverge [
-	self assert: (mustBeDiverge printString = ΛExpression diverge printString). "FIXME: Horrible!."
+Instr_End >> spriteExprContWith: mustBeNoSuccessor1 [
+	self assert: (mustBeNoSuccessor1 = 'no-successor-1').
 
 	^EImm imm: (EVar of: 'return')
 ]

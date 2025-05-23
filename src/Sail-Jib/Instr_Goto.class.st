@@ -38,10 +38,10 @@ Instr_Goto >> isGoto [
 ]
 
 { #category : #semantics }
-Instr_Goto >> spriteExprContWith: mustBeDiverge [
+Instr_Goto >> spriteExprContWith: mustBeNoSuccessor1 [
 	| target |
-	
-	self assert: (mustBeDiverge printString = ΛExpression diverge printString). "FIXME: Horrible!."
+
+	self assert: (mustBeNoSuccessor1 = 'no-successor-1').
 	
 	target := parent blocks detect:[:block | block range first = n ].
 	^target spriteΛEApp
