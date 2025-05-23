@@ -67,7 +67,7 @@ JibPrim >> signature [
 { #category : #semantics }
 JibPrim >> spriteEFun [
 		^ (self numArgs to: 1 by: -1)
-			inject: ΛExpression unknown
+			inject: (EImm imm: (ECon prim: PUnknown new))
 			into: [ :expr :argIdx | EFun bind: (SpriteBind id: 'a' , argIdx printString) expr: expr ]
 ]
 
