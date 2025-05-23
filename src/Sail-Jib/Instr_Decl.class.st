@@ -50,7 +50,7 @@ Instr_Decl >> spriteExprContWith: k [
 	^ELet
 		decl: (SpriteDecl
 			bind: (SpriteBind id: id)
-			expr: ΛExpression unknown)
+			expr: (EImm imm: (ECon prim: PUnknown new)))
 		expr: k
 ]
 
