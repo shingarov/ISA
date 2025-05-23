@@ -24,8 +24,8 @@ Exp_Field >> spriteExpr [
 	
 	match := ECase x: 'v' alts: { 
 		Alt daCon: sty id
-         binds: (sty def fields collect:[:nmAndTy | nmAndTy key = id ifTrue:[SpriteBind id:'f'] ifFalse:[SpriteBind junk]])
-          expr: (ΛExpression variable: 'f')
+         binds: (sty def fields collect:[:nmAndTy | nmAndTy key = id ifTrue:[SpriteBind id:'f'] ifFalse:[SpriteBind id: String junkSymbol]])
+          expr: (EImm imm: (EVar of:'f'))
 	}.
 	
 	unwrapper := 
@@ -33,7 +33,7 @@ Exp_Field >> spriteExpr [
 			bind: (SpriteBind id: 'extract_' , id)
 			expr: (EAnn
 				expr: (EFun mkEFun: { SpriteBind id: 'v' } expr: match)
-				ann:  (Val symbol: 'extract_' , id rtype: (sty spriteRType) => (fty spriteRType) metric: nil)).
+				ann:  (Val symbol: 'extract_' , id rtype: (sty spriteRType) ==> (fty spriteRType) metric: nil)).
 		
 	^ ELet
 				decl: unwrapper 
