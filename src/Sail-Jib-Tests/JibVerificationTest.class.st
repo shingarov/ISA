@@ -117,3 +117,22 @@ fn zf(zarg) {
 
 '
 ]
+
+{ #category : #tests }
+JibVerificationTest >> test_return_42 [
+
+	| jib prog |
+	jib := JibParser parse:'
+
+val zmain : (%i) -> %i
+fn  zmain(mainArg) {
+  zz39 : %i;
+  zz39 = 42;
+  return = zz39;
+  end;
+}
+'.
+
+	"jib doSemanticAnalysis."
+	prog := jib spriteProg.
+]
