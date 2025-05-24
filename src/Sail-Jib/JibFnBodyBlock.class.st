@@ -336,9 +336,14 @@ JibFnBodyBlock >> spriteArgNames [
 JibFnBodyBlock >> spriteDecl [
 	^SpriteDecl
 		bind: (SpriteBind id: self spriteFunName)
-		expr: (EAnn
+		expr: self spriteEAnn
+]
+
+{ #category : #semantics }
+JibFnBodyBlock >> spriteEAnn [
+	^EAnn
 			expr: self spriteEFun
-			 ann: self spriteVal )
+			 ann: self spriteVal
 ]
 
 { #category : #semantics }

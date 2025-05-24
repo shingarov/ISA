@@ -45,6 +45,7 @@ Instr_Jump >> spriteExprContWith: pass [
 	    trueE: jump spriteΛEApp 
 	   falseE: pass 
 ]
+
 { #category : #accessing }
 Instr_Jump >> target [
 	^ target
