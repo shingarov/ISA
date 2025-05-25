@@ -108,6 +108,29 @@ fn  zmain(mainArg) {
 ]
 
 { #category : #'tests - exp' }
+JibSemanticAnalysisTest >> test_exp_struct [
+	| program |
+	program := JibParser parse:'
+
+struct p {
+	x: %i,
+	y: %i
+}
+
+val zmain : (%i, %i) -> %struct p
+fn  zmain(a,b) {
+	zz1 : %struct p;
+	zz1 = struct p { y = b, x = a};
+  return = zz1;
+  end;
+}
+
+'.
+
+	program doSemanticAnalysis.
+]
+
+{ #category : #'tests - exp' }
 JibSemanticAnalysisTest >> test_exp_unwrap [
 	| program |
 	program := JibParser parse:'
