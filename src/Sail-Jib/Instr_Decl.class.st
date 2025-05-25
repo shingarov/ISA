@@ -47,11 +47,7 @@ Instr_Decl >> isDecl [
 
 { #category : #semantics }
 Instr_Decl >> spriteExprContWith: k [
-	^ELet
-		decl: (SpriteDecl
-			bind: (SpriteBind id: id)
-			expr: (EImm imm: (ECon prim: PUnknown new)))
-		expr: k
+	^ty declareUninitializedVar: id andThen: k
 ]
 
 { #category : #printing }

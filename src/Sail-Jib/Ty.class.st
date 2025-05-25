@@ -38,6 +38,22 @@ Ty >> childrenDo: aBlock [
 	
 ]
 
+{ #category : #semantics }
+Ty >> declareUninitializedVar: zz andThen: k [
+	"
+		⟦val zz: myType⟧
+		let zz = □;
+		k
+	"
+	^ELet
+		decl: (SpriteDecl
+			bind: (SpriteBind id: zz)
+			expr: (EAnn
+				expr: (EImm imm: (ECon prim: PUnknown new))
+				ann: (Val symbol: zz rtype: self spriteRType metric: nil)))
+		expr: k
+]
+
 { #category : #'as yet unclassified' }
 Ty >> newUndefined [
 	^ self sort mkFreshConst: 'undefined'
