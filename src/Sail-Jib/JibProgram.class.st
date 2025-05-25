@@ -6,7 +6,8 @@ Class {
 		'sourceSearchPath',
 		'sourceSubstitutePath',
 		'environment',
-		'prog'
+		'prog',
+		'topExpr'
 	],
 	#classVars : [
 		'SourceSearchPath',
@@ -47,6 +48,11 @@ JibProgram >> childrenDo: aBlock [
 { #category : #accessing }
 JibProgram >> dataDefs [
 	^defs select: #isDataDef
+]
+
+{ #category : #semantics }
+JibProgram >> defaultTopExpr [
+	^ΛExpression int: 0
 ]
 
 { #category : #analysis }
@@ -232,7 +238,7 @@ JibProgram >> sourceSubstitutePath [
 { #category : #semantics }
 JibProgram >> spriteExpr [
 	^(self externDefs, self functionDefs) reversed
-		inject: (ΛExpression int: 0)
+		inject: self topExpr
 		into: [ :soFar :thisTime |
 			ELet
 				decl: thisTime spriteDecl
@@ -282,6 +288,17 @@ JibProgram >> spriteProg [
 { #category : #accessing }
 JibProgram >> structDefs [
 	^defs select: #isStruct
+]
+
+{ #category : #accessing }
+JibProgram >> topExpr [
+	topExpr isNil ifTrue: [ topExpr := self defaultTopExpr ].
+	^ topExpr
+]
+
+{ #category : #accessing }
+JibProgram >> topExpr: anObject [
+	topExpr := anObject
 ]
 
 { #category : #accessing }
