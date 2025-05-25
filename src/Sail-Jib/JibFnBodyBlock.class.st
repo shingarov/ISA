@@ -391,7 +391,7 @@ JibFnBodyBlock >> spriteRType [
 
 { #category : #semantics }
 JibFnBodyBlock >> spriteVal [
-	^Val
+	^Refl
 		symbol: self spriteFunName
 		rtype: self spriteRType
 		metric: nil

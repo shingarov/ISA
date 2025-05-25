@@ -60,7 +60,7 @@ Def_Val >> spriteRType [
 
 { #category : #semantics }
 Def_Val >> spriteVal [
-	^Val
+	^Refl
 		symbol: id
 		rtype: self spriteRType
 		metric: nil
