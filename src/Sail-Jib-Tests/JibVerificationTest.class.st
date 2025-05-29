@@ -23,6 +23,26 @@ JibVerificationTest >> refute: check jibProgramSource: j [
 ]
 
 { #category : #tests }
+JibVerificationTest >> test_extern_01 [
+	self prove: '
+    ⟦val final_result : BitVec(Size32)[v|v === (16r78///32)]⟧
+    let final_result = zmain(0);
+	' jibProgramSource: '
+val zand_vec = "bvand" : (%bv, %bv) ->  %bv
+val zmain : (%i) -> %bv32
+fn zmain(zx) {
+    zv : %bv32;
+    zv = #x000000FF;
+    zw : %bv32;
+    zw = #x12345678;
+    return = zand_vec(zv, zw);
+    end;
+}
+'
+
+]
+
+{ #category : #tests }
 JibVerificationTest >> test_jump_goto_01 [
 	self prove: '
     ⟦val final_result : int[v|v === 42]⟧

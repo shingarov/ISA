@@ -36,14 +36,10 @@ Def_Extern >> isExtern [
 
 { #category : #semantics }
 Def_Extern >> spriteDecl [
-	| extern |
-
-	extern := self extern.
+"TODO: check that the type declaration in the extern matches the Fixpoint prelude"
 	^SpriteDecl
 		bind: (SpriteBind id: self id)
-		expr: (EAnn
-			expr: extern spriteEFun
-			ann:  extern spriteVal)
+		expr: (EImm imm: ext toEVar)
 ]
 
 { #category : #printing }
