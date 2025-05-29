@@ -23,6 +23,26 @@ JibVerificationTest >> refute: check jibProgramSource: j [
 ]
 
 { #category : #tests }
+JibVerificationTest >> test_jump_goto_01 [
+	self prove: '
+    ⟦val final_result : int[v|v === 42]⟧
+    let final_result = zmain(0);
+	' jibProgramSource: '
+val zmain : (%i) -> %i
+fn zmain(zx) {
+    zz1 : %i      			      `0;
+    jump @neq(zx, 0) goto 4 `1;       
+    zz1 = 1                 `2;
+    goto 5;
+    zz1 = 42                `4;
+    return = zz1            `5;
+    end;
+}
+'
+
+]
+
+{ #category : #tests }
 JibVerificationTest >> test_le_p [
 	self prove: '
     ⟦val final_result : bool[v|v]⟧
