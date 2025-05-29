@@ -18,12 +18,3 @@ Op_Not >> evaluateWithArguments: args [
 Op_Not >> numArgs [
 	^1
 ]
-
-{ #category : #semantics }
-Op_Not >> spriteRType [
-	| bool |
-
-	bool := TBase b: TBool instance r: Reft new known.
-
-	^bool ==> bool
-]

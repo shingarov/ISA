@@ -57,23 +57,7 @@ JibOp class >> isAbstract [
 	^self == JibOp
 ]
 
-{ #category : #accessing }
-JibOp >> id [
-	^self class id
-]
-
 { #category : #semantics }
-JibOp >> spriteDecl [
-	^ SpriteDecl
-		bind: (SpriteBind id: self id)
-		expr: (EAnn
-			expr: self spriteEFun
-			ann:  self spriteVal).
-]
-
-{ #category : #semantics }
-JibOp >> spriteEImm [
-	"Return Sprite's EImm representing this OP (for ΛEApp creation)"
-
-	^EImm imm: (EVar of: self id)
+JibOp >> spriteExpr [
+	self subclassResponsibility
 ]

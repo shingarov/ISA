@@ -20,13 +20,6 @@ Op_Neq >> numArgs [
 ]
 
 { #category : #semantics }
-Op_Neq >> spriteRType [
-	| t bool |
-
-	t := TBase b: (TVar symbol: 't') r: Reft new known.
-	bool := TBase b: TBool instance r: Reft new known.
-
-	^TAll
-		var: 't'
-		type: (t ==> (t ==> bool))
+Op_Neq >> spriteExpr [
+	^EImm imm: (ECon prim: (PBin primOp: BNe new))
 ]

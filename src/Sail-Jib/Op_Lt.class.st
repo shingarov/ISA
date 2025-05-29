@@ -18,3 +18,8 @@ Op_Lt class >> signature [
 Op_Lt >> evaluateWithArguments: args [
 	^ args first < args second
 ]
+
+{ #category : #semantics }
+Op_Lt >> spriteExpr [
+	^EImm imm: (ECon prim: (PBin primOp: BLt new))
+]
