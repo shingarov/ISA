@@ -5,14 +5,29 @@ Class {
 }
 
 { #category : #tests }
-JibVerificationTest >> test_return_42_n [
+JibVerificationTest >> prove: check jibProgramSource: j [
 	| finalCheck jib prog |
-	finalCheck := (ΛοParser parse: '
+	finalCheck := (ΛοParser parse: check) expr.
+	jib := JibParser parse: j.
+	jib topExpr: finalCheck.
+	jib doSemanticAnalysis
+]
+
+{ #category : #tests }
+JibVerificationTest >> refute: check jibProgramSource: j [
+	| finalCheck jib prog |
+	finalCheck := (ΛοParser parse: check) expr.
+	jib := JibParser parse: j.
+	jib topExpr: finalCheck.
+	self should: [jib doSemanticAnalysis] raise: Error
+]
+
+{ #category : #tests }
+JibVerificationTest >> test_return_42_n [
+	self refute: '
     ⟦val final_result : int[v|v === 42]⟧
     let final_result = zmain(0);
-	') expr.
-	
-	jib := JibParser parse:'
+	' jibProgramSource: '
 val zmain : (%i) -> %i
 fn  zmain(mainArg) {
   zz39 : %i;
@@ -20,21 +35,15 @@ fn  zmain(mainArg) {
   return = zz39;
   end;
 }
-'.
-
-	jib topExpr: finalCheck.
-	self should: [jib doSemanticAnalysis] raise: Error
+'
 ]
 
 { #category : #tests }
 JibVerificationTest >> test_return_42_p [
-	| finalCheck jib prog |
-	finalCheck := (ΛοParser parse: '
+	self prove: '
     ⟦val final_result : int[v|v === 42]⟧
     let final_result = zmain(0);
-	') expr.
-	
-	jib := JibParser parse:'
+	' jibProgramSource: '
 val zmain : (%i) -> %i
 fn  zmain(mainArg) {
   zz39 : %i;
@@ -42,8 +51,5 @@ fn  zmain(mainArg) {
   return = zz39;
   end;
 }
-'.
-
-	jib topExpr: finalCheck.
-	jib doSemanticAnalysis
+'
 ]
