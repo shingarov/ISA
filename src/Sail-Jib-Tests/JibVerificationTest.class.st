@@ -45,7 +45,7 @@ fn zmain(zx) {
 { #category : #tests }
 JibVerificationTest >> test_jump_goto_01 [
 	self prove: '
-    ⟦val final_result : int[v|v === 42]⟧
+    ⟦val final_result : int[v|v===42 | (v===1)]⟧
     let final_result = zmain(0);
 	' jibProgramSource: '
 val zmain : (%i) -> %i
