@@ -23,6 +23,87 @@ JibVerificationTest >> refute: check jibProgramSource: j [
 ]
 
 { #category : #tests }
+JibVerificationTest >> test_bvabs_01_n [
+	self refute: '
+    ⟦val check : BitVec(Size64) => BitVec(Size64)[v|v >= 0]⟧
+    let check = (x) => { zbvabs(x) };
+	' jibProgramSource: '
+
+val zsub_vec = "bvsub" : (%bv, %bv) ->  %bv
+
+val zbvabs : (%bv64) -> %bv64
+fn zbvabs(zx) {
+    zzero :  %bv64               `0;
+    zzero = #x0000000000000000   `1;
+    zz1 : %bv64                  `2;
+    zz2 : %bool                  `3;
+    zz2 = @lt(zx, zzero)         `4;
+    jump zz2 goto 8              `5;
+    zz1 = zx                     `6;
+    goto 9;
+    zz1 = zsub_vec(zzero, zx)    `8;
+    return = zz1                 `9;
+    end;
+}
+'
+
+]
+
+{ #category : #tests }
+JibVerificationTest >> test_bvabs_01_p [
+	self prove: '
+    ⟦val check : BitVec(Size64) => BitVec(Size64)[v|v >= 0]⟧
+    let check = (x) => { zbvabs(toBitVector(10)) };
+	' jibProgramSource: '
+
+val zsub_vec = "bvsub" : (%bv, %bv) ->  %bv
+
+val zbvabs : (%bv64) -> %bv64
+fn zbvabs(zx) {
+    zzero :  %bv64               `0;
+    zzero = #x0000000000000000   `1;
+    zz1 : %bv64                  `2;
+    zz2 : %bool                  `3;
+    zz2 = @lt(zx, zzero)         `4;
+    jump zz2 goto 8              `5;
+    zz1 = zx                     `6;
+    goto 9;
+    zz1 = zsub_vec(zzero, zx)    `8;
+    return = zz1                 `9;
+    end;
+}
+'
+
+]
+
+{ #category : #tests }
+JibVerificationTest >> test_bvabs_02_p [
+	self prove: '
+    ⟦val check : BitVec(Size64)[i|i ~== (16r8000000000000000 /// 64)]  => BitVec(Size64)[v|v >= 0]⟧
+    let check = (x) => { zbvabs(x) };
+	' jibProgramSource: '
+
+val zsub_vec = "bvsub" : (%bv, %bv) ->  %bv
+
+val zbvabs : (%bv64) -> %bv64
+fn zbvabs(zx) {
+    zzero :  %bv64               `0;
+    zzero = #x0000000000000000   `1;
+    zz1 : %bv64                  `2;
+    zz2 : %bool                  `3;
+    zz2 = @lt(zx, zzero)         `4;
+    jump zz2 goto 8              `5;
+    zz1 = zx                     `6;
+    goto 9;
+    zz1 = zsub_vec(zzero, zx)    `8;
+    return = zz1                 `9;
+    end;
+}
+'
+
+]
+
+{ #category : #tests }
 JibVerificationTest >> test_extern_01 [
 	self prove: '
     ⟦val final_result : BitVec(Size32)[v|v === (16r78///32)]⟧
